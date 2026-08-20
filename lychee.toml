@@ -1,0 +1,22 @@
+# lychee config for the AI Leverage Field Guide link check.
+# Run locally: lychee --config lychee.toml README.md docs/
+
+# Generous but bounded timeouts so rate-limited hosts don't flake the check.
+timeout = 30
+max_retries = 3
+retry_wait_time = 2
+max_concurrency = 8
+max_redirects = 10
+user_agent = "Mozilla/5.0 (compatible; lychee-link-checker)"
+
+# Treat these as valid: 200/206 OK, 3xx redirects, 403 (bot-blocked but live),
+# and 429 (rate limited, not dead).
+accept = [200, 206, 301, 302, 303, 307, 308, 403, 429]
+
+# Excluded from automated checking.
+# gemini.google.com returns HTTP 200 via curl but trips lychee's HTTP/2 client
+# (hyper stream error). It is a known lychee/Google incompatibility, not a dead
+# link. Manually verified live; re-check by hand if you change this entry.
+exclude = [
+  "https://gemini.google.com/",
+]

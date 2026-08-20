@@ -1,5 +1,5 @@
 site_name: AI Leverage Field Guide
-site_description: Practical AI leverage for working professionals — original field-guide essays, not a course catalog or a tool list.
+site_description: "Practical AI leverage for working professionals: original field-guide essays, not a course catalog or a tool list."
 site_author: Wyatt Brocato
 repo_url: https://github.com/wyattbrocato/ai-leverage-field-guide
 repo_name: wyattbrocato/ai-leverage-field-guide
@@ -35,3 +35,4 @@ nav:
       - Stop Conditions: guides/stop-conditions.md
       - Maker-Checker: guides/maker-checker.md
       - Recurring Prompts: guides/recurring-prompts.md
+  - Reading Catalog: reading.md

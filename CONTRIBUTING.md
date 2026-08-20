@@ -19,15 +19,15 @@ share, and safe to trust.**
 3. **Disclose AI assistance.** If AI helped you draft or edit any content you contribute,
    say so in the file (a short footer line like *"Written with AI assistance, edited and
    verified by [you]"* is enough). The whole point of this guide is the human judgment
-   layer — we are honest about where the machine helped.
+   layer, we are honest about where the machine helped.
 
 ## What you can contribute
 
-- **Curated links** for the README hub — free courses, tools with real free tiers,
+- **Curated links** for the README hub, free courses, tools with real free tiers,
   official docs, free reading, prompt/workflow libraries. Each link needs a one-line
   "why it's here" and must be **verified free and legitimate** (no paywalls, no pirate
   sources, no dead links).
-- **Original guides** under `docs/guides/` — short, structured, opinionated, with
+- **Original guides** under `docs/guides/`, short, structured, opinionated, with
   copy-paste templates. Follow the existing voice: practitioner, anti-hype, "more
   leverage, not more AI." Use the `old way → swap → what changes → tradeoff` structure.
 - **Fixes and improvements** to existing content, typos, broken links, clearer examples.

@@ -16,17 +16,17 @@ raw material multiple times, each pass tightening one thing, until the output cl
 bar. The machine is the practice partner; you are the coach with the standard.
 
 This is the same mechanism Anders Ericsson describes in **Peak**: expertise is built through
-deliberate practice — repeated, focused reps with immediate feedback — not through one
+deliberate practice, repeated, focused reps with immediate feedback, not through one
 heroic effort. A single prompt is a single rep. The loop is the practice.
 
 ## The loop
 
 ```
-1. CAPTURE  — dump the messy raw material (notes, bullets, a messy doc, the meeting transcript).
-2. STRUCTURE — run the prompt to organize it (summarize, group, draft, rank).
-3. JUDGMENT  — you mark what's wrong, missing, or off-voice.
-4. RE-RUN    — feed the judgment back in ("drop point 3, sharpen the opening, the tone is too soft").
-5. REPEAT    — until it clears your bar. Usually 2–4 passes, not 20.
+1. CAPTURE: dump the messy raw material (notes, bullets, a messy doc, the meeting transcript).
+2. STRUCTURE: run the prompt to organize it (summarize, group, draft, rank).
+3. JUDGMENT: you mark what's wrong, missing, or off-voice.
+4. RE-RUN: feed the judgment back in ("drop point 3, sharpen the opening, the tone is too soft").
+5. REPEAT: until it clears your bar. Usually 2–4 passes, not 20.
 ```
 
 The key is step 3. Most people skip their own judgment and wonder why the output is mid.
@@ -52,13 +52,13 @@ That second pass is where the quality lives.
 
 - Generic first drafts become specific, usable ones.
 - You stop blaming the tool ("AI is dumb") and start coaching it.
-- The same prompt becomes reusable — save it (see Recurring Prompts).
+- The same prompt becomes reusable, save it (see [Recurring Prompts](recurring-prompts.md)).
 
 ## Tradeoff
 
 It costs more turns and a little patience than the one-and-done habit. The discipline is
 knowing when to stop: once the output is *correct and usable for its purpose*, ship it.
-Loop prompting is for work that matters enough to be good — not for a throwaway Slack line.
+Loop prompting is for work that matters enough to be good, not for a throwaway Slack line.
 Cal Newport's point in **Deep Work** applies here too: the focus you bring to the
 judgment step is the scarce resource, so spend it where the output gets used.
 

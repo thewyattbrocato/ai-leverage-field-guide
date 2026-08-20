@@ -1,0 +1,31 @@
+name: Link check
+
+# Lightweight link integrity check for the curated links in README.md and docs/.
+# Runs on every push/PR to main and on a weekly schedule so a dead or paywalled
+# link is caught before launch (and before it rots later). Config lives in lychee.toml.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Weekly on Monday 06:17 UTC (off the top of the hour to avoid the cron storm).
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run lychee link checker
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # lychee.toml supplies timeouts, accepted status codes, and exclusions.
+          args: --config lychee.toml --no-progress README.md docs/
+          fail: true
