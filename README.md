@@ -256,4 +256,4 @@ Found a great *free* resource? See [CONTRIBUTING.md](CONTRIBUTING.md). Two hard 
 
 ---
 
-*Built from a private library of 200+ books on learning science, product, copywriting, leadership, and AI. Every idea attributed. No books uploaded. No pirate links. The reading sheet is the public proof — chase any source yourself.*
+*Built from a private library of 200+ books on learning science, product, copywriting, leadership, and AI. Every idea attributed. No books uploaded. No pirate links. The reading sheet is the public proof, chase any source yourself.*
