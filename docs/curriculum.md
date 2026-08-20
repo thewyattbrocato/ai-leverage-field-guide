@@ -147,13 +147,131 @@ MODULE 4: MASTERY
 
 ---
 
-## How to Use This Curriculum
+## 📅 Week-by-Week Calendar
 
-1. **Do not read ahead.** Do the exercise, then move on. (Retrieval > rereading — *Make It Stick*)
-2. **One track at a time.** The lead carries 80% of the impact (*Great Leads*).
-3. **Real work only.** Every exercise uses a real task from your week. No toy examples.
-3. **Stop conditions are your friend.** Define "done" before you start (*Stop Conditions* guide).
-4. **The loop is the product.** The prompt library is the byproduct.
+### Module 1: Foundations (Weeks 1–2)
+
+| Day | Activity | Time | Deliverable |
+|-----|----------|------|-------------|
+| **Mon (Wk 1)** | Exercise 1.1: Leverage Map | 20 min | Leverage Map (1 page) |
+| **Tue (Wk 1)** | Exercise 1.2 Run 1 | 15 min | Run 1 logged |
+| **Wed (Wk 1)** | Rest / reflect | — | — |
+| **Thu (Wk 1)** | Exercise 1.2 Run 2 | 15 min | Run 2 logged |
+| **Fri (Wk 1)** | Exercise 1.2 Run 3 + Save prompt | 15 min | Saved recurring prompt |
+| **Sat (Wk 1)** | Rest | — | — |
+| **Sun (Wk 1)** | Module 1 Checkpoint | 10 min | Self-assessment ✓ |
+
+| Day | Activity | Time | Deliverable |
+|-----|----------|------|-------------|
+| **Mon (Wk 2)** | Read Stop Conditions guide | 10 min | — |
+| **Tue (Wk 2)** | Exercise 2.1: 3 Stop Conditions | 30 min | Stop-Condition Library |
+| **Wed (Wk 2)** | Rest / catch up | — | — |
+| **Thu (Wk 2)** | Read Maker-Checker guide | 10 min | — |
+| **Fri (Wk 2)** | Exercise 2.2: Maker-Checker Run | 30 min | Checked artifact + retro |
+| **Sat (Wk 2)** | Rest | — | — |
+| **Sun (Wk 2)** | Module 1 Checkpoint | 10 min | Self-assessment ✓ |
+
+---
+
+### Module 2: Core Practices (Weeks 3–5)
+
+| Day | Activity | Time | Deliverable |
+|-----|----------|------|-------------|
+| **Mon (Wk 3)** | Exercise 2.1: 3 Stop Conditions | 30 min | Stop-Condition Library |
+| **Tue (Wk 3)** | Test stop conditions on real work | 15 min | Test results logged |
+| **Wed (Wk 3)** | Rest / catch up | — | — |
+| **Thu (Wk 3)** | Read Recurring Prompts guide | 10 min | — |
+| **Fri (Wk 3)** | Exercise 2.3: 5-Prompt Library (start) | 30 min | Prompts 1–3 drafted |
+| **Sat (Wk 3)** | Rest | — | — |
+| **Sun (Wk 3)** | Module 2 Week 1 review | 10 min | — |
+
+| Day | Activity | Time | Deliverable |
+|-----|----------|------|-------------|
+| **Mon (Wk 4)** | Exercise 2.2: Maker-Checker Run | 30 min | Checked artifact + retro |
+| **Tue (Wk 4)** | Exercise 2.3: 5-Prompt Library (finish) | 30 min | Prompts 4–5 drafted |
+| **Wed (Wk 4)** | Rest / catch up | — | — |
+| **Thu (Wk 4)** | Read Learning Paths guide | 10 min | — |
+| **Fri (Wk 4)** | Exercise 2.4: Retrieval Log (Session 1) | 15 min | Session 1 logged |
+| **Sat (Wk 4)** | Rest | — | — |
+| **Sun (Wk 4)** | Retrieval Session 2 (Day 1) | 10 min | Session 2 logged |
+
+| Day | Activity | Time | Deliverable |
+|-----|----------|------|-------------|
+| **Mon (Wk 5)** | Retrieval Session 3 (Day 3) | 10 min | Session 3 logged |
+| **Tue (Wk 5)** | Module 2 Portfolio Review | 15 min | 3 artifacts + reflection |
+| **Wed (Wk 5)** | Retrieval Session 4 (Day 7) | 15 min | Session 4 + summary |
+| **Thu (Wk 5)** | Module 2 Checkpoint | 10 min | Portfolio review ✓ |
+| **Fri (Wk 5)** | Pick your Track | 10 min | Track chosen |
+| **Sat (Wk 5)** | Rest | — | — |
+| **Sun (Wk 5)** | Module 2 Checkpoint | 10 min | Portfolio review ✓ |
+
+---
+
+### Module 3: Your Track (Weeks 6–8)
+
+| Week | Track | Project | Deliverable |
+|------|-------|---------|-------------|
+| **Wk 6** | [Your Track] | Project Part 1 | Deliverable 1 + Retro |
+| **Wk 7** | [Your Track] | Project Part 2 | Deliverable 2 + Retro |
+| **Wk 8** | [Your Track] | Retro + v2.0 prompts | Track complete ✓ |
+
+**Week 6 (Mon–Fri):**
+| Day | Activity |
+|-----|----------|
+| Mon | Build track's required prompts |
+| Tue | Run project Part 1 |
+| Wed | Retro on Part 1 |
+| Thu | Build/refine prompts |
+| Fri | Retro + plan Week 7 |
+
+**Week 7 (Mon–Fri):**
+| Day | Activity |
+|-----|----------|
+| Mon | Run project Part 2 |
+| Tue | Retro on Part 2 |
+| Wed | Refine prompts (v1.1) |
+| Thu | Run project Part 2 (if needed) |
+| Fri | Retro + plan Week 8 |
+
+**Week 8 (Mon–Fri):**
+| Day | Activity |
+|-----|----------|
+| Mon | Final project push / polish |
+| Tue | Final retro |
+| Wed | Update prompt library (v1.1) |
+| Thu | Module 3 Checkpoint |
+| Fri | Celebrate! Plan Module 4 |
+
+---
+
+### Module 4: Mastery (Ongoing — Monthly Rhythm)
+
+| Week | Activity |
+|------|----------|
+| **Week 1** | Advanced prompt: build one v2.0 prompt |
+| **Week 2** | Teach the Loop: run Module 1 for a colleague |
+| **Week 3** | Monthly Deep-Dive: 1 theme from Leverage Library |
+| **Week 4** | Community: share a prompt, review a peer's |
+
+**Monthly Repeat:**
+| Month | Deep-Dive Theme | Advanced Prompt | Teach | Community |
+|-------|-----------------|-----------------|-------|-----------|
+| Jan | | | | |
+| Feb | | | | |
+| Mar | | | | |
+| Apr | | | | |
+| May | | | | |
+| Jun | | | | |
+| Jul | | | | |
+| Aug | | | | |
+| Sep | | | | |
+| Oct | | | | |
+| Nov | | | | |
+| Dec | | | | |
+
+---
+
+## How to Use This Curriculum
 
 ---
 

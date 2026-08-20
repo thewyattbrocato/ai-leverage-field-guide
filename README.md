@@ -3,6 +3,10 @@
 </p>
 
 <p align="center">
+  <img src="assets/leverage-loop.svg" alt="The Leverage Loop" width="100%" />
+</p>
+
+<p align="center">
   <strong>Practical AI leverage for working professionals. Not engineers. Not hype.<br/>More leverage, not more AI.</strong>
 </p>
 
@@ -69,6 +73,10 @@ STOP WHEN: the ask is explicit and I'd be fine with my manager forwarding it.
 │  ✅ Outcome: You're the one others come to for leverage.                       │
 └────────────────────────────────────────────────────────────────────────────────┘
 ```
+
+<p align="center">
+  <img src="assets/curriculum-timeline.svg" alt="10-Week Curriculum Timeline" width="100%" />
+</p>
 
 **⏱ Time to first win: 3 min** | **🎯 Time to working system: 4–6 weeks** | **🏆 Time to role mastery: 8–10 weeks**
 
@@ -175,6 +183,10 @@ STOP WHEN: the ask is explicit and I'd be fine with my manager forwarding it.
 
 > **All exercises → [exercises.md](docs/exercises.md)** — includes Module 3 track projects, Module 4 mastery exercises, self-assessment rubrics, printable quick-reference cards.
 
+<p align="center">
+  <img src="assets/stop-condition-tree.svg" alt="Stop Condition Decision Tree" width="100%" />
+</p>
+
 ---
 
 ## 📖 The Original Guides (Reference + Exercise)
@@ -244,6 +256,17 @@ STOP WHEN: the ask is explicit and I'd be fine with my manager forwarding it.
 
 Found a great *free* resource? See [CONTRIBUTING.md](CONTRIBUTING.md). Two hard rules:  
 **no copyrighted uploads, no affiliate links.** All original content licensed [CC-BY-4.0](LICENSE).
+
+---
+
+## 📋 Quick Reference
+
+| Resource | Purpose |
+|----------|---------|
+| [Start Here](docs/start-here.md) | 15-minute onboarding → first win today |
+| [FAQ](docs/faq.md) | Top 10 stuck points + solutions |
+| [Progress Tracker](docs/progress-tracker.md) | Copy-paste checkbox tracker for all modules |
+| [Quick Reference Cards](docs/quick-reference/) | Printable cards for loop, stop conditions, maker-checker, retrieval |
 
 ---
 

@@ -123,5 +123,5 @@ Run it once on a real deliverable. Save both prompts.
 **Deliverable:** Checked artifact + 1-paragraph retro: "Where did the checker catch something I would have shipped wrong?"
 
 **Stop condition:** One complete maker/checker run logged + retro written.
-See [exercises.md](../exercises.md#exercise-22-maker-checker-run-week-4) for full template.
+See [exercises.md](docs/exercises.md#exercise-22-maker-checker-run-week-4) for full template.
 

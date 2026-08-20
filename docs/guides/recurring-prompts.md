@@ -108,5 +108,5 @@ Stop when: [copy from your stop-condition library]
 5. Meeting Prep / Agenda
 
 **Stop condition:** 5 prompts saved with metadata, each run at least once this month.
-See [exercises.md](../exercises.md#exercise-23-build-your-5-prompt-library-week-4) for full template.
+See [exercises.md](docs/exercises.md#exercise-23-build-your-5-prompt-library-week-4) for full template.
 

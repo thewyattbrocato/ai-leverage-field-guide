@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500">
+  <defs>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a371f7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="mod1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#58a6ff;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="mod2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7ee787;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#7ee787;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="mod3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f78166;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#f78166;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="mod4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a371f7;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#a371f7;stop-opacity:0.3" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <rect width="1200" height="500" fill="#0d1117"/>
+  
+  <text x="600" y="35" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+        font-size="26" font-weight="700" fill="white" text-anchor="middle">Your 10-Week Journey</text>
+  <text x="600" y="58" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#8b949e" text-anchor="middle">
+    4 modules • 4 tracks • 1 system that compounds
+  </text>
+  
+  <path d="M 80 100 L 1120 100" stroke="#30363d" stroke-width="3" fill="none"/>
+  
+  <g id="mod1-group">
+    <rect x="80" y="60" width="240" height="100" rx="12" fill="url(#mod1)" stroke="#58a6ff" stroke-width="2" filter="url(#glow)"/>
+    <text x="200" y="85" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">MODULE 1</text>
+    <text x="200" y="105" font-family="system-ui, sans-serif" font-size="11" fill="#58a6ff" text-anchor="middle" font-weight="600">FOUNDATIONS</text>
+    <text x="200" y="120" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Weeks 1–2</text>
+    <text x="200" y="140" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Leverage Map (20 min)</text>
+    <text x="200" y="152" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Run Loop 3× (3×15 min)</text>
+    <text x="200" y="164" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Checkpoint: Pass/Fail</text>
+  </g>
+  
+  <g id="mod2-group">
+    <rect x="340" y="60" width="300" height="100" rx="12" fill="url(#mod2)" stroke="#7ee787" stroke-width="2"/>
+    <text x="490" y="85" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">MODULE 2</text>
+    <text x="490" y="105" font-family="system-ui, sans-serif" font-size="11" fill="#7ee787" text-anchor="middle" font-weight="600">CORE PRACTICES</text>
+    <text x="490" y="120" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Weeks 3–5</text>
+    <text x="490" y="140" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Wk 3: 3 Stop Conditions</text>
+    <text x="490" y="152" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Wk 4: Maker-Checker + 5 Prompts</text>
+    <text x="490" y="164" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Wk 5: 1 Book Retrieval Log</text>
+    <text x="490" y="176" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Checkpoint: Portfolio Review</text>
+  </g>
+  
+  <g id="mod3-group">
+    <rect x="660" y="60" width="300" height="100" rx="12" fill="url(#mod3)" stroke="#f78166" stroke-width="2"/>
+    <text x="810" y="85" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">MODULE 3</text>
+    <text x="810" y="105" font-family="system-ui, sans-serif" font-size="11" fill="#f78166" text-anchor="middle" font-weight="600">YOUR TRACK</text>
+    <text x="810" y="120" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Weeks 6–8 (Pick ONE)</text>
+    <text x="810" y="140" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Manager: Decision Loop</text>
+    <text x="810" y="152" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Writer: Draft→Edit→Publish</text>
+    <text x="810" y="164" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Operator: Status→Follow-up→Handoff</text>
+    <text x="810" y="176" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Knowledge Worker: Research→Brief</text>
+  </g>
+  
+  <g id="mod4-group">
+    <rect x="980" y="60" width="200" height="100" rx="12" fill="url(#mod4)" stroke="#a371f7" stroke-width="2"/>
+    <text x="1080" y="85" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">MODULE 4</text>
+    <text x="1080" y="105" font-family="system-ui, sans-serif" font-size="11" fill="#a371f7" text-anchor="middle" font-weight="600">MASTERY</text>
+    <text x="1080" y="120" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Ongoing</text>
+    <text x="1080" y="140" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Advanced Prompts</text>
+    <text x="1080" y="152" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Teach the Loop</text>
+    <text x="1080" y="164" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Monthly Deep-Dive</text>
+    <text x="1080" y="176" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">▸ Community + Contribute</text>
+  </g>
+  
+  <g id="milestones">
+    <circle cx="200" cy="100" r="8" fill="#58a6ff" stroke="white" stroke-width="2"/>
+    <text x="200" y="50" font-family="system-ui, sans-serif" font-size="9" fill="#58a6ff" text-anchor="middle" font-weight="600">✅ Checkpoint 1</text>
+    <circle cx="490" cy="100" r="8" fill="#7ee787" stroke="white" stroke-width="2"/>
+    <text x="490" y="50" font-family="system-ui, sans-serif" font-size="9" fill="#7ee787" text-anchor="middle" font-weight="600">✅ Checkpoint 2</text>
+    <circle cx="810" cy="100" r="8" fill="#f78166" stroke="white" stroke-width="2"/>
+    <text x="810" y="50" font-family="system-ui, sans-serif" font-size="9" fill="#f78166" text-anchor="middle" font-weight="600">✅ Track Done</text>
+    <circle cx="1080" cy="100" r="8" fill="#a371f7" stroke="white" stroke-width="2"/>
+    <text x="1080" y="50" font-family="system-ui, sans-serif" font-size="9" fill="#a371f7" text-anchor="middle" font-weight="600">🏆 Mastery</text>
+  </g>
+  
+  <g id="week-markers" font-family="system-ui, sans-serif" font-size="8" fill="#484f58">
+    <text x="110" y="220" text-anchor="middle">Wk 1</text>
+    <text x="170" y="220" text-anchor="middle">Wk 2</text>
+    <text x="290" y="220" text-anchor="middle">Wk 3</text>
+    <text x="350" y="220" text-anchor="middle">Wk 4</text>
+    <text x="410" y="220" text-anchor="middle">Wk 4</text>
+    <text x="470" y="220" text-anchor="middle">Wk 5</text>
+    <text x="530" y="220" text-anchor="middle">Wk 6</text>
+    <text x="590" y="220" text-anchor="middle">Wk 7</text>
+    <text x="650" y="220" text-anchor="middle">Wk 7</text>
+    <text x="710" y="220" text-anchor="middle">Wk 8</text>
+    <text x="770" y="220" text-anchor="middle">Wk 9+</text>
+  </g>
+  
+  <g id="tracks">
+    <text x="600" y="260" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">Pick Your Track (Week 6)</text>
+    
+    <rect x="150" y="280" width="220" height="160" rx="12" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+    <text x="260" y="305" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#58a6ff" text-anchor="middle">🎯 MANAGER</text>
+    <text x="260" y="325" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Maker-Checker + Stop Conditions</text>
+    <text x="260" y="340" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">Decision Loop on real decisions</text>
+    <text x="260" y="355" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">2 decisions + retro</text>
+    <text x="260" y="375" font-family="system-ui, sans-serif" font-size="9" fill="#58a6ff" text-anchor="middle">Guide: Maker-Checker, Stop Conditions</text>
+    
+    <rect x="390" y="280" width="220" height="160" rx="12" fill="#161b22" stroke="#7ee787" stroke-width="2"/>
+    <text x="500" y="305" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#7ee787">✍️ WRITER</text>
+    <text x="500" y="325" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Loop Prompting + Recurring Prompts</text>
+    <text x="500" y="340" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">Draft → Edit → Publish pipeline</text>
+    <text x="500" y="355" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">2 pieces + retro</text>
+    <text x="500" y="375" font-family="system-ui, sans-serif" font-size="9" fill="#7ee787">Guide: Loop Prompting, Recurring Prompts</text>
+    
+    <rect x="630" y="280" width="220" height="160" rx="12" fill="#161b22" stroke="#f78166" stroke-width="2"/>
+    <text x="740" y="305" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#f78166">⚙️ OPERATOR</text>
+    <text x="740" y="325" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Stop Conditions + Recurring Prompts</text>
+    <text x="740" y="340" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">Status → Follow-up → Handoff</text>
+    <text x="740" y="355" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">2 weeks + retro</text>
+    <text x="740" y="375" font-family="system-ui, sans-serif" font-size="9" fill="#f78166">Guide: Stop Conditions, Recurring Prompts</text>
+    
+    <rect x="870" y="280" width="220" height="160" rx="12" fill="#161b22" stroke="#a371f7" stroke-width="2"/>
+    <text x="980" y="305" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#a371f7">🔍 KNOWLEDGE WORKER</text>
+    <text x="980" y="325" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Loop Prompting + Learning Paths</text>
+    <text x="980" y="340" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">Research → Synthesis → Brief</text>
+    <text x="980" y="355" font-family="system-ui, sans-serif" font-size="9" fill="#c9d1d9" text-anchor="middle">2 briefs + retro</text>
+    <text x="980" y="375" font-family="system-ui, sans-serif" font-size="9" fill="#a371f7">Guide: Loop Prompting, Learning Paths</text>
+  </g>
+  
+  <text x="600" y="470" font-family="system-ui, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">
+    Rule of One: Pick ONE track. Finish it. Then add another. The lead carries 80% of the impact.
+  </text>
+</svg>

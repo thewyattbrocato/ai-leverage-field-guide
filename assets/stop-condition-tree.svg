@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a371f7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="yesGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7ee787;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#7ee787;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="noGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f78166;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#f78166;stop-opacity:0.3" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <rect width="800" height="600" fill="#0d1117"/>
+  
+  <text x="400" y="35" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+        font-size="24" font-weight="700" fill="white" text-anchor="middle">Stop Condition Decision Tree</text>
+  <text x="400" y="55" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#8b949e" text-anchor="middle">
+    Define "done" before you start. Evidence > confidence.
+  </text>
+  
+  <!-- Start node -->
+  <g id="start">
+    <rect x="275" y="80" width="250" height="55" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2" filter="url(#glow)"/>
+    <text x="400" y="112" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#58a6ff" text-anchor="middle">🛑 START: Write Your Stop Condition</text>
+    <text x="400" y="128" font-family="system-ui, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">Before you run the prompt, define "done" in one sentence</text>
+  </g>
+  
+  <!-- Arrow down -->
+  <path d="M 400 135 L 400 170" stroke="#58a6ff" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Question 1: Is it observable? -->
+  <g id="q1">
+    <rect x="200" y="185" width="400" height="65" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+    <text x="400" y="212" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#58a6ff" text-anchor="middle">Q1: Is it OBSERVABLE?</text>
+    <text x="400" y="230" font-family="system-ui, sans-serif" font-size="10" fill="#c9d1d9" text-anchor="middle">Could someone else verify it without reading your mind?</text>
+    <text x="400" y="243" font-family="system-ui, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">✓ Yes = every claim has a source I can name | ✗ No = "looks good to me"</text>
+  </g>
+  
+  <!-- YES branch -->
+  <path d="M 200 250 L 120 250" stroke="#7ee787" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <g id="yes1">
+    <rect x="20" y="240" width="95" height="35" rx="6" fill="url(#yesGrad)" stroke="#7ee787" stroke-width="1.5"/>
+    <text x="67.5" y="263" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#7ee787" text-anchor="middle">YES</text>
+  </g>
+  
+  <!-- NO branch -->
+  <path d="M 600 250 L 680 250" stroke="#f78166" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <g id="no1">
+    <rect x="685" y="240" width="95" height="35" rx="6" fill="url(#noGrad)" stroke="#f78166" stroke-width="1.5"/>
+    <text x="732.5" y="263" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#f78166" text-anchor="middle">NO</text>
+  </g>
+  
+  <!-- NO path: Rewrite -->
+  <g id="no1-path">
+    <rect x="685" y="280" width="95" height="50" rx="8" fill="#161b22" stroke="#f78166" stroke-width="2"/>
+    <text x="732.5" y="305" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#f78166" text-anchor="middle">↩ REWRITE</text>
+    <text x="732.5" y="320" font-family="system-ui, sans-serif" font-size="8" fill="#8b949e" text-anchor="middle">Make it observable</text>
+    <text x="732.5" y="332" font-family="system-ui, sans-serif" font-size="8" fill="#8b949e" text-anchor="middle">Add concrete check</text>
+  </g>
+  <path d="M 732.5 330 L 732.5 360 L 400 360 L 400 185" stroke="#f78166" stroke-width="1.5" fill="none" stroke-dasharray="4,4"/>
+  
+  <!-- YES path down -->
+  <path d="M 400 250 L 400 300" stroke="#7ee787" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Question 2: Is it falsifiable? -->
+  <g id="q2">
+    <rect x="200" y="315" width="400" height="65" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+    <text x="400" y="342" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#58a6ff" text-anchor="middle">Q2: Is it FALSIFIABLE?</text>
+    <text x="400" y="360" font-family="system-ui, sans-serif" font-size="10" fill="#c9d1d9" text-anchor="middle">Can you clearly FAIL it? (Not "good tone" — that passes everything)</text>
+    <text x="400" y="373" font-family="system-ui, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">✓ Yes = "every number traces to a doc" | ✗ No = "feels right"</text>
+  </g>
+  
+  <!-- YES branch 2 -->
+  <path d="M 200 380 L 120 380" stroke="#7ee787" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <g id="yes2">
+    <rect x="20" y="370" width="95" height="35" rx="6" fill="url(#yesGrad)" stroke="#7ee787" stroke-width="1.5"/>
+    <text x="67.5" y="393" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#7ee787" text-anchor="middle">YES</text>
+  </g>
+  
+  <!-- NO branch 2 -->
+  <path d="M 600 380 L 680 380" stroke="#f78166" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <g id="no2">
+    <rect x="685" y="370" width="95" height="35" rx="6" fill="url(#noGrad)" stroke="#f78166" stroke-width="1.5"/>
+    <text x="732.5" y="393" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#f78166" text-anchor="middle">NO</text>
+  </g>
+  
+  <!-- NO path 2: Rewrite -->
+  <g id="no2-path">
+    <rect x="685" y="410" width="95" height="50" rx="8" fill="#161b22" stroke="#f78166" stroke-width="2"/>
+    <text x="732.5" y="435" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#f78166" text-anchor="middle">↩ REWRITE</text>
+    <text x="732.5" y="448" font-family="system-ui, sans-serif" font-size="8" fill="#8b949e" text-anchor="middle">Add fail condition</text>
+    <text x="732.5" y="460" font-family="system-ui, sans-serif" font-size="8" fill="#8b949e" text-anchor="middle">Make it binary</text>
+  </g>
+  <path d="M 732.5 460 L 732.5 490 L 400 490 L 400 315" stroke="#f78166" stroke-width="1.5" fill="none" stroke-dasharray="4,4"/>
+  
+  <!-- YES path down -->
+  <path d="M 400 380 L 400 430" stroke="#7ee787" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Question 3: Does it target the real risk? -->
+  <g id="q3">
+    <rect x="200" y="445" width="400" height="65" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+    <text x="400" y="472" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#58a6ff" text-anchor="middle">Q3: Does It Target the REAL RISK?</text>
+    <text x="400" y="490" font-family="system-ui, sans-serif" font-size="10" fill="#c9d1d9" text-anchor="middle">Not a proxy. What actually goes wrong if you stop too early/late?</text>
+    <text x="400" y="503" font-family="system-ui, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">✓ Yes = catches real failure mode | ✗ No = proxy metric</text>
+  </g>
+  
+  <!-- YES branch 3 -->
+  <path d="M 200 510 L 120 510" stroke="#7ee787" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <g id="yes3">
+    <rect x="20" y="500" width="95" height="35" rx="6" fill="url(#yesGrad)" stroke="#7ee787" stroke-width="1.5"/>
+    <text x="67.5" y="523" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#7ee787" text-anchor="middle">YES</text>
+  </g>
+  
+  <!-- NO branch 3 -->
+  <path d="M 600 510 L 680 510" stroke="#f78166" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <g id="no3">
+    <rect x="685" y="500" width="95" height="35" rx="6" fill="url(#noGrad)" stroke="#f78166" stroke-width="1.5"/>
+    <text x="732.5" y="523" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#f78166" text-anchor="middle">NO</text>
+  </g>
+  
+  <!-- NO path 3: Rewrite -->
+  <g id="no3-path">
+    <rect x="685" y="540" width="95" height="45" rx="8" fill="#161b22" stroke="#f78166" stroke-width="2"/>
+    <text x="732.5" y="562" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#f78166" text-anchor="middle">↩ REWRITE</text>
+    <text x="732.5" y="575" font-family="system-ui, sans-serif" font-size="8" fill="#8b949e" text-anchor="middle">Find real risk</text>
+  </g>
+  <path d="M 732.5 585 L 732.5 610 L 400 610 L 400 445" stroke="#f78166" stroke-width="1.5" fill="none" stroke-dasharray="4,4"/>
+  
+  <!-- YES path 3 down to SUCCESS -->
+  <path d="M 400 510 L 400 550" stroke="#7ee787" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- SUCCESS node -->
+  <g id="success">
+    <rect x="250" y="555" width="300" height="70" rx="12" fill="url(#yesGrad)" stroke="#7ee787" stroke-width="3" filter="url(#glow)"/>
+    <text x="400" y="585" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#7ee787" text-anchor="middle">✅ STOP CONDITION READY</text>
+    <text x="400" y="600" font-family="system-ui, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">Observable ✓  Falsifiable ✓  Targets real risk ✓  —  Ship when it passes</text>
+  </g>
+  
+  <!-- Examples sidebar -->
+  <g id="examples" font-family="system-ui, sans-serif">
+    <rect x="20" y="20" width="170" height="560" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+    <text x="105" y="45" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#58a6ff" text-anchor="middle">EXAMPLES</text>
+    
+    <text x="30" y="80" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#7ee787" text-anchor="start">✅ GOOD</text>
+    <text x="30" y="98" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">Every claim has a source</text>
+    <text x="30" y="113" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">Every number traces to doc</text>
+    <text x="30" y="128" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">Ask explicit in first 2 lines</text>
+    <text x="30" y="143" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">2 unverified claims flagged</text>
+    
+    <text x="30" y="175" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#f78166" text-anchor="start">❌ BAD</text>
+    <text x="30" y="193" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">"Until it feels right"</text>
+    <text x="30" y="208" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">"Until I'm confident"</text>
+    <text x="30" y="223" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">"Good tone"</text>
+    <text x="30" y="238" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">"High quality"</text>
+    
+    <text x="30" y="270" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#58a6ff" text-anchor="start">BY WORK TYPE</text>
+    <text x="30" y="288" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">Status: numbers traced, ask explicit</text>
+    <text x="30" y="303" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">Email: one clear ask, actionable</text>
+    <text x="30" y="318" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">Brief: claims sourced, 2 unverified</text>
+    <text x="30" y="333" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">Summary: nothing missing, nothing added</text>
+    
+    <text x="30" y="365" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#a371f7" text-anchor="start">CREATIVE?</text>
+    <text x="30" y="383" font-family="system-ui, sans-serif" font-size="8" fill="#c9d1d9" text-anchor="start">Time-box: 3 passes, then decide</text>
+  </g>
+  
+  <!-- Bottom tip -->
+  <text x="400" y="585" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#58a6ff" text-anchor="middle" font-weight="600">
+    Write the stop condition FIRST. Then run the prompt. Check like a checklist, not a vibe.
+  </text>
+</svg>
