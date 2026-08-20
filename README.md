@@ -50,8 +50,8 @@ want literacy, not a degree.
   friendliest "what AI actually is" course for non-technical people. No math.
 - [Google AI Essentials](https://www.coursera.org/learn/google-ai-essentials). Coursera
   audit track. Practical everyday-use basics from Google.
-- [Generative AI for Everyone](https://www.deeplearning.ai/courses/generative-ai-for-everyone/). Andrew Ng / DeepLearning.AI. Plain-English mental models, zero code.
-- [AI For Everyone](https://www.deeplearning.ai/courses/ai-for-everyone/). Andrew Ng.
+- [Generative AI for Everyone](https://www.deeplearning.ai/courses/generative-ai-for-everyone). Andrew Ng / DeepLearning.AI. Plain-English mental models, zero code.
+- [AI For Everyone](https://www.deeplearning.ai/courses/ai-for-everyone). Andrew Ng.
   How AI fits organizations; great for managers deciding where it's real.
 - [Harvard CS50's Intro to AI with Python](https://cs50.harvard.edu/ai/). Free
   OpenCourseWare. Rigorous; best if you'll touch a little code.
@@ -124,7 +124,7 @@ Free to read, free to keep. Themed around leverage, judgment, and clear thinking
   management, communication, and systems thinking.
 - [LessWrong](https://www.lesswrong.com/). Free long-form on clear thinking and rationality.
   Dense but genuinely useful for judgment.
-- [Paul Graham. Essays](http://www.paulgraham.com/articles.html). Free, sharp essays on
+- [Paul Graham. Essays](https://paulgraham.com/articles.html). Free, sharp essays on
   startups, work, and thinking. High leverage per hour.
 - [The Public Domain (James Boyle)](https://www.thepublicdomain.org/). Free book on what's
   actually free to use. Useful context for this whole repo's license stance.
