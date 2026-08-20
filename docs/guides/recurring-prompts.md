@@ -64,3 +64,49 @@ you stop re-inventing the wheel and start driving it.
 
 ---
 
+## Exercises
+
+> **These use real work from your week. No toy examples.**
+
+### Exercise 1: Build Your 5-Prompt Library (Week 4)
+
+Save your 5 most-used prompts in a reusable library. Format per prompt:
+
+```
+# [Prompt Name] — v1.0 — [Date]
+
+## CONTEXT
+Role: [your role]
+Audience: [who reads the output]
+Task type: [status / follow-up / brief / draft / summary / etc.]
+
+## PROMPT
+```
+[full prompt text here — include stop condition at the end]
+```
+
+## STOP CONDITION
+Stop when: [copy from your stop-condition library]
+
+## JUDGMENT NOTES (from last run)
+- What worked:
+- What needed fixing:
+- Next improvement:
+
+## METADATA
+- Created: [date]
+- Last run: [date]
+- Runs this month: [count]
+- Avg time saved: [minutes]
+```
+
+**Start with these 5 (adapt to your work):**
+1. Weekly Status Update
+2. Meeting Follow-up Email
+3. Research Brief / Synthesis
+4. Decision Brief (for a decision you need to make)
+5. Meeting Prep / Agenda
+
+**Stop condition:** 5 prompts saved with metadata, each run at least once this month.
+See [exercises.md](../exercises.md#exercise-23-build-your-5-prompt-library-week-4) for full template.
+

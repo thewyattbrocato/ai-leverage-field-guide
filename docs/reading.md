@@ -20,7 +20,7 @@ a book is in the public domain, read it free from a legitimate source.
 
 ## Ground rules (same as the repo)
 
-- No Z-Library, libgen, or any pirate source, not linked, not named, not implied.
+- No pirate sources, not linked, not named, not implied.
 - Buy or borrow when there's no free source. That's the right way.
 - Author sites and publishers are the legitimate path.
 

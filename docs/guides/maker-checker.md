@@ -66,3 +66,62 @@ Judgment is the product. Don't ship it unchecked.
 
 ---
 
+## Exercises
+
+> **These use real work from your week. No toy examples.**
+
+### Exercise 1: Maker-Checker Run (Week 4)
+
+Run the maker/checker split on one real deliverable this week.
+
+**Maker Prompt:**
+```
+CONTEXT: I'm a [role] creating a [deliverable] for [audience].
+RAW MATERIAL:
+[paste messy notes / draft / transcript]
+
+TASK (MAKER): Produce the best draft you can. Be thorough. Do not self-edit.
+
+OUTPUT FORMAT:
+[DRAFT]
+[your draft here]
+
+[MAKER NOTES]
+- What I'm confident about:
+- What I'm uncertain about:
+- Where I cut corners:
+```
+
+**Checker Prompt:**
+```
+CONTEXT: You are a rigorous checker. The maker (above) produced a draft. Your job: find what the maker missed, what's wrong, what's unverified, what's off-voice.
+
+MAKER'S DRAFT:
+[paste draft]
+
+MAKER'S NOTES:
+[paste maker notes]
+
+TASK (CHECKER): Run this checklist:
+1. Every factual claim → source or flag as unverified
+2. Every number → traceable to a doc I trust
+3. The ask/decision → explicit in first 2 sentences?
+4. Tone → matches audience? (formal/casual/direct)
+5. Jargon → stripped or defined?
+6. One clear thing? Or multiple mixed?
+7. Would I be comfortable with my manager reading this?
+
+OUTPUT:
+[CHECKER REPORT]
+- Pass / Fail on each item above
+- Specific fixes needed (line-level if possible)
+- Verdict: READY / NEEDS REWORK
+```
+
+Run it once on a real deliverable. Save both prompts.
+
+**Deliverable:** Checked artifact + 1-paragraph retro: "Where did the checker catch something I would have shipped wrong?"
+
+**Stop condition:** One complete maker/checker run logged + retro written.
+See [exercises.md](../exercises.md#exercise-22-maker-checker-run-week-4) for full template.
+

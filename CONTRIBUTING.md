@@ -8,10 +8,9 @@ share, and safe to trust.**
 ## Two hard rules (no exceptions)
 
 1. **No copyrighted uploads.** Do not add, link to, or reference pirated books, PDFs,
-   or any file you do not have the right to share. This includes (but is not limited to)
-   Z-Library, libgen, and similar sources. If you are not sure a source is legitimate,
-   do not include it. Cite and link to publisher pages, author sites, official stores,
-   libraries, or public-domain/CC sources instead.
+   or any file you do not have the right to share. If you are not sure a source is
+   legitimate, do not include it. Cite and link to publisher pages, author sites,
+   official stores, libraries, or public-domain/CC sources instead.
 
 2. **No affiliate links.** Do not add links that pay you a commission. This repo earns
    nothing and must stay that way.

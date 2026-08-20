@@ -64,3 +64,70 @@ judgment step is the scarce resource, so spend it where the output gets used.
 
 ---
 
+## Exercises
+
+> **These use real work from your week. No toy examples.**
+
+### Exercise 1: Run the Loop (3× this week)
+
+Pick one recurring task from your [Leverage Map](curriculum.md#exercise-11-leverage-map).
+Run the loop template 3 times (e.g., Mon/Wed/Fri). Log each run:
+
+| Run | Date | Task | Time | Judgment: 3 Weakest Parts | Stop Met? |
+|-----|------|------|------|---------------------------|-----------|
+| 1   |      |      |      | 1. 2. 3.                  | Y / N     |
+| 2   |      |      |      | 1. 2. 3.                  | Y / N     |
+| 3   |      |      |      | 1. 2. 3.                  | Y / N     |
+
+**Template:**
+```
+CONTEXT: I'm a [role] writing a [status update / follow-up / brief] for [audience].
+RAW MATERIAL:
+[paste your messy notes]
+
+TASK: Draft a tight version. Then, in a separate section, list the 3 weakest parts of
+your own draft and exactly what would make each stronger.
+
+CONSTRAINTS: Plain language. No jargon. Under [X] words.
+```
+
+**Stop condition:** 3 runs logged with judgment notes. Final prompt saved to your library.
+See [Recurring Prompts](recurring-prompts.md#exercise-23-build-your-5-prompt-library).
+
+---
+
+### Exercise 2: Build Your v2.0 Prompt (after 5+ runs)
+
+Take your most-used prompt. Build v2.0 with few-shot examples from your best runs:
+
+```
+# [Prompt Name] — v2.0 — [Date]
+
+## ROLE
+You are a [specific role] with [years] experience in [domain].
+You [specific strength: catch unverified claims / spot logical gaps / sharpen prose].
+
+## FEW-SHOT EXAMPLES (3–5 from your best runs)
+### Example 1
+INPUT: [raw material]
+OUTPUT: [ideal output]
+
+## PROMPT
+```
+[full prompt with stop condition]
+```
+
+## STOP CONDITION
+Stop when: [specific, observable, falsifiable]
+
+## TRACKING
+- Version: 2.0
+- Created: [date]
+- Based on: v1.0 runs [count]
+- Avg quality (1–10): ____
+- Next review: [date + 30 days]
+```
+
+**Stop condition:** v2.0 built, tested once, metadata complete.
+See [exercises.md](../exercises.md#exercise-41-build-an-advanced-prompt) for full template.
+

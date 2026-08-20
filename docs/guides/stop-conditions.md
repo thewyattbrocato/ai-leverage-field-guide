@@ -65,3 +65,34 @@ you run, so the machine doesn't decide it for you.
 
 ---
 
+## Exercises
+
+> **These use real work from your week. No toy examples.**
+
+### Exercise 1: Build Your Stop-Condition Library (Week 3)
+
+Write 3 stop conditions for your top 3 work types. Use this template per type:
+
+```
+WORK TYPE: [Status Update / Follow-up Email / Research Brief / Meeting Prep / Draft / etc.]
+
+STOP CONDITION:
+Stop when: [observable, falsifiable condition — see examples above]
+
+WHY THIS CONDITION:
+- It's observable: [yes/no — someone else could verify it]
+- It's falsifiable: [yes/no — you can clearly fail it]
+- It targets the real risk: [what goes wrong if you stop too early/late]
+
+TEST RUN:
+Task: ___________________
+Did the condition catch a real issue?  Y / N
+If yes, what did it catch? ___________________________________
+Time saved vs. old way: ___________________
+```
+
+**Do this for 3 work types.** Save as `stop-conditions.md` in your prompt library.
+
+**Stop condition for this exercise:** 3 stop conditions written, each tested once, saved in library.
+See [exercises.md](../exercises.md#exercise-21-stop-condition-library-week-3) for full template.
+

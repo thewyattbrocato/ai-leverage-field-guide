@@ -51,4 +51,50 @@ It is slower than skimming and it feels less productive in the moment. The disci
 
 ---
 
-*Written with AI assistance, edited and verified by Wyatt.*
+## Exercises
+
+> **These use real work from your week. No toy examples.**
+
+### Exercise 1: Retrieval Log for One Book (Week 5)
+
+Pick ONE book from the [Leverage Library](library.md) Start Here list. Run the retrieval loop:
+
+```
+1. METALARN: Before you study, map the skill. What does "good" look like? What are the sub-skills?
+2. RETRIEVE: Close the source. Write what you remember cold. Or ask the model to quiz you.
+3. FEEDBACK: Compare your answer to the source. The error is the lesson.
+4. SPACE: Wait. Run the same retrieval again in 1 day, 3 days, 1 week.
+5. INTERLEAVE: Mix topics. The model can shuffle the quiz order.
+6. CONSOLIDATE: Summarize in your own words. Sleep on it.
+```
+
+**Log Format:**
+```
+BOOK: [Title] — [Author]
+DATE STARTED: ___________
+
+METALARN (pre-study):
+- What "good" looks like for this book's ideas:
+- Sub-skills I want to extract:
+
+SESSION 1 (Day 0) — RETRIEVE + FEEDBACK:
+- What I recalled cold:
+- What the source says (key differences):
+- Error lesson:
+
+SESSION 2 (Day 1) — RETRIEVE:
+- What I recalled:
+
+SESSION 3 (Day 3) — RETRIEVE:
+- What I recalled:
+
+SESSION 4 (Day 7) — RETRIEVE + CONSOLIDATE:
+- What I recalled:
+- My one-paragraph summary in my own words:
+- How I'll use this in my work:
+
+TIME SPENT TOTAL: ______ minutes
+```
+
+**Stop condition:** All 4 sessions logged. One-paragraph summary written. Applied once to work.
+See [exercises.md](../exercises.md#exercise-24-retrieval-log-for-one-book-week-5) for full template.
