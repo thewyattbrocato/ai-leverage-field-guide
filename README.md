@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/thewyattbrocato/ai-leverage-field-guide/main/assets/banner.svg" alt="AI Leverage Field Guide" width="100%" />
+  <img src="assets/banner.svg" alt="AI Leverage Field Guide" width="100%" />
 </p>
 
 <p align="center">
