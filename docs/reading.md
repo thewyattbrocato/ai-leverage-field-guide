@@ -8,6 +8,10 @@ these files are in this repository, and none are linked from pirate sources.** T
 exists so you can pursue the ideas *legally*: buy them, borrow them from a library, or, where
 a book is in the public domain, read it free from a legitimate source.
 
+For the curated shortlist (the ten books to start with, organized by theme), see
+[library.md](library.md). This sheet is the full inventory; the Library page is the
+front door.
+
 ## How to read this sheet
 
 - **Category**, where the book earns its place in a leverage toolkit.
