@@ -1,7 +1,7 @@
 # Leverage Library
 
 The curated front door to the reading behind this field guide. The full catalog lives in
-[READING.md](https://github.com/wyattbrocato/ai-leverage-field-guide/blob/main/READING.md) at
+[READING.md](reading.md) at
 the repo root. This page is the shortlist: the books worth your hour, organized by the idea
 they sharpen.
 
@@ -227,7 +227,7 @@ Use the library in three passes, not all at once:
    else. They are the highest-leverage ideas and the ones the guides lean on hardest.
 2. **Theme picks next.** When a specific job shows up, go to its theme. Prepping a status update?
    Theme D. Building a checker prompt? Theme E. Setting a stop condition? Theme F.
-3. **Full catalog last.** [READING.md](https://github.com/wyattbrocato/ai-leverage-field-guide/blob/main/READING.md)
+3. **Full catalog last.** [READING.md](reading.md)
    is the complete inventory when you want to go deep or find the primary source for a claim.
 
 The guides are the practice; the library is the reading that makes the practice stick. Start with

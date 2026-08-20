@@ -57,7 +57,7 @@ It is slower than skimming and it feels less productive in the moment. The disci
 
 ### Exercise 1: Retrieval Log for One Book (Week 5)
 
-Pick ONE book from the [Leverage Library](library.md) Start Here list. Run the retrieval loop:
+Pick ONE book from the [Leverage Library](../library.md) Start Here list. Run the retrieval loop:
 
 ```
 1. METALARN: Before you study, map the skill. What does "good" look like? What are the sub-skills?
