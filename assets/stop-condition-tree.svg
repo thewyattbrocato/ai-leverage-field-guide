@@ -1,35 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" viewBox="0 0 800 680" preserveAspectRatio="xMidYMid meet">
-  <defs>
-    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#a371f7;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="yesGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#7ee787;stop-opacity:0.9" />
-      <stop offset="100%" style="stop-color:#7ee787;stop-opacity:0.3" />
-    </linearGradient>
-    <linearGradient id="noGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#f78166;stop-opacity:0.9" />
-      <stop offset="100%" style="stop-color:#f78166;stop-opacity:0.3" />
-    </linearGradient>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#58a6ff" />
-    </marker>
-    <marker id="arrowheadGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#7ee787" />
-    </marker>
-    <marker id="arrowheadRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#f78166" />
-    </marker>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-  
   <rect width="800" height="680" fill="#0d1117"/>
   
   <text x="400" y="35" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
@@ -39,17 +8,18 @@
   </text>
   
   <!-- Start node -->
-  <g id="start">
-    <rect x="250" y="70" width="300" height="60" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2" filter="url(#glow)"/>
+  <g>
+    <rect x="250" y="70" width="300" height="60" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
     <text x="400" y="100" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#58a6ff" text-anchor="middle">🛑 START: Write Your Stop Condition</text>
     <text x="400" y="118" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Before you run the prompt, define "done" in one sentence</text>
   </g>
   
   <!-- Arrow down -->
-  <path d="M 400 130 L 400 165" stroke="#58a6ff" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 400 130 L 400 165" stroke="#58a6ff" stroke-width="3" fill="none"/>
+  <polygon points="395,160 400,170 405,160" fill="#58a6ff"/>
   
   <!-- Question 1: Is it observable? -->
-  <g id="q1">
+  <g>
     <rect x="150" y="180" width="500" height="70" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
     <text x="400" y="205" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#58a6ff" text-anchor="middle">Q1: Is it OBSERVABLE?</text>
     <text x="400" y="222" font-family="system-ui, sans-serif" font-size="11" fill="#c9d1d9" text-anchor="middle">Could someone else verify it without reading your mind?</text>
@@ -57,21 +27,23 @@
   </g>
   
   <!-- YES branch -->
-  <path d="M 150 250 L 80 250" stroke="#7ee787" stroke-width="3" fill="none" marker-end="url(#arrowheadGreen)"/>
-  <g id="yes1">
+  <path d="M 150 250 L 80 250" stroke="#7ee787" stroke-width="3" fill="none"/>
+  <polygon points="85,245 80,255 85,255" fill="#7ee787"/>
+  <g>
     <rect x="15" y="240" width="60" height="35" rx="6" fill="#161b22" stroke="#7ee787" stroke-width="2"/>
     <text x="45" y="263" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#7ee787" text-anchor="middle">YES</text>
   </g>
   
   <!-- NO branch -->
-  <path d="M 650 250 L 720 250" stroke="#f78166" stroke-width="3" fill="none" marker-end="url(#arrowheadRed)"/>
-  <g id="no1">
+  <path d="M 650 250 L 720 250" stroke="#f78166" stroke-width="3" fill="none"/>
+  <polygon points="715,245 720,255 715,255" fill="#f78166"/>
+  <g>
     <rect x="725" y="240" width="60" height="35" rx="6" fill="#161b22" stroke="#f78166" stroke-width="2"/>
     <text x="755" y="263" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#f78166" text-anchor="middle">NO</text>
   </g>
   
   <!-- NO path: Rewrite -->
-  <g id="no1-path">
+  <g>
     <rect x="725" y="285" width="60" height="55" rx="8" fill="#161b22" stroke="#f78166" stroke-width="2"/>
     <text x="755" y="307" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#f78166" text-anchor="middle">↩ REWRITE</text>
     <text x="755" y="323" font-family="system-ui, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">Make it</text>
@@ -80,10 +52,10 @@
   <path d="M 755 340 L 755 370 L 400 370 L 400 180" stroke="#f78166" stroke-width="2" fill="none" stroke-dasharray="6,4"/>
   
   <!-- YES path down -->
-  <path d="M 400 250 L 400 305" stroke="#7ee787" stroke-width="3" fill="none" marker-end="url(#arrowheadGreen)"/>
+  <path d="M 400 250 L 400 305" stroke="#7ee787" stroke-width="3" fill="none"/>
   
   <!-- Question 2: Is it falsifiable? -->
-  <g id="q2">
+  <g>
     <rect x="150" y="320" width="500" height="70" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
     <text x="400" y="345" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#58a6ff" text-anchor="middle">Q2: Is it FALSIFIABLE?</text>
     <text x="400" y="363" font-family="system-ui, sans-serif" font-size="11" fill="#c9d1d9" text-anchor="middle">Can you clearly FAIL it? (Not "good tone" — that passes everything)</text>
@@ -91,21 +63,23 @@
   </g>
   
   <!-- YES branch 2 -->
-  <path d="M 150 390 L 80 390" stroke="#7ee787" stroke-width="3" fill="none" marker-end="url(#arrowheadGreen)"/>
-  <g id="yes2">
+  <path d="M 150 390 L 80 390" stroke="#7ee787" stroke-width="3" fill="none"/>
+  <polygon points="85,385 80,395 85,395" fill="#7ee787"/>
+  <g>
     <rect x="15" y="380" width="60" height="35" rx="6" fill="#161b22" stroke="#7ee787" stroke-width="2"/>
     <text x="45" y="403" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#7ee787" text-anchor="middle">YES</text>
   </g>
   
   <!-- NO branch 2 -->
-  <path d="M 650 390 L 720 390" stroke="#f78166" stroke-width="3" fill="none" marker-end="url(#arrowheadRed)"/>
-  <g id="no2">
+  <path d="M 650 390 L 720 390" stroke="#f78166" stroke-width="3" fill="none"/>
+  <polygon points="715,385 720,395 715,395" fill="#f78166"/>
+  <g>
     <rect x="725" y="380" width="60" height="35" rx="6" fill="#161b22" stroke="#f78166" stroke-width="2"/>
     <text x="755" y="403" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#f78166" text-anchor="middle">NO</text>
   </g>
   
   <!-- NO path 2: Rewrite -->
-  <g id="no2-path">
+  <g>
     <rect x="725" y="425" width="60" height="55" rx="8" fill="#161b22" stroke="#f78166" stroke-width="2"/>
     <text x="755" y="447" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#f78166" text-anchor="middle">↩ REWRITE</text>
     <text x="755" y="463" font-family="system-ui, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">Add fail</text>
@@ -114,10 +88,10 @@
   <path d="M 755 480 L 755 510 L 400 510 L 400 320" stroke="#f78166" stroke-width="2" fill="none" stroke-dasharray="6,4"/>
   
   <!-- YES path down -->
-  <path d="M 400 390 L 400 435" stroke="#7ee787" stroke-width="3" fill="none" marker-end="url(#arrowheadGreen)"/>
+  <path d="M 400 390 L 400 435" stroke="#7ee787" stroke-width="3" fill="none"/>
   
   <!-- Question 3: Does it target the real risk? -->
-  <g id="q3">
+  <g>
     <rect x="150" y="450" width="500" height="70" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
     <text x="400" y="475" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#58a6ff" text-anchor="middle">Q3: Does It Target the REAL RISK?</text>
     <text x="400" y="493" font-family="system-ui, sans-serif" font-size="11" fill="#c9d1d9" text-anchor="middle">Not a proxy. What actually goes wrong if you stop too early/late?</text>
@@ -125,21 +99,23 @@
   </g>
   
   <!-- YES branch 3 -->
-  <path d="M 150 520 L 80 520" stroke="#7ee787" stroke-width="3" fill="none" marker-end="url(#arrowheadGreen)"/>
-  <g id="yes3">
+  <path d="M 150 520 L 80 520" stroke="#7ee787" stroke-width="3" fill="none"/>
+  <polygon points="85,515 80,525 85,525" fill="#7ee787"/>
+  <g>
     <rect x="15" y="510" width="60" height="35" rx="6" fill="#161b22" stroke="#7ee787" stroke-width="2"/>
     <text x="45" y="533" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#7ee787" text-anchor="middle">YES</text>
   </g>
   
   <!-- NO branch 3 -->
-  <path d="M 650 520 L 720 520" stroke="#f78166" stroke-width="3" fill="none" marker-end="url(#arrowheadRed)"/>
-  <g id="no3">
+  <path d="M 650 520 L 720 520" stroke="#f78166" stroke-width="3" fill="none"/>
+  <polygon points="715,515 720,525 715,525" fill="#f78166"/>
+  <g>
     <rect x="725" y="510" width="60" height="35" rx="6" fill="#161b22" stroke="#f78166" stroke-width="2"/>
     <text x="755" y="533" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#f78166" text-anchor="middle">NO</text>
   </g>
   
   <!-- NO path 3: Rewrite -->
-  <g id="no3-path">
+  <g>
     <rect x="725" y="555" width="60" height="50" rx="8" fill="#161b22" stroke="#f78166" stroke-width="2"/>
     <text x="755" y="577" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#f78166" text-anchor="middle">↩ REWRITE</text>
     <text x="755" y="593" font-family="system-ui, sans-serif" font-size="9" fill="#8b949e" text-anchor="middle">Find real</text>
@@ -148,17 +124,17 @@
   <path d="M 755 610 L 755 640 L 400 640 L 400 450" stroke="#f78166" stroke-width="2" fill="none" stroke-dasharray="6,4"/>
   
   <!-- YES path 3 down to SUCCESS -->
-  <path d="M 400 520 L 400 560" stroke="#7ee787" stroke-width="4" fill="none" marker-end="url(#arrowheadGreen)"/>
+  <path d="M 400 520 L 400 560" stroke="#7ee787" stroke-width="4" fill="none"/>
   
   <!-- SUCCESS node -->
-  <g id="success">
-    <rect x="220" y="565" width="360" height="80" rx="12" fill="#161b22" stroke="#7ee787" stroke-width="3" filter="url(#glow)"/>
+  <g>
+    <rect x="220" y="565" width="360" height="80" rx="12" fill="#161b22" stroke="#7ee787" stroke-width="3"/>
     <text x="400" y="595" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#7ee787" text-anchor="middle">✅ STOP CONDITION READY</text>
     <text x="400" y="613" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">Observable ✓  Falsifiable ✓  Targets real risk ✓  —  Ship when it passes</text>
   </g>
   
   <!-- Examples sidebar -->
-  <g id="examples" font-family="system-ui, sans-serif">
+  <g font-family="system-ui, sans-serif">
     <rect x="15" y="15" width="180" height="650" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
     <text x="105" y="40" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#58a6ff" text-anchor="middle">EXAMPLES</text>
     

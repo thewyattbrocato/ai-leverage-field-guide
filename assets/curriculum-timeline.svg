@@ -1,30 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" viewBox="0 0 1200 580" preserveAspectRatio="xMidYMid meet">
-  <defs>
-    <linearGradient id="mod1" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:0.9" />
-      <stop offset="100%" style="stop-color:#58a6ff;stop-opacity:0.3" />
-    </linearGradient>
-    <linearGradient id="mod2" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#7ee787;stop-opacity:0.9" />
-      <stop offset="100%" style="stop-color:#7ee787;stop-opacity:0.3" />
-    </linearGradient>
-    <linearGradient id="mod3" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#f78166;stop-opacity:0.9" />
-      <stop offset="100%" style="stop-color:#f78166;stop-opacity:0.3" />
-    </linearGradient>
-    <linearGradient id="mod4" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#a371f7;stop-opacity:0.9" />
-      <stop offset="100%" style="stop-color:#a371f7;stop-opacity:0.3" />
-    </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-  
   <rect width="1200" height="580" fill="#0d1117"/>
   
   <text x="600" y="35" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
@@ -33,12 +7,11 @@
     4 modules • 4 tracks • 1 system that compounds
   </text>
   
-  <!-- Timeline backbone -->
   <path d="M 80 110 L 1120 110" stroke="#30363d" stroke-width="4" fill="none"/>
   
   <!-- Module 1: Weeks 1-2 -->
-  <g id="mod1-group">
-    <rect x="80" y="70" width="250" height="120" rx="12" fill="url(#mod1)" stroke="#58a6ff" stroke-width="2" filter="url(#glow)"/>
+  <g>
+    <rect x="80" y="70" width="250" height="120" rx="12" fill="#1a2a3a" stroke="#58a6ff" stroke-width="2"/>
     <text x="205" y="95" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">MODULE 1</text>
     <text x="205" y="112" font-family="system-ui, sans-serif" font-size="13" fill="#58a6ff" text-anchor="middle" font-weight="600">FOUNDATIONS</text>
     <text x="205" y="128" font-family="system-ui, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">Weeks 1–2</text>
@@ -48,8 +21,8 @@
   </g>
   
   <!-- Module 2: Weeks 3-5 -->
-  <g id="mod2-group">
-    <rect x="350" y="70" width="300" height="120" rx="12" fill="url(#mod2)" stroke="#7ee787" stroke-width="2"/>
+  <g>
+    <rect x="350" y="70" width="300" height="120" rx="12" fill="#1a2d1a" stroke="#7ee787" stroke-width="2"/>
     <text x="500" y="95" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">MODULE 2</text>
     <text x="500" y="112" font-family="system-ui, sans-serif" font-size="13" fill="#7ee787" text-anchor="middle" font-weight="600">CORE PRACTICES</text>
     <text x="500" y="128" font-family="system-ui, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">Weeks 3–5</text>
@@ -60,8 +33,8 @@
   </g>
   
   <!-- Module 3: Weeks 6-8 -->
-  <g id="mod3-group">
-    <rect x="670" y="70" width="300" height="120" rx="12" fill="url(#mod3)" stroke="#f78166" stroke-width="2"/>
+  <g>
+    <rect x="670" y="70" width="300" height="120" rx="12" fill="#2d1a16" stroke="#f78166" stroke-width="2"/>
     <text x="820" y="95" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">MODULE 3</text>
     <text x="820" y="112" font-family="system-ui, sans-serif" font-size="13" fill="#f78166" text-anchor="middle" font-weight="600">YOUR TRACK</text>
     <text x="820" y="128" font-family="system-ui, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">Weeks 6–8 (Pick ONE)</text>
@@ -72,8 +45,8 @@
   </g>
   
   <!-- Module 4: Ongoing -->
-  <g id="mod4-group">
-    <rect x="990" y="70" width="200" height="120" rx="12" fill="url(#mod4)" stroke="#a371f7" stroke-width="2"/>
+  <g>
+    <rect x="990" y="70" width="200" height="120" rx="12" fill="#1d162d" stroke="#a371f7" stroke-width="2"/>
     <text x="1090" y="95" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">MODULE 4</text>
     <text x="1090" y="112" font-family="system-ui, sans-serif" font-size="13" fill="#a371f7" text-anchor="middle" font-weight="600">MASTERY</text>
     <text x="1090" y="128" font-family="system-ui, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">Ongoing</text>
@@ -83,19 +56,17 @@
   </g>
   
   <!-- Milestone markers on timeline -->
-  <g id="milestones">
-    <circle cx="205" cy="110" r="10" fill="#58a6ff" stroke="white" stroke-width="2"/>
-    <text x="205" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#58a6ff" text-anchor="middle" font-weight="600">✅ Checkpoint 1</text>
-    <circle cx="500" cy="110" r="10" fill="#7ee787" stroke="white" stroke-width="2"/>
-    <text x="500" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#7ee787" text-anchor="middle" font-weight="600">✅ Checkpoint 2</text>
-    <circle cx="820" cy="110" r="10" fill="#f78166" stroke="white" stroke-width="2"/>
-    <text x="820" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#f78166" text-anchor="middle" font-weight="600">✅ Track Done</text>
-    <circle cx="1090" cy="110" r="10" fill="#a371f7" stroke="white" stroke-width="2"/>
-    <text x="1090" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#a371f7" text-anchor="middle" font-weight="600">🏆 Mastery</text>
-  </g>
+  <circle cx="205" cy="110" r="10" fill="#58a6ff" stroke="white" stroke-width="2"/>
+  <text x="205" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#58a6ff" text-anchor="middle" font-weight="600">✅ Checkpoint 1</text>
+  <circle cx="500" cy="110" r="10" fill="#7ee787" stroke="white" stroke-width="2"/>
+  <text x="500" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#7ee787" text-anchor="middle" font-weight="600">✅ Checkpoint 2</text>
+  <circle cx="820" cy="110" r="10" fill="#f78166" stroke="white" stroke-width="2"/>
+  <text x="820" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#f78166" text-anchor="middle" font-weight="600">✅ Track Done</text>
+  <circle cx="1090" cy="110" r="10" fill="#a371f7" stroke="white" stroke-width="2"/>
+  <text x="1090" y="50" font-family="system-ui, sans-serif" font-size="10" fill="#a371f7" text-anchor="middle" font-weight="600">🏆 Mastery</text>
   
   <!-- Week markers -->
-  <g id="week-markers" font-family="system-ui, sans-serif" font-size="9" fill="#484f58">
+  <g font-family="system-ui, sans-serif" font-size="9" fill="#484f58">
     <text x="120" y="230" text-anchor="middle">Wk 1</text>
     <text x="180" y="230" text-anchor="middle">Wk 2</text>
     <text x="310" y="230" text-anchor="middle">Wk 3</text>
@@ -110,7 +81,7 @@
   </g>
   
   <!-- Track selector visual -->
-  <g id="tracks">
+  <g>
     <text x="600" y="260" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="white" text-anchor="middle">Pick Your Track (Week 6)</text>
     
     <rect x="130" y="280" width="240" height="180" rx="12" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
