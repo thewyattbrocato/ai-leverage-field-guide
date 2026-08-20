@@ -52,7 +52,7 @@ That second pass is where the quality lives.
 
 - Generic first drafts become specific, usable ones.
 - You stop blaming the tool ("AI is dumb") and start coaching it.
-- The same prompt becomes reusable, save it (see Recurring Prompts).
+- The same prompt becomes reusable, save it (see [Recurring Prompts](recurring-prompts.md)).
 
 ## Tradeoff
 

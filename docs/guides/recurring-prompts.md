@@ -48,7 +48,7 @@ as you tune it.
 - **Name by job, not by tool.** `status-update`, not `chatgpt-thing`.
 - **Version the bar.** When your standard rises, edit the prompt, don't start over.
 - **One per recurring job.** Ten good prompts beat fifty you forget exist.
-- **Keep judgment in.** Each entry ends with its stop condition (see Stop Conditions).
+- **Keep judgment in.** Each entry ends with its stop condition (see [Stop Conditions](stop-conditions.md)).
 
 ## What changes
 
