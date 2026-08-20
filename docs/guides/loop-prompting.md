@@ -64,4 +64,3 @@ judgment step is the scarce resource, so spend it where the output gets used.
 
 ---
 
-*Written with AI assistance, edited and verified by Wyatt.*

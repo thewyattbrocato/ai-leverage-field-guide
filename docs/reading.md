@@ -278,4 +278,3 @@ This list is the captain's *reading*, not his *files*. The leverage isn't in own
 It's in the synthesized mental models you'll find in the guides (`/docs`). Use this sheet to go
 deeper on any idea that lands, always through legitimate sources.
 
-*Written with AI assistance, edited and verified by Wyatt.*

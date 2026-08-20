@@ -66,4 +66,3 @@ Judgment is the product. Don't ship it unchecked.
 
 ---
 
-*Written with AI assistance, edited and verified by Wyatt.*

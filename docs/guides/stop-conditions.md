@@ -65,4 +65,3 @@ you run, so the machine doesn't decide it for you.
 
 ---
 
-*Written with AI assistance, edited and verified by Wyatt.*

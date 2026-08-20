@@ -179,4 +179,3 @@ here is licensed [CC-BY-4.0](LICENSE).
 
 ---
 
-*Written with AI assistance, edited and verified by Wyatt.*

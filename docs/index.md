@@ -45,4 +45,3 @@ books are attributed; the writing is original.
 
 ---
 
-*Written with AI assistance, edited and verified by Wyatt.*

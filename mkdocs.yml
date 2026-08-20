@@ -30,9 +30,11 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Leverage Library: library.md
   - Guides:
       - Loop Prompting: guides/loop-prompting.md
       - Stop Conditions: guides/stop-conditions.md
       - Maker-Checker: guides/maker-checker.md
       - Recurring Prompts: guides/recurring-prompts.md
+      - Learning Paths: guides/learning-paths.md
   - Reading Catalog: reading.md

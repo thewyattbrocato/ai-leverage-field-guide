@@ -5,7 +5,7 @@ resource for working professionals who want practical AI leverage without hype, 
 or tool-collecting. The bar is simple: **everything here must be free to read, free to
 share, and safe to trust.**
 
-## Three hard rules (no exceptions)
+## Two hard rules (no exceptions)
 
 1. **No copyrighted uploads.** Do not add, link to, or reference pirated books, PDFs,
    or any file you do not have the right to share. This includes (but is not limited to)
@@ -15,11 +15,6 @@ share, and safe to trust.**
 
 2. **No affiliate links.** Do not add links that pay you a commission. This repo earns
    nothing and must stay that way.
-
-3. **Disclose AI assistance.** If AI helped you draft or edit any content you contribute,
-   say so in the file (a short footer line like *"Written with AI assistance, edited and
-   verified by [you]"* is enough). The whole point of this guide is the human judgment
-   layer, we are honest about where the machine helped.
 
 ## What you can contribute
 

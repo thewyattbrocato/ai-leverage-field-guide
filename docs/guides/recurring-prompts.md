@@ -64,4 +64,3 @@ you stop re-inventing the wheel and start driving it.
 
 ---
 
-*Written with AI assistance, edited and verified by Wyatt.*
