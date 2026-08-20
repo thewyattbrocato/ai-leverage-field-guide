@@ -35,3 +35,4 @@ nav:
       - Stop Conditions: guides/stop-conditions.md
       - Maker-Checker: guides/maker-checker.md
       - Recurring Prompts: guides/recurring-prompts.md
+  - Reading Catalog: reading.md

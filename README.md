@@ -167,7 +167,7 @@ Short, structured, copy-paste. Start with these four:
 4. [Recurring Prompts](docs/guides/recurring-prompts.md), build your personal prompt library.
 
 These guides are grounded in a wider working library of business, writing, and thinking
-books. See [READING.md](READING.md) for the full sourced-reading catalog behind them.
+books. See [docs/reading.md](docs/reading.md) for the full sourced-reading catalog behind them.
 
 Full site index: [docs/index.md](docs/index.md).
 
