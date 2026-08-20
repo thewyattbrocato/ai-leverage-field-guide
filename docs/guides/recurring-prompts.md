@@ -5,17 +5,17 @@
 ## Old way
 
 Every Monday you re-type the same status update from scratch. Every follow-up, every research
-prep, every weekly brief — composed fresh, inconsistent in quality, dependent on how tired you
+prep, every weekly brief, composed fresh, inconsistent in quality, dependent on how tired you
 are. Your best prompts live in your head and die with the tab.
 
 ## Swap
 
-Keep a small file of **recurring prompts** — the ones you run again and again — edited to your
+Keep a small file of **recurring prompts**, the ones you run again and again, edited to your
 voice, your audience, your standards. It's a personal library, not a public template dump. The
 first time a prompt works, you save it. The third time it works, it's a system.
 
 This is leverage as Greg McKeown frames it in **Essentialism**: the disciplined pursuit of
-less — fewer decisions re-made from zero, more of your effort spent on the few things that
+less, fewer decisions re-made from zero, more of your effort spent on the few things that
 matter. Richard Koch's **The 80/20 Manager** points the same way: most of your output comes
 from a handful of repeatable moves. Recurring prompts are that 20%, industrialized.
 
@@ -23,9 +23,9 @@ from a handful of repeatable moves. Recurring prompts are that 20%, industrializ
 
 Start with the three you'll actually reuse this week:
 
-1. **Status update** — messy notes → tight update with the ask up top.
-2. **Follow-up** — thread + intent → one crisp nudge that gets a reply.
-3. **Research prep** — topic → 5 questions to answer + a source checklist.
+1. **Status update**, messy notes → tight update with the ask up top.
+2. **Follow-up**, thread + intent → one crisp nudge that gets a reply.
+3. **Research prep**, topic → 5 questions to answer + a source checklist.
 
 ## Copy-paste library entry (status update)
 
@@ -46,7 +46,7 @@ as you tune it.
 ## How to maintain it
 
 - **Name by job, not by tool.** `status-update`, not `chatgpt-thing`.
-- **Version the bar.** When your standard rises, edit the prompt — don't start over.
+- **Version the bar.** When your standard rises, edit the prompt, don't start over.
 - **One per recurring job.** Ten good prompts beat fifty you forget exist.
 - **Keep judgment in.** Each entry ends with its stop condition (see Stop Conditions).
 
@@ -54,12 +54,12 @@ as you tune it.
 
 - Weekly work gets consistent and fast.
 - Quality stops depending on your energy level.
-- You build an asset — the library is yours, portable, and compounds.
+- You build an asset, the library is yours, portable, and compounds.
 
 ## Tradeoff
 
 It takes a little discipline to *save* the prompt instead of closing the tab. And a saved
-prompt can go stale if your role changes — review the library monthly. The upside dwarfs it:
+prompt can go stale if your role changes, review the library monthly. The upside dwarfs it:
 you stop re-inventing the wheel and start driving it.
 
 ---

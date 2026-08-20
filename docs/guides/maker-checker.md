@@ -5,8 +5,8 @@
 ## Old way
 
 You ask the model to "write the thing," then you send the thing. The machine did the making
-*and* the checking, and you were a rubber stamp. When it's wrong — wrong fact, wrong tone,
-wrong call — it's your name on it anyway.
+*and* the checking, and you were a rubber stamp. When it's wrong, wrong fact, wrong tone,
+wrong call, it's your name on it anyway.
 
 ## Swap
 
@@ -16,7 +16,7 @@ Run two separate roles on purpose:
 - **Checker** = you. The only one who owns accuracy, taste, context, risk, and the final call.
 
 Peter Drucker's **The Effective Executive** is the root idea: the executive's job is to be
-*effective* — to make the right decisions and be accountable for them — not to do all the
+*effective*, to make the right decisions and be accountable for them, not to do all the
 making. The machine is brilliant at making; it is not accountable. You are.
 
 ## The split, concretely
@@ -27,7 +27,7 @@ MAKER (model):
   - Summarize the long doc into 5 points
   - Generate 3 options for the wording
 
-CHECKER (you) — run this checklist every time:
+CHECKER (you), run this checklist every time:
   [ ] Is every factual claim true, or sourced and labeled?
   [ ] Does it match the audience and the relationship?
   [ ] Does it say the right thing, or just a plausible thing?
@@ -53,7 +53,7 @@ DRAFT:
 
 ## What changes
 
-- Wrong outputs get caught by you, before they're sent — not after.
+- Wrong outputs get caught by you, before they're sent, not after.
 - You spend your scarce attention on judgment, where it compounds, not on typing.
 - The model becomes a junior associate, not a co-signer.
 
@@ -61,7 +61,7 @@ DRAFT:
 
 The checker step is real work and real time. The lever is matching the bar to the stakes:
 a Slack reply gets a 5-second scan; a customer-facing doc gets the full checklist. The risk
-you're avoiding is the quiet one — looking careless because you trusted a plausible draft.
+you're avoiding is the quiet one, looking careless because you trusted a plausible draft.
 Judgment is the product. Don't ship it unchecked.
 
 ---
