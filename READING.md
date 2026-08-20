@@ -2,7 +2,7 @@
 
 **This sheet cites and recommends. It does not host files.**
 
-These 192 books sit in the captain's private library. They are the raw material behind the
+These 191 books sit in the captain's private library. They are the raw material behind the
 guides in this repo — the mental models for leverage, judgment, and clear work. **None of
 these files are in this repository, and none are linked from pirate sources.** This sheet
 exists so you can pursue the ideas *legally*: buy them, borrow them from a library, or — where
@@ -195,7 +195,7 @@ a book is in the public domain — read it free from a legitimate source.
 | Information Graphics | Robert L. Harris | Reference for visual data tools. | Buy or borrow — no free source. |
 | Envisioning Information | Edward Tufte | Dense information made legible. | Buy or borrow — no free source. |
 | The Visual Display of Quantitative Information | Edward Tufte | The classic on data display. | Buy or borrow — no free source. |
-| Visual Explanations | Edward Tufte | Showing因果 and mechanism visually. | Buy or borrow — no free source. |
+| Visual Explanations | Edward Tufte | Showing cause and effect and mechanism visually. | Buy or borrow — no free source. |
 | Interaction of Color | Josef Albers | Color as perception, not formula. | Buy or borrow — no free source. |
 | The Animator's Survival Kit | Richard Williams | Classical animation principles; timing and weight. | Buy or borrow — no free source. |
 
@@ -274,7 +274,7 @@ a book is in the public domain — read it free from a legitimate source.
 
 ## A note on the moat
 
-This list is the captain's *reading*, not his *files*. The leverage isn't in owning 192 books —
+This list is the captain's *reading*, not his *files*. The leverage isn't in owning 191 books —
 it's in the synthesized mental models you'll find in the guides (`/docs`). Use this sheet to go
 deeper on any idea that lands, always through legitimate sources.
 

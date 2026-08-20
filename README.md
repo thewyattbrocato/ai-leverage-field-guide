@@ -16,8 +16,8 @@ get more output per hour without adding hours — and to keep your judgment in t
 matters. No tool treadmill. No prompt theater. No outsourced judgment.
 
 > This repo is **private until launch**. When it goes public, the links below should all be
-> free and live. A link-checker CI will run on every PR. If you find a dead or paywalled
-> link, open an issue.
+> free and live. If you find a dead or paywalled link, open an issue — we re-check the
+> curated links before each launch.
 
 ---
 
@@ -112,7 +112,7 @@ When you want the source, not the hot take.
 - [What Is ChatGPT Doing and Why Does It Work?](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/)
   — Stephen Wolfram's clear, non-hyped explainer on how LLMs actually work.
 
-## Free related reading (public domain / open / author-free)
+## Free related reading (public domain / open access)
 
 Free to read, free to keep. Themed around leverage, judgment, and clear thinking.
 

@@ -62,7 +62,7 @@ DRAFT:
 The checker step is real work and real time. The lever is matching the bar to the stakes:
 a Slack reply gets a 5-second scan; a customer-facing doc gets the full checklist. The risk
 you're avoiding is the quiet one — looking careless because you trusted a plausible draft.
-Judgment is the product. Don't ship it uncheckened.
+Judgment is the product. Don't ship it unchecked.
 
 ---
 
