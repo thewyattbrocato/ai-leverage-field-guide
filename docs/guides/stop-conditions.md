@@ -94,5 +94,5 @@ Time saved vs. old way: ___________________
 **Do this for 3 work types.** Save as `stop-conditions.md` in your prompt library.
 
 **Stop condition for this exercise:** 3 stop conditions written, each tested once, saved in library.
-See [exercises.md](docs/exercises.md#exercise-21-stop-condition-library-week-3) for full template.
+See [exercises.md](../exercises.md#exercise-21-stop-condition-library-week-3) for full template.
 

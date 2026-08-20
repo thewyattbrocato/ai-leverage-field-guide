@@ -70,7 +70,7 @@ judgment step is the scarce resource, so spend it where the output gets used.
 
 ### Exercise 1: Run the Loop (3× this week)
 
-Pick one recurring task from your [Leverage Map](docs/curriculum.md#exercise-11-leverage-map).
+Pick one recurring task from your [Leverage Map](../curriculum.md#exercise-11-leverage-map).
 Run the loop template 3 times (e.g., Mon/Wed/Fri). Log each run:
 
 | Run | Date | Task | Time | Judgment: 3 Weakest Parts | Stop Met? |
@@ -129,5 +129,5 @@ Stop when: [specific, observable, falsifiable]
 ```
 
 **Stop condition:** v2.0 built, tested once, metadata complete.
-See [exercises.md](docs/exercises.md#exercise-41-build-an-advanced-prompt) for full template.
+See [exercises.md](../exercises.md#exercise-41-build-an-advanced-prompt) for full template.
 

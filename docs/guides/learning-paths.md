@@ -97,4 +97,4 @@ TIME SPENT TOTAL: ______ minutes
 ```
 
 **Stop condition:** All 4 sessions logged. One-paragraph summary written. Applied once to work.
-See [exercises.md](docs/exercises.md#exercise-24-retrieval-log-for-one-book-week-5) for full template.
+See [exercises.md](../exercises.md#exercise-24-retrieval-log-for-one-book-week-5) for full template.

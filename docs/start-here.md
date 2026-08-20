@@ -114,7 +114,7 @@ WEEK 1 CHECKLIST
 1. **Just the first win** → Copy the prompt above, run it once, save it. Come back when you want more.
 2. **The full system** → Pick your track below and start Module 1.
 
-**[→ Pick Your Track](https://github.com/thewyattbrocato/ai-leverage-field-guide#-choose-your-path---start-here)** | **[→ Full Curriculum](../curriculum.md)** | **[→ All Exercises](../exercises.md)**
+**[→ Pick Your Track](https://github.com/thewyattbrocato/ai-leverage-field-guide#-choose-your-path---start-here)** | **[→ Full Curriculum](curriculum.md)** | **[→ All Exercises](exercises.md)**
 
 ---
 
