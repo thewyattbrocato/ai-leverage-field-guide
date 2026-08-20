@@ -68,7 +68,7 @@ want literacy, not a degree.
   — Free short course on Cloud Skills Boost.
 - [Hugging Face NLP Course](https://huggingface.co/learn/nlp-course) — Free, code-leaning
   intro to modern NLP. For the curious operator, not the coder.
-- [IBM AI Foundations (audit)](https://www.coursera.org/professional-certificates/ibm-ai-foundations) —
+- [IBM AI Foundations (audit)](https://www.coursera.org/specializations/ibm-ai-foundations-for-business) —
   Coursera audit track. Broad AI/ML literacy from IBM.
 
 ## Free tools with real free tiers
@@ -103,7 +103,7 @@ When you want the source, not the hot take.
 - [Hugging Face Documentation](https://huggingface.co/docs) — Docs for open models and tools.
 - [Prompt Engineering Guide (DAIR-ai)](https://www.promptingguide.ai/) — Vendor-neutral,
   thorough guide to writing effective prompts.
-- [Google — Prompt Engineering Best Practices](https://developers.google.com/machine-learning/resources/prompt-engineering)
+- [Google — Prompt Engineering Best Practices](https://ai.google.dev/gemini-api/docs/prompting-strategies)
   — Google's own practical prompt-engineering writeup.
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
   — The U.S. government's framework for trustworthy AI. Read the "Map/Measure/Manage" logic.

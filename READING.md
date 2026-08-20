@@ -2,7 +2,7 @@
 
 **This sheet cites and recommends. It does not host files.**
 
-These 191 books sit in the captain's private library. They are the raw material behind the
+These 188 books sit in the captain's private library. They are the raw material behind the
 guides in this repo — the mental models for leverage, judgment, and clear work. **None of
 these files are in this repository, and none are linked from pirate sources.** This sheet
 exists so you can pursue the ideas *legally*: buy them, borrow them from a library, or — where
@@ -274,7 +274,7 @@ a book is in the public domain — read it free from a legitimate source.
 
 ## A note on the moat
 
-This list is the captain's *reading*, not his *files*. The leverage isn't in owning 191 books —
+This list is the captain's *reading*, not his *files*. The leverage isn't in owning 188 books —
 it's in the synthesized mental models you'll find in the guides (`/docs`). Use this sheet to go
 deeper on any idea that lands, always through legitimate sources.
 
