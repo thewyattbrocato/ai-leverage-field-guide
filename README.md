@@ -1,69 +1,90 @@
-# AI Leverage Field Guide
+<p align="center">
+  <img src="https://raw.githubusercontent.com/thewyattbrocato/ai-leverage-field-guide/main/assets/banner.svg" alt="AI Leverage Field Guide" width="100%" />
+</p>
 
-**Practical AI leverage for working professionals, managers, operators, knowledge workers.  
-Not engineers. Not hype. More leverage, not more AI.**
+<p align="center">
+  <strong>Practical AI leverage for working professionals. Not engineers. Not hype.<br/>More leverage, not more AI.</strong>
+</p>
 
-Everything here is free to read, free to share, and built for Monday-morning reality.  
-No tool treadmill. No prompt theater. No outsourced judgment.  
-Licensed [CC-BY-4.0](LICENSE). Written with AI assistance, edited and verified by Wyatt.
-
----
-
-## 🎯 Your First Win (5 Minutes)
-
-You don't need a course. Do these three things right now:
-
-1. **Pick one recurring task** you do weekly — a status update, a follow-up email, a meeting-prep note.
-2. **Open any free AI tool** (see [Tools](#free-tools-with-real-free-tiers) below) and paste this:
-
-```
-I'm a [your role]. Here are my messy notes for this week's [status update / follow-up].
-Turn them into a tight version: first line = the status + the ask, then 3 bullets
-(what moved / what's blocked / what's next). Plain language. Under 200 words.
-```
-
-3. **Read the result like a boss, not a rubber stamp.** Fix anything wrong, off-voice, or missing.  
-   That edit *is* the leverage. Save the prompt → [Recurring Prompts](docs/guides/recurring-prompts.md).
+<p align="center">
+  <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-CC--BY--4.0-lightgrey.svg" alt="License: CC BY 4.0" />
+  </a>
+  <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/actions/workflows/link-check.yml">
+    <img src="https://github.com/thewyattbrocato/ai-leverage-field-guide/actions/workflows/link-check.yml/badge.svg" alt="Link Check" />
+  </a>
+  <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/stargazers">
+    <img src="https://img.shields.io/github/stars/thewyattbrocato/ai-leverage-field-guide?style=flat" alt="Stars" />
+  </a>
+  <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/forks">
+    <img src="https://img.shields.io/github/forks/thewyattbrocato/ai-leverage-field-guide?style=social" alt="Forks" />
+  </a>
+</p>
 
 ---
 
-## 🗺️ See the Whole Journey Before You Commit
+## 🎯 Your First Win — Right Now (3 Minutes)
+
+**Copy this prompt. Paste it into any free AI tool. Get a usable result in seconds.**
+
+> **Copy → Paste → Edit → Save. That's the whole loop.**
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ MODULE 1: FOUNDATIONS (Weeks 1–2)                                           │
-│ Mental Models → Capture/Structure/Judgment Loop → First Recurring Prompt    │
-│ Outcome: Run the loop on a real task 3× this week. Saved prompt.            │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ MODULE 2: CORE PRACTICES (Weeks 3–5)                                        │
-│ Stop Conditions → Maker-Checker → Recurring Prompts → Learning Paths        │
-│ Outcome: 3 stop-conditions, 1 checked artifact, 5-prompt library, 1 book   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ MODULE 3: YOUR TRACK (Weeks 6–8)                                            │
-│ Manager / Writer / Operator / Knowledge Worker → 1 Project + 1 Retro       │
-│ Outcome: A domain-specific leverage system you use every week.              │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ MODULE 4: MASTERY & CONTINUATION (Ongoing)                                  │
-│ Advanced prompts → Teach the loop → Leverage Library deep-dive → Community │
-│ Outcome: You're the one others come to for leverage.                        │
-└─────────────────────────────────────────────────────────────────────────────┘
+I'm a [your role]. Here are my messy notes for this week's [status update / follow-up / meeting prep].
+Turn them into a tight version:
+• First line = the status + the ask
+• Then 3 bullets: what moved | what's blocked | what's next
+• Plain language. No jargon. Under 200 words.
+STOP WHEN: the ask is explicit and I'd be fine with my manager forwarding it.
 ```
 
-**Time to first win:** 20 minutes | **Time to working system:** 4–6 weeks | **Time to role mastery:** 8–10 weeks
+**Your 3-step first win:**
+1. **Pick** one recurring task you do weekly (status update, follow-up, meeting prep)
+2. **Paste** the prompt above into [ChatGPT](https://chat.openai.com) • [Claude](https://claude.ai) • [Gemini](https://gemini.google.com) • [Copilot](https://copilot.microsoft.com)
+3. **Edit** the result like a boss, not a rubber stamp. That edit *is* the leverage.
+
+**→ Save that prompt. You just built your first recurring prompt.**  
+**→ Want the full system? Keep reading.**
 
 ---
 
-## 🚪 Choose Your Entry Point
+## 🗺️ The Complete Journey (4 Modules, 8–10 Weeks)
 
-| You Are… | Start Here | First Guide |
-|----------|------------|-------------|
-| **Manager** — decide, prioritize, resource, report up | [Module 1](docs/curriculum.md#module-1-foundations-weeks-1-2) → [Manager Track](docs/guides/manager.md) | [Maker-Checker](docs/guides/maker-checker.md) |
-| **Writer/Content** — draft, edit, publish, repurpose | [Module 1](docs/curriculum.md#module-1-foundations-weeks-1-2) → [Writer Track](docs/guides/writer.md) | [Loop Prompting](docs/guides/loop-prompting.md) |
-| **Operator** — status, follow-ups, handoffs, tickets | [Module 1](docs/curriculum.md#module-1-foundations-weeks-1-2) → [Operator Track](docs/guides/operator.md) | [Stop Conditions](docs/guides/stop-conditions.md) |
-| **Knowledge Worker** — research, synthesis, briefs, strategy | [Module 1](docs/curriculum.md#module-1-foundations-weeks-1-2) → [Knowledge Worker Track](docs/guides/knowledge-worker.md) | [Loop Prompting](docs/guides/loop-prompting.md) |
-| **Not sure / Generalist** | [Module 1](docs/curriculum.md#module-1-foundations-weeks-1-2) → [Module 2](docs/curriculum.md#module-2-core-practices-weeks-3-5) | [Loop Prompting](docs/guides/loop-prompting.md) |
+```
+┌────────────────────────────────────────────────────────────────────────────────┐
+│  MODULE 1: FOUNDATIONS (Weeks 1–2)                                              │
+│  Mental Models → Capture/Structure/Judgment Loop → First Recurring Prompt      │
+│  ✅ Outcome: Run the loop on a real task 3× this week. Saved prompt.           │
+├────────────────────────────────────────────────────────────────────────────────┤
+│  MODULE 2: CORE PRACTICES (Weeks 3–5)                                           │
+│  Stop Conditions → Maker-Checker → Recurring Prompts → Learning Paths          │
+│  ✅ Outcome: 3 stop-conditions, 1 checked artifact, 5-prompt library, 1 book  │
+├────────────────────────────────────────────────────────────────────────────────┤
+│  MODULE 3: YOUR TRACK (Weeks 6–8)                                               │
+│  Manager / Writer / Operator / Knowledge Worker → 1 Project + 1 Retro         │
+│  ✅ Outcome: A domain-specific leverage system you use every week.             │
+├────────────────────────────────────────────────────────────────────────────────┤
+│  MODULE 4: MASTERY & CONTINUATION (Ongoing)                                     │
+│  Advanced prompts → Teach the loop → Leverage Library deep-dive → Community   │
+│  ✅ Outcome: You're the one others come to for leverage.                       │
+└────────────────────────────────────────────────────────────────────────────────┘
+```
 
-> **Rule of One** (from *Great Leads*): Pick ONE track. Finish it. Then add another. The lead carries 80% of the impact.
+**⏱ Time to first win: 3 min** | **🎯 Time to working system: 4–6 weeks** | **🏆 Time to role mastery: 8–10 weeks**
+
+---
+
+## 🚀 Choose Your Path — Start Here
+
+| Track | You Are… | First Guide | Outcome |
+|-------|----------|-------------|---------|
+| **[🎯 Manager](docs/guides/manager.md)** | Decide, prioritize, resource, report up | [Maker-Checker](docs/guides/maker-checker.md) | Decision loop on real decisions |
+| **[✍️ Writer](docs/guides/writer.md)** | Draft, edit, publish, repurpose | [Loop Prompting](docs/guides/loop-prompting.md) | Draft→Edit→Publish pipeline |
+| **[⚙️ Operator](docs/guides/operator.md)** | Status, follow-ups, handoffs, tickets | [Stop Conditions](docs/guides/stop-conditions.md) | Status→Follow-up→Handoff rhythm |
+| **[🔍 Knowledge Worker](docs/guides/knowledge-worker.md)** | Research, synthesis, briefs, strategy | [Loop Prompting](docs/guides/loop-prompting.md) | Research→Synthesis→Brief pipeline |
+| **[🎯 Generalist](docs/curriculum.md)** | Not sure / want the full foundation | [Loop Prompting](docs/guides/loop-prompting.md) | Complete 4-module curriculum |
+
+> **Rule of One** — Pick ONE track. Finish it. Then add another. The lead carries 80% of the impact (*Great Leads*).
 
 ---
 
@@ -74,7 +95,7 @@ Turn them into a tight version: first line = the status + the ask, then 3 bullet
 |------|-------|----------|-------------|
 | 1.1 | How This Works (5 min) | [Leverage Map](docs/exercises.md#exercise-11-leverage-map-20-minutes) | **Leverage Map** (1 page) |
 | 1.2 | [Loop Prompting](docs/guides/loop-prompting.md) | [Run the Loop 3×](docs/exercises.md#exercise-12-run-the-loop-3-this-week) | **Saved Recurring Prompt** |
-| **Checkpoint** | | [Self-Assessment](docs/exercises.md#module-1-checkpoint-rubric) | **Pass/Fail + Notes** |
+| **✅ Checkpoint** | | [Self-Assessment](docs/exercises.md#module-1-checkpoint-rubric) | **Pass/Fail + Notes** |
 
 ### Module 2: Core Practices (Weeks 3–5)
 | Week | Guide | Exercise | Deliverable |
@@ -83,11 +104,11 @@ Turn them into a tight version: first line = the status + the ask, then 3 bullet
 | 4 | [Maker-Checker](docs/guides/maker-checker.md) | [1 Checked Artifact](docs/exercises.md#exercise-22-maker-checker-run-week-4) | **Checked Artifact + Retro** |
 | 4 | [Recurring Prompts](docs/guides/recurring-prompts.md) | [5-Prompt Library](docs/exercises.md#exercise-23-build-your-5-prompt-library-week-4) | **Prompt Library v1** |
 | 5 | [Learning Paths](docs/guides/learning-paths.md) | [1 Book Retrieval Log](docs/exercises.md#exercise-24-retrieval-log-for-one-book-week-5) | **Retrieval Log + Summary** |
-| **Checkpoint** | | [Portfolio Review](docs/exercises.md#module-2-checkpoint-rubric) | **Pass/Fail + Next Focus** |
+| **✅ Checkpoint** | | [Portfolio Review](docs/exercises.md#module-2-checkpoint-rubric) | **Pass/Fail + Next Focus** |
 
-### Module 3: Your Track (Weeks 6–8) — *Pick ONE*
-| Track | Guides | Project | Retro |
-|-------|--------|---------|-------|
+### Module 3: Your Track (Weeks 6–8) — Pick ONE
+| Track | Guides | Project | Retro Question |
+|-------|--------|---------|----------------|
 | [Manager](docs/guides/manager.md) | Maker-Checker + Stop Conditions | Decision Loop on real decision | "What did the loop catch?" |
 | [Writer](docs/guides/writer.md) | Loop Prompting + Recurring Prompts | Draft→Edit→Publish pipeline | "Which prompt saved time?" |
 | [Operator](docs/guides/operator.md) | Stop Conditions + Recurring Prompts | Status→Follow-up→Handoff pipeline | "What dropped? What saved me?" |
@@ -104,112 +125,113 @@ Turn them into a tight version: first line = the status + the ask, then 3 bullet
 
 ---
 
-## 📖 Leverage Library — The Curated Front Door
+## 📖 Leverage Library — The 10 Books to Start With
 
-**The 10 books to start with, organized by theme, with free sources where they exist.**
+**Ranked by how directly they feed the "more leverage, not more AI" thesis.**
 
-### Start Here (Ranked)
-1. **Peak** (Ericsson & Pool) — Skills are built, not found; deliberate practice beats the 10,000-hour myth
-2. **Make It Stick** (Brown, Roediger, McDaniel) — Retrieval & spacing are the most proven ways to retain what you learn
-3. **AI Snake Oil** (Narayanan & Kapoor) — The clearest "what AI can/can't do" filter; kills hype fast
-4. **Co-Intelligence** (Mollick) — Practical "human-in-the-loop" framing; four rules map to copy-paste prompt principles
-5. **Deep Work** (Newport) — The focus/leverage spine; pairs with *A World Without Email* for operator systems
-6. **The Scout Mindset** (Galef) — Soldier vs. scout for judgment checklists and stop conditions
-7. **Crucial Conversations** (Grenny et al.) — Maker-checker and meeting follow-ups are "safety" operationalized
-8. **The Mom Test** (Fitzpatrick) — Discovery discipline for research prep; free cheatsheet available
-9. **Scientific Advertising** (Hopkins, 1923) — **Public domain** — reason-why / test-and-measure doctrine, free to quote
-10. **Good Strategy / Bad Strategy** (Rumelt) — Diagnosis→policy→action kernel = intellectual backbone of stop conditions
+| # | Book | Why It Matters | Free Source |
+|---|------|----------------|-------------|
+| 1 | **Peak** (Ericsson & Pool) | Skills are built, not found; deliberate practice beats the 10,000-hour myth | Buy/borrow |
+| 2 | **Make It Stick** (Brown, Roediger, McDaniel) | Retrieval & spacing are the most proven ways to retain what you learn | Buy/borrow |
+| 3 | **AI Snake Oil** (Narayanan & Kapoor) | Clearest "what AI can/can't do" filter; kills hype fast | Buy/borrow |
+| 4 | **Co-Intelligence** (Mollick) | Practical "human-in-the-loop" framing; 4 rules → copy-paste prompt principles | Buy/borrow |
+| 5 | **Deep Work** (Newport) | Focus/leverage spine; pairs with *A World Without Email* | Buy/borrow |
+| 6 | **The Scout Mindset** (Galef) | Soldier vs. scout for judgment checklists and stop conditions | Buy/borrow |
+| 7 | **Crucial Conversations** (Grenny et al.) | Maker-checker & meeting follow-ups = "safety" operationalized | Buy/borrow |
+| 8 | **The Mom Test** (Fitzpatrick) | Discovery discipline for research prep; **free cheatsheet** | [momtestbook.com](https://momtestbook.com) |
+| 9 | **Scientific Advertising** (Hopkins, 1923) | **Public domain** — reason-why / test-and-measure doctrine | [archive.org](https://archive.org/details/scientificadvert0000hopk) |
+| 10 | **Good Strategy / Bad Strategy** (Rumelt) | Diagnosis→policy→action kernel = backbone of stop conditions | Buy/borrow |
 
-### Themes (Go Here When a Specific Job Shows Up)
+**Themes (go here when a specific job shows up):**
+
 | Theme | Core Idea | Maps To |
 |-------|-----------|---------|
-| **A: Judgment over automation** | A prediction ≠ a decision; keep human in loop | [Judgment Checklists](docs/guides/stop-conditions.md) |
+| **A: Judgment over automation** | A prediction ≠ a decision; keep human in loop | [Stop Conditions](docs/guides/stop-conditions.md) |
 | **B: Retrieval-based learning** | Retrieval + spacing + interleaving = skill that sticks | [Learning Paths](docs/guides/learning-paths.md) |
-| **C: Less-for-more systems** | Eliminate/automate low-leverage work; 20% causes → 80% results | [Recurring Prompts](docs/guides/recurring-prompts.md) |
-| **D: Point-first writing** | Lead with action; kill clutter; write for the busy reader | [Status Updates](docs/guides/recurring-prompts.md) |
-| **E: High-stakes conversations** | Safety = mutual purpose + respect; radical candor = care + challenge | [Maker-Checker](docs/guides/maker-checker.md) |
+| **C: Less-for-more systems** | Eliminate low-leverage work; 20% causes → 80% results | [Recurring Prompts](docs/guides/recurring-prompts.md) |
+| **D: Point-first writing** | Lead with action; kill clutter; write for busy readers | [Recurring Prompts](docs/guides/recurring-prompts.md) |
+| **E: High-stakes conversations** | Safety = mutual purpose + respect; radical candor | [Maker-Checker](docs/guides/maker-checker.md) |
 | **F: Strategy as diagnosis** | Strategy begins with diagnosis, not goals; Rumelt's kernel | [Stop Conditions](docs/guides/stop-conditions.md) |
-| **G: Messaging that sticks** | SUCCESs (Simple, Unexpected, Concrete, Credible, Emotional, Stories) | Future messaging guides |
-| **H: Discovery with real signals** | Validate with behavior/commitment, not opinions | [Research Prep](docs/guides/stop-conditions.md) |
+| **G: Messaging that sticks** | SUCCESs (Simple, Unexpected, Concrete, Credible, Emotional, Stories) | Future guides |
+| **H: Discovery with real signals** | Validate with behavior/commitment, not opinions | [Stop Conditions](docs/guides/stop-conditions.md) |
 | **I: Prompting craft** | Few-shot + RAG beat clever phrasing; grounding > rhetoric | [Loop Prompting](docs/guides/loop-prompting.md) |
 
-> **Full catalog:** [Reading Catalog](docs/reading.md) — 188 books with categories, why-it-matters, and legitimate sources (buy/borrow/free). No pirate links. Ever.
+> **Full catalog:** [Reading Catalog](docs/reading.md) — 188 books with categories, why-it-matters, legitimate sources (buy/borrow/free). No pirate links. Ever.
 
 ---
 
-## 🏋️ Practice Ground — Exercises You Run on Real Work
+## 🏋️ Practice Ground — Exercises on YOUR Real Work
 
 **Every exercise uses YOUR work from THIS week. No toy examples.**
 
-| Exercise | Time | Guide | Template |
-|----------|------|-------|----------|
-| [1.1 Leverage Map](docs/exercises.md#exercise-11-leverage-map-20-minutes) | 20 min | — | [Map your week → 3 leverage points](docs/exercises.md#exercise-11-leverage-map-20-minutes) |
-| [1.2 Run the Loop 3×](docs/exercises.md#exercise-12-run-the-loop-3-this-week) | 3 × 15 min | [Loop Prompting](docs/guides/loop-prompting.md) | [Capture→Structure→Judgment→Re-run](docs/exercises.md#exercise-12-run-the-loop-3-this-week) |
-| [2.1 Stop-Condition Library](docs/exercises.md#exercise-21-stop-condition-library-week-3) | 30 min | [Stop Conditions](docs/guides/stop-conditions.md) | [3 observable/falsifiable conditions](docs/exercises.md#exercise-21-stop-condition-library-week-3) |
-| [2.2 Maker-Checker Run](docs/exercises.md#exercise-22-maker-checker-run-week-4) | 30 min | [Maker-Checker](docs/guides/maker-checker.md) | [Maker draft → Checker audit](docs/exercises.md#exercise-22-maker-checker-run-week-4) |
-| [2.3 5-Prompt Library](docs/exercises.md#exercise-23-build-your-5-prompt-library-week-4) | 60 min | [Recurring Prompts](docs/guides/recurring-prompts.md) | [Status / Follow-up / Brief / Decision / Prep](docs/exercises.md#exercise-23-build-your-5-prompt-library-week-4) |
-| [2.4 Retrieval Log](docs/exercises.md#exercise-24-retrieval-log-for-one-book-week-5) | 4 sessions | [Learning Paths](docs/guides/learning-paths.md) | [Metalearn → Retrieve → Feedback → Space](docs/exercises.md#exercise-24-retrieval-log-for-one-book-week-5) |
+| Exercise | Time | Guide | What You Build |
+|----------|------|-------|----------------|
+| [1.1 Leverage Map](docs/exercises.md#exercise-11-leverage-map-20-minutes) | 20 min | — | Your 3 highest-leverage weekly tasks |
+| [1.2 Run the Loop 3×](docs/exercises.md#exercise-12-run-the-loop-3-this-week) | 3 × 15 min | [Loop Prompting](docs/guides/loop-prompting.md) | Saved recurring prompt + judgment log |
+| [2.1 Stop-Condition Library](docs/exercises.md#exercise-21-stop-condition-library-week-3) | 30 min | [Stop Conditions](docs/guides/stop-conditions.md) | 3 observable/falsifiable stop conditions |
+| [2.2 Maker-Checker Run](docs/exercises.md#exercise-22-maker-checker-run-week-4) | 30 min | [Maker-Checker](docs/guides/maker-checker.md) | Checked artifact + retro |
+| [2.3 5-Prompt Library](docs/exercises.md#exercise-23-build-your-5-prompt-library-week-4) | 60 min | [Recurring Prompts](docs/guides/recurring-prompts.md) | Prompt Library v1 (Status, Follow-up, Brief, Decision, Prep) |
+| [2.4 Retrieval Log](docs/exercises.md#exercise-24-retrieval-log-for-one-book-week-5) | 4 sessions | [Learning Paths](docs/guides/learning-paths.md) | Retrieval log + 1-paragraph summary |
 
-> **All exercises:** [exercises.md](docs/exercises.md) — includes Module 3 track projects, Module 4 mastery exercises, self-assessment rubrics, and printable quick-reference cards.
+> **All exercises → [exercises.md](docs/exercises.md)** — includes Module 3 track projects, Module 4 mastery exercises, self-assessment rubrics, printable quick-reference cards.
 
 ---
 
-## 📖 The Original Guides (Reference Cards + Exercises)
+## 📖 The Original Guides (Reference + Exercise)
 
-| Guide | Core Idea | Exercise Link |
-|-------|-----------|---------------|
-| [Loop Prompting](docs/guides/loop-prompting.md) | Treat the prompt like a rep, not a request. Capture→Structure→Judgment→Re-run. | [Run 3×](docs/exercises.md#exercise-12-run-the-loop-3-this-week) |
-| [Stop Conditions](docs/guides/stop-conditions.md) | Define "done" before you start. "Until every claim has a source" beats "until I'm confident." | [3 Conditions](docs/exercises.md#exercise-21-stop-condition-library-week-3) |
-| [Maker-Checker](docs/guides/maker-checker.md) | Split drafting (machine) from checking (human). The model makes; you judge. | [1 Run](docs/exercises.md#exercise-22-maker-checker-run-week-4) |
-| [Recurring Prompts](docs/guides/recurring-prompts.md) | Build a personal prompt library for weekly work. Leverage compounds. | [5 Prompts](docs/exercises.md#exercise-23-build-your-5-prompt-library-week-4) |
-| [Learning Paths](docs/guides/learning-paths.md) | Retrieval + spacing + interleaving as prompt loops. Make skill stick. | [1 Book](docs/exercises.md#exercise-24-retrieval-log-for-one-book-week-5) |
-| [Manager Track](docs/guides/manager.md) | Decision loop on real decisions. Keep judgment in the loop. | [2 Decisions](docs/guides/manager.md#the-project-weeks-6-8) |
-| [Writer Track](docs/guides/writer.md) | Draft→Edit→Publish pipeline that compounds. | [2 Pieces](docs/guides/writer.md#the-project-weeks-6-8) |
-| [Operator Track](docs/guides/operator.md) | Status→Follow-up→Handoff pipeline that never drops the ball. | [2 Weeks](docs/guides/operator.md#the-project-weeks-6-8) |
-| [Knowledge Worker Track](docs/guides/knowledge-worker.md) | Research→Synthesis→Brief pipeline for decision-ready output. | [1 Brief](docs/guides/knowledge-worker.md#the-project-weeks-6-8) |
+| Guide | Core Idea | Exercise |
+|-------|-----------|----------|
+| [Loop Prompting](docs/guides/loop-prompting.md) | Prompt = rep, not request. Capture→Structure→Judgment→Re-run. | [Run 3×](docs/exercises.md#exercise-12-run-the-loop-3-this-week) |
+| [Stop Conditions](docs/guides/stop-conditions.md) | Define "done" before you start. Evidence > confidence. | [3 Conditions](docs/exercises.md#exercise-21-stop-condition-library-week-3) |
+| [Maker-Checker](docs/guides/maker-checker.md) | Split drafting (machine) from checking (human). You judge. | [1 Run](docs/exercises.md#exercise-22-maker-checker-run-week-4) |
+| [Recurring Prompts](docs/guides/recurring-prompts.md) | Build a personal prompt library. Leverage compounds. | [5 Prompts](docs/exercises.md#exercise-23-build-your-5-prompt-library-week-4) |
+| [Learning Paths](docs/guides/learning-paths.md) | Retrieval + spacing + interleaving as prompt loops. | [1 Book](docs/exercises.md#exercise-24-retrieval-log-for-one-book-week-5) |
+| [Manager Track](docs/guides/manager.md) | Decision loop on real decisions. | [2 Decisions](docs/guides/manager.md#the-project-weeks-6-8) |
+| [Writer Track](docs/guides/writer.md) | Draft→Edit→Publish pipeline. | [2 Pieces](docs/guides/writer.md#the-project-weeks-6-8) |
+| [Operator Track](docs/guides/operator.md) | Status→Follow-up→Handoff rhythm. | [2 Weeks](docs/guides/operator.md#the-project-weeks-6-8) |
+| [Knowledge Worker Track](docs/guides/knowledge-worker.md) | Research→Synthesis→Brief pipeline. | [1 Brief](docs/guides/knowledge-worker.md#the-project-weeks-6-8) |
 
 ---
 
 ## 🛠️ Free Resources Hub
 
-### Free AI Courses (audit tracks, no paywalls)
+### 🎓 Free AI Courses (audit tracks, no paywalls)
 - [Elements of AI](https://www.elementsofai.com/) — Friendliest "what AI actually is" for non-technical people
 - [Google AI Essentials](https://www.coursera.org/learn/google-ai-essentials) — Practical everyday basics from Google
 - [Generative AI for Everyone](https://www.deeplearning.ai/courses/generative-ai-for-everyone) — Andrew Ng, plain-English mental models
 - [AI For Everyone](https://www.deeplearning.ai/courses/ai-for-everyone) — Andrew Ng, how AI fits organizations
-- [Microsoft Generative AI for Beginners](https://github.com/microsoft/generative-ai-for-beginners) — 18-lesson MIT-licensed GitHub course
+- [Microsoft Generative AI for Beginners](https://github.com/microsoft/generative-ai-for-beginners) — 18-lesson MIT-licensed course
 - [Microsoft AI for Beginners](https://github.com/microsoft/AI-For-Beginners) — 24-lesson curriculum on ML
-- [Cohere LLM University](https://cohere.com/llmu) — Free modules on how LLMs work
 
-### Free Tools with Real Free Tiers
-- [ChatGPT](https://chat.openai.com) • [Claude](https://claude.ai) • [Gemini](https://gemini.google.com) • [Copilot](https://copilot.microsoft.com)
-- [Perplexity](https://www.perplexity.ai) — Answer engine with cited sources
-- [NotebookLM](https://notebooklm.google.com) — Ground chat in YOUR documents
-- [Hugging Face](https://huggingface.co) • [Poe](https://poe.com) • [Mistral Le Chat](https://chat.mistral.ai)
-- [Obsidian](https://obsidian.md) — Free for personal use; where your prompt library lives
+### 🛠️ Free Tools with Real Free Tiers
+| Tool | Best For |
+|------|----------|
+| [ChatGPT](https://chat.openai.com) | General chat, coding, analysis |
+| [Claude](https://claude.ai) | Long documents, careful writing |
+| [Gemini](https://gemini.google.com) | Deep Docs/Workspace integration |
+| [Copilot](https://copilot.microsoft.com) | Web-grounded chat |
+| [Perplexity](https://www.perplexity.ai) | Research with cited sources |
+| [NotebookLM](https://notebooklm.google.com) | Ground chat in YOUR documents |
+| [Obsidian](https://obsidian.md) | Free for personal use; prompt library home |
 
-### Official Docs & Primary Sources
+### 📚 Official Docs & Primary Sources
 - [OpenAI Docs](https://platform.openai.com/docs) • [Anthropic Docs & Prompt Library](https://docs.anthropic.com)
 - [Google AI/Gemini Docs](https://ai.google.dev) • [Microsoft AI Learn](https://learn.microsoft.com/ai/)
 - [Prompt Engineering Guide (DAIR-ai)](https://www.promptingguide.ai/) • [Google Prompting Strategies](https://ai.google.dev/gemini-api/docs/prompting-strategies)
 
-### Free Related Reading (Public Domain / Open Access)
-- [Scientific Advertising (Hopkins, 1923)](https://archive.org/details/scientificadvert0000hopk) — **Public domain**, direct-response & testing classic
+### 📖 Free Related Reading (Public Domain / Open Access)
+- [Scientific Advertising (Hopkins, 1923)](https://archive.org/details/scientificadvert0000hopk) — **Public domain**, direct-response classic
 - [Project Gutenberg](https://www.gutenberg.org/) — 70,000+ free books (*Art of War, The Prince, Meditations, Think and Grow Rich, Elements of Style, As a Man Thinketh*)
 - [OpenStax](https://openstax.org/) — Free peer-reviewed textbooks (economics, business, stats)
 - [MIT OpenCourseWare](https://ocw.mit.edu/) — Free course materials (management, communication, systems)
 - [Paul Graham Essays](https://paulgraham.com/articles.html) — Free, sharp essays on startups, work, thinking
 
-### Prompt & Workflow Libraries
-- [Awesome ChatGPT Prompts](https://github.com/f/awesome-chatgpt-prompts) • [Anthropic Prompt Library](https://docs.anthropic.com/en/resources/prompt-library)
-- [OpenAI Examples](https://platform.openai.com/examples) • [Learn Prompting](https://learnprompting.org/)
-
 ---
 
 ## ⚡ Hype vs. Real — Quick Filter
 
-| Real | Hype |
-|------|------|
+| ✅ Real | ❌ Hype |
+|---------|---------|
 | Specific, repeatable job you can do this week | "Revolutionize your workflow," "10x everything" |
 | Free tier, no account needed to learn | Tool needs 40-min video to explain |
 | You keep judgment in the loop | Machine makes the call, you just forward it |
@@ -227,7 +249,7 @@ Found a great *free* resource? See [CONTRIBUTING.md](CONTRIBUTING.md). Two hard 
 
 ## 📬 Stay in the Loop
 
-- **GitHub:** Star this repo → get updates in your feed
+- **GitHub:** [Star this repo](https://github.com/thewyattbrocato/ai-leverage-field-guide) → updates in your feed
 - **Newsletter:** [wyattbrocato.site](https://wyattbrocato.site) — weekly leverage notes
 - **X:** [@thewyattbrocato](https://x.com/thewyattbrocato) — daily threads
 - **LinkedIn:** [/in/wyattbrocato](https://www.linkedin.com/in/wyattbrocato/) — weekly posts
