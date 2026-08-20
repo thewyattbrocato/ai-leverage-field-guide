@@ -39,7 +39,8 @@ Each guide follows the same shape:
 - **Tradeoff** — what you give up or have to watch.
 
 Every guide is original, written in the captain's voice, and grounded in the working
-library of business, writing, and thinking books behind this project. Ideas from those
+library of business, writing, and thinking books behind this project (see
+[../READING.md](../READING.md) for the full catalog). Ideas from those
 books are attributed; the writing is original.
 
 ---
