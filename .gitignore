@@ -1,0 +1,33 @@
+# OS junk
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+~$*
+.*.swp
+*~
+*.tmp
+*.bak
+*.log
+
+# Editor / IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Python
+__pycache__/
+*.pyc
+
+# Book files must NEVER enter the repo (copyright / private)
+*.pdf
+*.epub
+*.mobi
+*.djvu
+
+# Local env
+.env
+.venv/
+venv/
