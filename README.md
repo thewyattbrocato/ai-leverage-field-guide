@@ -167,15 +167,18 @@ If a resource can't pass "what exactly will I do with this on Monday?" — skip 
 
 ## The original guides
 
-Short, structured, copy-paste. Start with these four:
+Short, structured, copy-paste. Start with these five:
 
 1. [Loop Prompting](docs/guides/loop-prompting.md) — run the same prompt to converge on quality.
 2. [Stop Conditions](docs/guides/stop-conditions.md) — define when the work is *done*.
 3. [Maker-Checker](docs/guides/maker-checker.md) — split drafting from checking.
 4. [Recurring Prompts](docs/guides/recurring-prompts.md) — build your personal prompt library.
+5. [Learning Paths](docs/guides/learning-paths.md) — make skills stick with retrieval and spacing as prompt loops.
 
 These guides are grounded in a wider working library of business, writing, and thinking
-books. See [READING.md](READING.md) for the full sourced-reading catalog behind them.
+books. **[Leverage Library](docs/library.md)** is the curated front door to that reading: the
+ten books to start with, organized by theme, with the legitimately-free sources for each.
+See [READING.md](READING.md) for the full sourced-reading catalog behind them.
 
 Full site index: [docs/index.md](docs/index.md).
 

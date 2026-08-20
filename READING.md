@@ -6,7 +6,11 @@ These 188 books sit in the captain's private library. They are the raw material 
 guides in this repo — the mental models for leverage, judgment, and clear work. **None of
 these files are in this repository, and none are linked from pirate sources.** This sheet
 exists so you can pursue the ideas *legally*: buy them, borrow them from a library, or — where
-a book is in the public domain — read it free from a legitimate source.
+  a book is in the public domain — read it free from a legitimate source.
+
+For the curated shortlist (the ten books to start with, organized by theme), see
+[docs/library.md](docs/library.md). This sheet is the full inventory; the Library page is the
+front door.
 
 ## How to read this sheet
 
