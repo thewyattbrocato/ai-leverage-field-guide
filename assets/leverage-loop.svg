@@ -1,64 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="253" viewBox="0 0 760 253">
-  <rect width="760" height="253" fill="#0d1117"/>
-  <text x="380" y="28" font-size="18" font-weight="bold" fill="white" text-anchor="middle">The Leverage Loop</text>
-  
-  <!-- Node 1: CAPTURE -->
-  <rect x="15" y="60" width="120" height="72" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
-  <text x="75" y="85" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">1. CAPTURE</text>
-  <text x="75" y="102" font-size="9" fill="#c9d1d9" text-anchor="middle">Dump messy notes,</text>
-  <text x="75" y="113" font-size="9" fill="#c9d1d9" text-anchor="middle">bullets, transcripts</text>
-  <text x="75" y="127" font-size="9" font-weight="bold" fill="#58a6ff" text-anchor="middle">Raw material</text>
-  
-  <path d="M 135 120 L 175 120" stroke="#58a6ff" stroke-width="2" fill="none"/>
-  <polygon points="170,115 180,120 170,125" fill="#58a6ff"/>
-  
-  <!-- Node 2: STRUCTURE -->
-  <rect x="188" y="60" width="120" height="72" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
-  <text x="178" y="85" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">2. STRUCTURE</text>
-  <text x="178" y="102" font-size="9" fill="#c9d1d9" text-anchor="middle">Run prompt to</text>
-  <text x="178" y="113" font-size="9" fill="#c9d1d9" text-anchor="middle">organize, draft</text>
-  <text x="178" y="127" font-size="9" font-weight="bold" fill="#58a6ff" text-anchor="middle">First draft</text>
-  
-  <path d="M 323 120 L 358 120" stroke="#58a6ff" stroke-width="2" fill="none"/>
-  <polygon points="353,115 363,120 353,125" fill="#58a6ff"/>
-  
-  <!-- Node 3: JUDGMENT (center, highlighted) -->
-  <rect x="340" y="45" width="145" height="110" rx="8" fill="#161b22" stroke="#a371f7" stroke-width="3"/>
-  <text x="397" y="72" font-size="11" font-weight="bold" fill="#a371f7" text-anchor="middle">3. JUDGMENT</text>
-  <text x="397" y="88" font-size="10" fill="#c9d1d9" text-anchor="middle">YOU mark what is</text>
-  <text x="397" y="100" font-size="10" fill="#c9d1d9" text-anchor="middle">wrong, missing,</text>
-  <text x="397" y="110" font-size="10" fill="#c9d1d9" text-anchor="middle">off-voice</text>
-  <text x="397" y="127" font-size="10" font-weight="bold" fill="#a371f7" text-anchor="middle">Feedback list</text>
-  <text x="397" y="140" font-size="9" font-weight="bold" fill="#58a6ff" text-anchor="middle">The key step</text>
-  
-  <path d="M 505 120 L 535 120" stroke="#58a6ff" stroke-width="2" fill="none"/>
-  <polygon points="530,115 540,120 530,125" fill="#58a6ff"/>
-  
-  <!-- Node 4: RE-RUN -->
-  <rect x="520" y="60" width="120" height="72" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
-  <text x="438" y="85" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">4. RE-RUN</text>
-  <text x="438" y="102" font-size="9" fill="#c9d1d9" text-anchor="middle">Feed judgment</text>
-  <text x="438" y="113" font-size="9" fill="#c9d1d9" text-anchor="middle">back as next</text>
-  <text x="438" y="127" font-size="9" font-weight="bold" fill="#58a6ff" text-anchor="middle">Refined draft</text>
-  
-  <path d="M 653 120 L 688 120" stroke="#58a6ff" stroke-width="2" fill="none"/>
-  <polygon points="683,115 593,120 583,125" fill="#58a6ff"/>
-  
-  <!-- Node 5: REPEAT -->
-  <rect x="690" y="60" width="110" height="72" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
-  <text x="710" y="85" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">5. REPEAT</text>
-  <text x="710" y="102" font-size="9" fill="#c9d1d9" text-anchor="middle">Until stop</text>
-  <text x="710" y="113" font-size="9" fill="#c9d1d9" text-anchor="middle">condition passes</text>
-  <text x="710" y="127" font-size="9" font-weight="bold" fill="#58a6ff" text-anchor="middle">Ship it</text>
-  
-  <!-- Return arrow (purple dashed) -->
-  <path d="M 805 120 C 795 120 795 90 720 90 C 380 90 40 90 15 120" stroke="#a371f7" stroke-width="2" fill="none" stroke-dasharray="8,4"/>
-  
-  <text x="380" y="25" font-size="10" fill="#a371f7" text-anchor="middle" font-weight="bold">Next task → New loop begins</text>
-  
-  <!-- Stop Condition badge -->
-  <rect x="480" y="30" width="240" height="25" rx="8" fill="#161b22" stroke="#a371f7" stroke-width="2"/>
-  <text x="650" y="49" font-size="9" font-weight="bold" fill="#a371f7" text-anchor="middle">Stop: Ask explicit + every number traced</text>
-  
-  <text x="380" y="240" font-size="9" fill="#8b949e" text-anchor="middle">Typical: 2-4 loops per task. Stop condition = your finish line. Judgment is the product.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="820" viewBox="0 0 760 820" role="img" aria-labelledby="loop-title loop-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="loop-title">The Leverage Loop — Five Steps</title>
+  <desc id="loop-desc">Vertical five-card diagram: 1 Capture, 2 Structure, 3 Judgment (highlighted as the key human step), 4 Re-run, 5 Repeat. Each card has one line describing the step. Repeat until your stop condition passes.</desc>
+  <rect width="760" height="820" fill="#0d1117"/>
+
+  <text x="380" y="44" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">The Leverage Loop</text>
+  <text x="380" y="72" font-size="14" fill="#8b949e" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Capture, Structure, Judgment, Re-run, Repeat — judgment is the product</text>
+
+  <g id="step-1-capture">
+    <rect x="80" y="100" width="600" height="96" rx="12" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+    <text x="112" y="136" font-size="20" font-weight="bold" fill="#58a6ff" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">1. Capture</text>
+    <text x="112" y="164" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Dump messy notes, bullets, transcripts, half-formed thoughts.</text>
+  </g>
+  <path d="M 380 200 L 380 220" stroke="#58a6ff" stroke-width="3"/>
+  <polygon points="374,220 386,220 380,232" fill="#58a6ff"/>
+
+  <g id="step-2-structure">
+    <rect x="80" y="238" width="600" height="96" rx="12" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+    <text x="112" y="274" font-size="20" font-weight="bold" fill="#58a6ff" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">2. Structure</text>
+    <text x="112" y="302" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Run a prompt that organizes the mess into a usable first draft.</text>
+  </g>
+  <path d="M 380 338 L 380 358" stroke="#a371f7" stroke-width="3"/>
+  <polygon points="374,358 386,358 380,370" fill="#a371f7"/>
+
+  <g id="step-3-judgment">
+    <rect x="80" y="376" width="600" height="118" rx="12" fill="#1a1326" stroke="#a371f7" stroke-width="4"/>
+    <text x="112" y="412" font-size="22" font-weight="bold" fill="#a371f7" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">3. Judgment</text>
+    <rect x="552" y="392" width="108" height="28" rx="14" fill="#a371f7"/>
+    <text x="606" y="411" font-size="14" font-weight="bold" fill="#0d1117" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Key step</text>
+    <text x="112" y="442" font-size="14" fill="#e6edf3" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">You mark what is wrong, missing, off-voice, or hallucinated.</text>
+    <text x="112" y="468" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">The edit is the leverage.</text>
+  </g>
+  <path d="M 380 498 L 380 518" stroke="#58a6ff" stroke-width="3"/>
+  <polygon points="374,518 386,518 380,530" fill="#58a6ff"/>
+
+  <g id="step-4-rerun">
+    <rect x="80" y="536" width="600" height="96" rx="12" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+    <text x="112" y="572" font-size="20" font-weight="bold" fill="#58a6ff" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">4. Re-run</text>
+    <text x="112" y="600" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Feed your judgment back: “Fix these three things: [your list].”</text>
+  </g>
+  <path d="M 380 636 L 380 656" stroke="#58a6ff" stroke-width="3"/>
+  <polygon points="374,656 386,656 380,668" fill="#58a6ff"/>
+
+  <g id="step-5-repeat">
+    <rect x="80" y="674" width="600" height="96" rx="12" fill="#161b22" stroke="#7ee787" stroke-width="2"/>
+    <text x="112" y="710" font-size="20" font-weight="bold" fill="#7ee787" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">5. Repeat</text>
+    <text x="112" y="738" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Loop again until your stop condition passes — then ship it.</text>
+  </g>
+
+  <text x="380" y="800" font-size="14" fill="#8b949e" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Save each finished loop as a recurring prompt so next week starts ahead.</text>
 </svg>

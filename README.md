@@ -1,9 +1,14 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="AI Leverage Field Guide" width="100%" />
+  <img src="assets/banner.svg" alt="AI Leverage Field Guide — Practical AI leverage for working professionals. More leverage, not more AI." width="100%" />
 </p>
 
 <p align="center">
-  <img src="assets/leverage-loop.svg" alt="The Leverage Loop" width="100%" />
+  <a href="docs/site/leverage-loop.html">
+    <img src="assets/leverage-loop.svg" alt="The Leverage Loop: five steps — Capture, Structure, Judgment (key human step), Re-run, Repeat" width="100%" />
+  </a>
+</p>
+<p align="center">
+  <sub>Diagram: <a href="docs/site/leverage-loop.html">Read the Leverage Loop guide</a></sub>
 </p>
 
 <p align="center">
@@ -24,6 +29,21 @@
     <img src="https://img.shields.io/github/forks/thewyattbrocato/ai-leverage-field-guide?style=social" alt="Forks" />
   </a>
 </p>
+
+---
+
+## 🌐 Read the Web Guides
+
+Responsive, accessible HTML versions of the core guides live in [`docs/site`](docs/site/):
+
+| Guide | Start here if you want… |
+|-------|-------------------------|
+| [Home](docs/site/index.html) | The overview: first win in 3 minutes, tracks, library |
+| [The Leverage Loop](docs/site/leverage-loop.html) | The core engine: Capture → Structure → Judgment → Re-run → Repeat |
+| [10-Week Curriculum](docs/site/curriculum.html) | Four modules that build a system that compounds |
+| [Stop Conditions](docs/site/stop-conditions.html) | Define "done" before you start — observable, falsifiable, real risk |
+
+> The site ships with skip links, `aria-current` navigation, keyboard-scrollable tables, and no horizontal overflow from 320 px up. It deploys via GitHub Pages once enabled (see below).
 
 ---
 
@@ -75,7 +95,12 @@ STOP WHEN: the ask is explicit and I'd be fine with my manager forwarding it.
 ```
 
 <p align="center">
-  <img src="assets/curriculum-timeline.svg" alt="10-Week Curriculum Timeline" width="100%" />
+  <a href="docs/site/curriculum.html">
+    <img src="assets/curriculum-timeline.svg" alt="Your 10-week journey: four modules — Foundations (Weeks 1–2), Core Practices (Weeks 3–5), Your Track (Weeks 6–8), Mastery (ongoing)" width="100%" />
+  </a>
+</p>
+<p align="center">
+  <sub>Diagram: <a href="docs/site/curriculum.html">Read the 10-Week Curriculum guide</a></sub>
 </p>
 
 **⏱ Time to first win: 3 min** | **🎯 Time to working system: 4–6 weeks** | **🏆 Time to role mastery: 8–10 weeks**
@@ -92,7 +117,7 @@ STOP WHEN: the ask is explicit and I'd be fine with my manager forwarding it.
 | **[🔍 Knowledge Worker](docs/guides/knowledge-worker.md)** | Research, synthesis, briefs, strategy | [Loop Prompting](docs/guides/loop-prompting.md) | Research→Synthesis→Brief pipeline |
 | **[🎯 Generalist](docs/curriculum.md)** | Not sure / want the full foundation | [Loop Prompting](docs/guides/loop-prompting.md) | Complete 4-module curriculum |
 
-> **Rule of One** — Pick ONE track. Finish it. Then add another. The lead carries 80% of the impact (*Great Leads*).
+> **Rule of One** — Pick ONE track. Finish it. Then add another. The lead guide carries most of the impact (*Great Leads*).
 
 ---
 
@@ -156,7 +181,7 @@ STOP WHEN: the ask is explicit and I'd be fine with my manager forwarding it.
 |-------|-----------|---------|
 | **A: Judgment over automation** | A prediction ≠ a decision; keep human in loop | [Stop Conditions](docs/guides/stop-conditions.md) |
 | **B: Retrieval-based learning** | Retrieval + spacing + interleaving = skill that sticks | [Learning Paths](docs/guides/learning-paths.md) |
-| **C: Less-for-more systems** | Eliminate low-leverage work; 20% causes → 80% results | [Recurring Prompts](docs/guides/recurring-prompts.md) |
+| **C: Less-for-more systems** | Eliminate low-leverage work; focus on the vital few | [Recurring Prompts](docs/guides/recurring-prompts.md) |
 | **D: Point-first writing** | Lead with action; kill clutter; write for busy readers | [Recurring Prompts](docs/guides/recurring-prompts.md) |
 | **E: High-stakes conversations** | Safety = mutual purpose + respect; radical candor | [Maker-Checker](docs/guides/maker-checker.md) |
 | **F: Strategy as diagnosis** | Strategy begins with diagnosis, not goals; Rumelt's kernel | [Stop Conditions](docs/guides/stop-conditions.md) |
@@ -184,7 +209,12 @@ STOP WHEN: the ask is explicit and I'd be fine with my manager forwarding it.
 > **All exercises → [exercises.md](docs/exercises.md)** — includes Module 3 track projects, Module 4 mastery exercises, self-assessment rubrics, printable quick-reference cards.
 
 <p align="center">
-  <img src="assets/stop-condition-tree.svg" alt="Stop Condition Decision Tree" width="100%" />
+  <a href="docs/site/stop-conditions.html">
+    <img src="assets/stop-condition-tree.svg" alt="Stop Condition Decision Tree: Observable? Falsifiable? Targets the real risk? Ready to ship — if any answer is no, rewrite the stop condition" width="100%" />
+  </a>
+</p>
+<p align="center">
+  <sub>Diagram: <a href="docs/site/stop-conditions.html">Read the Stop Conditions guide</a></sub>
 </p>
 
 ---

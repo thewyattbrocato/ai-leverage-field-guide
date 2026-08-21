@@ -1,104 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520">
-  <rect width="760" height="520" fill="#0d1117"/>
-  
-  <text x="380" y="30" font-size="20" font-weight="bold" fill="white" text-anchor="middle">Your 10-Week Journey</text>
-  <text x="380" y="50" font-size="12" fill="#8b949e" text-anchor="middle">4 modules | 4 tracks | 1 system that compounds</text>
-  
-  <path d="M 40 70 L 720 70" stroke="#30363d" stroke-width="3" fill="none"/>
-  
-  <!-- Module 1: Weeks 1-2 -->
-  <rect x="40" y="45" width="160" height="100" rx="8" fill="#1a2a3a" stroke="#58a6ff" stroke-width="2"/>
-  <text x="120" y="62" font-size="12" font-weight="bold" fill="white" text-anchor="middle">MODULE 1</text>
-  <text x="120" y="80" font-size="10" fill="#58a6ff" text-anchor="middle" font-weight="bold">FOUNDATIONS</text>
-  <text x="120" y="94" font-size="9" fill="#8b949e" text-anchor="middle">Weeks 1-2</text>
-  <text x="120" y="110" font-size="8" fill="#c9d1d9" text-anchor="middle">Leverage Map (20 min)</text>
-  <text x="120" y="122" font-size="8" fill="#c9d1d9" text-anchor="middle">Run Loop 3x (3x15 min)</text>
-  <text x="120" y="130" font-size="8" fill="#c9d1d9" text-anchor="middle">Checkpoint: Pass/Fail</text>
-  
-  <!-- Module 2: Weeks 3-5 -->
-  <rect x="190" y="45" width="220" height="100" rx="8" fill="#1a2d1a" stroke="#7ee787" stroke-width="2"/>
-  <text x="290" y="62" font-size="12" font-weight="bold" fill="white" text-anchor="middle">MODULE 2</text>
-  <text x="290" y="80" font-size="10" fill="#7ee787" text-anchor="middle" font-weight="bold">CORE PRACTICES</text>
-  <text x="290" y="94" font-size="9" fill="#8b949e" text-anchor="middle">Weeks 3-5</text>
-  <text x="290" y="110" font-size="8" fill="#c9d1d9" text-anchor="middle">Wk 3: 3 Stop Conditions</text>
-  <text x="290" y="118" font-size="8" fill="#c9d1d9" text-anchor="middle">Wk 4: Maker-Checker + 5 Prompts</text>
-  <text x="290" y="126" font-size="8" fill="#c9d1d9" text-anchor="middle">Wk 5: 1 Book Retrieval Log</text>
-  <text x="290" y="126" font-size="8" fill="#c9d1d9" text-anchor="middle">Checkpoint: Portfolio Review</text>
-  
-  <!-- Module 3: Weeks 6-8 -->
-  <rect x="440" y="45" width="220" height="100" rx="8" fill="#2d1a16" stroke="#f78166" stroke-width="2"/>
-  <text x="430" y="62" font-size="12" font-weight="bold" fill="white" text-anchor="middle">MODULE 3</text>
-  <text x="430" y="80" font-size="10" fill="#f78166" text-anchor="middle" font-weight="bold">YOUR TRACK</text>
-  <text x="430" y="94" font-size="9" fill="#8b949e" text-anchor="middle">Weeks 6-8 (Pick ONE)</text>
-  <text x="430" y="110" font-size="8" fill="#c9d1d9" text-anchor="middle">Manager: Decision Loop</text>
-  <text x="430" y="118" font-size="8" fill="#c9d1d9" text-anchor="middle">Writer: Draft-Edit-Publish</text>
-  <text x="430" y="126" font-size="8" fill="#c9d1d9" text-anchor="middle">Operator: Status-Followup-Handoff</text>
-  <text x="430" y="134" font-size="8" fill="#c9d1d9" text-anchor="middle">Knowledge Worker: Research-Brief</text>
-  
-  <!-- Module 4: Ongoing -->
-  <rect x="580" y="45" width="160" height="100" rx="8" fill="#1d162d" stroke="#a371f7" stroke-width="2"/>
-  <text x="550" y="62" font-size="12" font-weight="bold" fill="white" text-anchor="middle">MODULE 4</text>
-  <text x="550" y="80" font-size="10" fill="#a371f7" text-anchor="middle" font-weight="bold">MASTERY</text>
-  <text x="550" y="94" font-size="9" fill="#8b949e" text-anchor="middle">Ongoing</text>
-  <text x="550" y="110" font-size="8" fill="#c9d1d9" text-anchor="middle">Advanced Prompts</text>
-  <text x="550" y="118" font-size="8" fill="#c9d1d9" text-anchor="middle">Teach the Loop</text>
-  <text x="550" y="126" font-size="8" fill="#c9d1d9" text-anchor="middle">Monthly Deep-Dive</text>
-  
-  <!-- Milestones -->
-  <circle cx="120" cy="70" r="8" fill="#58a6ff" stroke="white" stroke-width="2"/>
-  <text x="120" y="30" font-size="8" fill="#58a6ff" text-anchor="middle" font-weight="bold">Checkpoint 1</text>
-  <circle cx="290" cy="70" r="8" fill="#7ee787" stroke="white" stroke-width="2"/>
-  <text x="290" y="30" font-size="8" fill="#7ee787" text-anchor="middle" font-weight="bold">Checkpoint 2</text>
-  <circle cx="430" cy="70" r="8" fill="#f78166" stroke="white" stroke-width="2"/>
-  <text x="430" y="30" font-size="8" fill="#f78166" text-anchor="middle" font-weight="bold">Track Done</text>
-  <circle cx="550" cy="70" r="8" fill="#a371f7" stroke="white" stroke-width="2"/>
-  <text x="550" y="30" font-size="8" fill="#a371f7" text-anchor="middle" font-weight="bold">Mastery</text>
-  
-  <!-- Week markers -->
-  <g font-size="7" fill="#484f58">
-    <text x="70" y="160" text-anchor="middle">Wk 1</text>
-    <text x="110" y="160" text-anchor="middle">Wk 2</text>
-    <text x="160" y="160" text-anchor="middle">Wk 3</text>
-    <text x="200" y="160" text-anchor="middle">Wk 4</text>
-    <text x="240" y="160" text-anchor="middle">Wk 4</text>
-    <text x="280" y="160" text-anchor="middle">Wk 5</text>
-    <text x="320" y="160" text-anchor="middle">Wk 6</text>
-    <text x="360" y="160" text-anchor="middle">Wk 7</text>
-    <text x="400" y="160" text-anchor="middle">Wk 7</text>
-    <text x="440" y="160" text-anchor="middle">Wk 8</text>
-    <text x="520" y="160" text-anchor="middle">Wk 9+</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="700" viewBox="0 0 760 700" role="img" aria-labelledby="curr-title curr-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="curr-title">Your 10-Week Journey — Four Modules</title>
+  <desc id="curr-desc">Vertical sequence of four stacked cards: 1 Foundations, Weeks 1 to 2. 2 Core Practices, Weeks 3 to 5. 3 Your Track, Weeks 6 to 8. 4 Mastery, ongoing. Footer reads: Rule of One — pick one track, finish it, then add another.</desc>
+  <rect width="760" height="700" fill="#0d1117"/>
+
+  <text x="380" y="44" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Your 10-Week Journey</text>
+  <text x="380" y="72" font-size="14" fill="#8b949e" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">4 modules · 4 tracks · 1 system that compounds</text>
+
+  <g id="module-1">
+    <rect x="80" y="100" width="600" height="110" rx="12" fill="#1a2a3a" stroke="#58a6ff" stroke-width="2"/>
+    <text x="112" y="136" font-size="20" font-weight="bold" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">1. Foundations</text>
+    <text x="648" y="136" font-size="15" font-weight="bold" fill="#58a6ff" text-anchor="end" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Weeks 1–2</text>
+    <text x="112" y="166" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Mental models, the Capture–Structure–Judgment loop,</text>
+    <text x="112" y="188" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">and your first recurring prompt.</text>
   </g>
-  
-  <!-- Tracks -->
-  <text x="380" y="185" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Pick Your Track (Week 6)</text>
-  
-  <rect x="30" y="200" width="170" height="140" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
-  <text x="115" y="220" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">MANAGER</text>
-  <text x="115" y="232" font-size="9" fill="#8b949e" text-anchor="middle">Maker-Checker + Stop Conditions</text>
-  <text x="115" y="244" font-size="8" fill="#c9d1d9" text-anchor="middle">Decision Loop on real decisions</text>
-  <text x="115" y="256" font-size="8" fill="#c9d1d9" text-anchor="middle">2 decisions + retro</text>
-  <text x="115" y="268" font-size="8" fill="#58a6ff" text-anchor="middle">Guide: Maker-Checker, Stop Conditions</text>
-  
-  <rect x="210" y="200" width="170" height="140" rx="8" fill="#161b22" stroke="#7ee787" stroke-width="2"/>
-  <text x="295" y="220" font-size="11" font-weight="bold" fill="#7ee787">WRITER</text>
-  <text x="295" y="232" font-size="9" fill="#8b949e" text-anchor="middle">Loop Prompting + Recurring Prompts</text>
-  <text x="295" y="244" font-size="8" fill="#c9d1d9" text-anchor="middle">Draft - Edit - Publish pipeline</text>
-  <text x="295" y="256" font-size="8" fill="#c9d1d9" text-anchor="middle">2 pieces + retro</text>
-  <text x="295" y="268" font-size="8" fill="#7ee787" text-anchor="middle">Guide: Loop Prompting, Recurring Prompts</text>
-  
-  <rect x="390" y="200" width="170" height="140" rx="8" fill="#161b22" stroke="#f78166" stroke-width="2"/>
-  <text x="475" y="220" font-size="11" font-weight="bold" fill="#f78166">OPERATOR</text>
-  <text x="475" y="232" font-size="9" fill="#8b949e" text-anchor="middle">Stop Conditions + Recurring Prompts</text>
-  <text x="475" y="244" font-size="8" fill="#c9d1d9" text-anchor="middle">Status - Follow-up - Handoff</text>
-  <text x="475" y="256" font-size="8" fill="#c9d1d9" text-anchor="middle">2 weeks + retro</text>
-  <text x="475" y="268" font-size="8" fill="#f78166" text-anchor="middle">Guide: Stop Conditions, Recurring Prompts</text>
-  
-  <rect x="570" y="200" width="170" height="140" rx="8" fill="#161b22" stroke="#a371f7" stroke-width="2"/>
-  <text x="655" y="220" font-size="11" font-weight="bold" fill="#a371f7">KNOWLEDGE WORKER</text>
-  <text x="655" y="232" font-size="9" fill="#8b949e" text-anchor="middle">Loop Prompting + Learning Paths</text>
-  <text x="655" y="244" font-size="8" fill="#c9d1d9" text-anchor="middle">Research - Synthesis - Brief</text>
-  <text x="655" y="256" font-size="8" fill="#c9d1d9" text-anchor="middle">2 briefs + retro</text>
-  <text x="655" y="268" font-size="8" fill="#a371f7" text-anchor="middle">Guide: Loop Prompting, Learning Paths</text>
-  
-  <text x="380" y="360" font-size="10" fill="#8b949e" text-anchor="middle">Rule of One: Pick ONE track. Finish it. Then add another. The lead carries 80% of the impact.</text>
+  <path d="M 380 214 L 380 234" stroke="#58a6ff" stroke-width="3"/>
+  <polygon points="374,234 386,234 380,246" fill="#58a6ff"/>
+
+  <g id="module-2">
+    <rect x="80" y="252" width="600" height="110" rx="12" fill="#1a2d1a" stroke="#7ee787" stroke-width="2"/>
+    <text x="112" y="288" font-size="20" font-weight="bold" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">2. Core Practices</text>
+    <text x="648" y="288" font-size="15" font-weight="bold" fill="#7ee787" text-anchor="end" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Weeks 3–5</text>
+    <text x="112" y="318" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Stop conditions, maker-checker review, and a personal</text>
+    <text x="112" y="340" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">library of recurring prompts.</text>
+  </g>
+  <path d="M 380 366 L 380 386" stroke="#f78166" stroke-width="3"/>
+  <polygon points="374,386 386,386 380,398" fill="#f78166"/>
+
+  <g id="module-3">
+    <rect x="80" y="404" width="600" height="110" rx="12" fill="#2d1a16" stroke="#f78166" stroke-width="2"/>
+    <text x="112" y="440" font-size="20" font-weight="bold" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">3. Your Track</text>
+    <text x="648" y="440" font-size="15" font-weight="bold" fill="#f78166" text-anchor="end" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Weeks 6–8</text>
+    <text x="112" y="470" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Pick one track — Manager, Writer, Operator, or Knowledge</text>
+    <text x="112" y="492" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Worker — and finish one real project plus a retro.</text>
+  </g>
+  <path d="M 380 518 L 380 538" stroke="#a371f7" stroke-width="3"/>
+  <polygon points="374,538 386,538 380,550" fill="#a371f7"/>
+
+  <g id="module-4">
+    <rect x="80" y="556" width="600" height="96" rx="12" fill="#1d162d" stroke="#a371f7" stroke-width="2"/>
+    <text x="112" y="592" font-size="20" font-weight="bold" fill="#ffffff" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">4. Mastery</text>
+    <text x="648" y="592" font-size="15" font-weight="bold" fill="#a371f7" text-anchor="end" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Ongoing</text>
+    <text x="112" y="622" font-size="14" fill="#c9d1d9" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Advanced prompts, teach the loop, monthly deep-dives, community.</text>
+  </g>
+
+  <text x="380" y="684" font-size="14" font-weight="bold" fill="#8b949e" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">Rule of One: Pick one track, finish it, then add another.</text>
 </svg>

@@ -31,3 +31,9 @@ __pycache__/
 .env
 .venv/
 venv/
+
+# Visual test artifacts
+artifacts/
+tools/visual-tests/node_modules/
+tools/visual-tests/test-results/
+playwright-report/
