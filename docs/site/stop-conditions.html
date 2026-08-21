@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Stop Conditions — Define done before you start. Observable, falsifiable, targets the real risk. The decision framework that stops over-iteration and starts shipping.">
+  <title>Stop Conditions — AI Leverage Field Guide</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="site-title">AI Leverage Field Guide</a>
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="leverage-loop.html" class="nav-link">Leverage Loop</a>
+        <a href="curriculum.html" class="nav-link">Curriculum</a>
+        <a href="stop-conditions.html" class="nav-link" aria-current="page">Stop Conditions</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="main-content" role="main">
+    <header class="page-header">
+      <h1 class="page-title">Stop Conditions</h1>
+      <p class="page-description">Define "done" before you start. Observable. Falsifiable. Targets the real risk. Stop over-iterating, start shipping.</p>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">The Core Idea</h2>
+      <div class="callout callout--important">
+        <p class="callout-title">A stop condition is a checklist, not a vibe.</p>
+        <p class="callout-body">You write it <strong>before</strong> you run the prompt. It has three criteria: <strong>Observable</strong> (someone else could verify it), <strong>Falsifiable</strong> (you can clearly fail it), <strong>Targets the Real Risk</strong> (not a proxy metric). If it doesn't meet all three, rewrite it.</p>
+      </div>
+      <p>Most people iterate until "it feels right." That passes everything and teaches nothing. A stop condition makes the finish line visible, testable, and tied to what actually goes wrong if you ship too early or too late.</p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">The Three Criteria</h2>
+
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3 class="step-title">Observable</h3>
+          <p class="step-description"><strong>Could someone else verify it without reading your mind?</strong></p>
+          <p class="step-description"><em>Yes:</em> Every factual claim has a source. Every number traces to a document. The ask is explicit in the first two lines. Unverified claims are flagged.</p>
+          <p class="step-description"><em>No:</em> "Looks good to me." "Feels right." "Professional tone."</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3 class="step-title">Falsifiable</h3>
+          <p class="step-description"><strong>Can you clearly FAIL it?</strong> (Not "good tone" — that passes everything.)</p>
+          <p class="step-description"><em>Yes:</em> "Every number traces to a source document." "The requested action appears in the first two lines." "All requested sections are present."</p>
+          <p class="step-description"><em>No:</em> "Until I'm confident." "High quality." "Make it better."</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3 class="step-title">Targets the Real Risk</h3>
+          <p class="step-description"><strong>Not a proxy. What actually goes wrong if you stop too early or too late?</strong></p>
+          <p class="step-description"><em>Yes:</em> "Missing the explicit ask causes my manager to forward a vague email." "An untraced number triggers a compliance review." "An unverified claim damages credibility with the client."</p>
+          <p class="step-description"><em>No:</em> "Word count." "Readability score." "Number of revisions."</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Decision Sequence</h2>
+      <p>Before you run the prompt, write your stop condition. Then check it against these three questions:</p>
+
+      <div class="callout callout--info">
+        <p class="callout-title">Q1: Is it Observable?</p>
+        <p class="callout-body">Could a colleague verify it without asking you? If <strong>NO</strong> → <span class="badge badge--warning">REWRITE: Make it observable</span></p>
+      </div>
+
+      <div class="callout callout--info">
+        <p class="callout-title">Q2: Is it Falsifiable?</p>
+        <p class="callout-body">Can you clearly fail it? If <strong>NO</strong> → <span class="badge badge--warning">REWRITE: Add a fail condition</span></p>
+      </div>
+
+      <div class="callout callout--info">
+        <p class="callout-title">Q3: Does It Target the Real Risk?</p>
+        <p class="callout-body">What actually goes wrong if this passes but the work is bad? If <strong>NO</strong> → <span class="badge badge--warning">REWRITE: Find the real risk</span></p>
+      </div>
+
+      <div class="callout callout--success">
+        <p class="callout-title">ALL YES → STOP CONDITION READY</p>
+        <p class="callout-body">Observable | Falsifiable | Targets real risk — Ship when it passes.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Good Examples</h2>
+      <p>These pass all three criteria:</p>
+      <ul class="checklist">
+        <li class="done">Every factual claim has a source</li>
+        <li class="done">Every number traces to a source document</li>
+        <li class="done">The requested action appears within the first two lines</li>
+        <li class="done">Unverified claims are explicitly flagged</li>
+        <li class="done">All requested sections are present</li>
+        <li class="done">Nothing missing that was in the original request</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Bad Examples (and Why They Fail)</h2>
+      <div class="guide-grid">
+        <article class="card">
+          <h3 class="card-title">"Until it feels right"</h3>
+          <p class="card-body"><strong>Fails:</strong> Observable, Falsifiable, Real Risk. No one else can verify your feelings. You can't fail "feels right." It targets confidence, not risk.</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">"Until I am confident"</h3>
+          <p class="card-body"><strong>Fails:</strong> Observable, Falsifiable, Real Risk. Confidence is internal. It passes everything. It doesn't catch the actual failure mode.</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">"Good tone"</h3>
+          <p class="card-body"><strong>Fails:</strong> Observable, Falsifiable. Tone is subjective. Everything passes "good tone." It's a proxy for voice, not a measure of risk.</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">"High quality"</h3>
+          <p class="card-body"><strong>Fails:</strong> Observable, Falsifiable, Real Risk. Undefined. Passes everything. Quality of what? For whom? At what cost?</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">"Make it better"</h3>
+          <p class="card-body"><strong>Fails:</strong> Observable, Falsifiable. Infinite loop. No defined end state. Better than what? By whose standard?</p>
+        </article>
+        <article class="card">
+          <h3 class="card-title">"Professional standard"</h3>
+          <p class="card-body"><strong>Fails:</strong> Observable, Falsifiable. Whose standard? Which profession? A proxy that sounds rigorous but means nothing specific.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Examples by Work Type</h2>
+      <div class="guide-grid">
+        <article class="card">
+          <h3 class="card-title">Status Update</h3>
+          <ul class="checklist">
+            <li class="done">Numbers traced to tickets</li>
+            <li class="done">Ask explicit in first 2 lines</li>
+            <li class="done">Blocked items truly blocked</li>
+            <li class="done">No jargon, under 200 words</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Email / Follow-up</h3>
+          <ul class="checklist">
+            <li class="done">One clear ask</li>
+            <li class="done">Actionable by recipient</li>
+            <li class="done">Context sufficient for reply</li>
+            <li class="done">Deadline or next step stated</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Brief / Strategy</h3>
+          <ul class="checklist">
+            <li class="done">Claims sourced</li>
+            <li class="done">Max 2 unverified, flagged</li>
+            <li class="done">Diagnosis → Policy → Action clear</li>
+            <li class="done">Risks named, not hidden</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Summary</h3>
+          <ul class="checklist">
+            <li class="done">Nothing missing from source</li>
+            <li class="done">Nothing added not in source</li>
+            <li class="done">Key decision + rationale included</li>
+            <li class="done">Next actions explicit</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3 class="card-title">Creative Work</h3>
+          <ul class="checklist">
+            <li class="done">Time-box: 3 passes, then decide</li>
+            <li class="done">Specific criteria per pass</li>
+            <li class="done">Version saved at each pass</li>
+            <li class="done">Final choice documented</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Rewrite Exercise</h2>
+      <div class="callout callout--info">
+        <p class="callout-title">Practice: Fix These Stop Conditions</p>
+        <p class="callout-body">For each weak example, write a version that passes all three criteria.</p>
+      </div>
+      <div class="table-wrapper" role="region" aria-label="Stop condition rewrite examples table" tabindex="0">
+        <table>
+        <thead>
+          <tr>
+            <th>Weak Stop Condition</th>
+            <th>Fixed (Observable + Falsifiable + Real Risk)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>"Until the tone is professional"</td>
+            <td>"No hedging words (just, perhaps, maybe). Direct requests in imperative mood. Recipient can act without clarification."</td>
+          </tr>
+          <tr>
+            <td>"Until I'm happy with it"</td>
+            <td>"All 3 sections from the template present. Every number traces to source. Ask explicit in line 1. Zero unverified claims."</td>
+          </tr>
+          <tr>
+            <td>"High quality output"</td>
+            <td>"Passes the stop-condition checklist for this work type. Peer reviewer would sign off without edits."</td>
+          </tr>
+          <tr>
+            <td>"Good enough to send"</td>
+            <td>"Meets the specific stop condition written for this task type before the prompt ran."</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Final Checklist</h2>
+      <p>Before you run any prompt, complete this:</p>
+      <ul class="checklist">
+        <li>I have written a stop condition for this task</li>
+        <li>It is observable (someone else could verify)</li>
+        <li>It is falsifiable (I can clearly fail it)</li>
+        <li>It targets the real risk (not a proxy)</li>
+        <li>I will check the output against it like a checklist, not a vibe</li>
+      </ul>
+      <p><strong>Write the stop condition FIRST. Then run the prompt. Check like a checklist, not a vibe.</strong></p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">What's Next</h2>
+      <div class="callout callout--success">
+        <p class="callout-title">Recommended: <a href="leverage-loop.html">The Leverage Loop</a></p>
+        <p class="callout-body">Stop conditions are the finish line for every loop iteration. Learn the full engine: Capture → Structure → Judgment → Re-run → Repeat.</p>
+      </div>
+      <p>Or continue: <a href="curriculum.html">10-Week Curriculum →</a></p>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-links">
+      <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/blob/main/LICENSE" target="_blank" rel="noopener">License: CC-BY-4.0</a>
+      <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide" target="_blank" rel="noopener">Repository</a>
+      <a href="../../CONTRIBUTING.md">Contributing</a>
+    </div>
+    <p>AI Leverage Field Guide — More leverage, not more AI.</p>
+  </footer>
+</body>
+</html>
