@@ -38,37 +38,12 @@ Responsive, accessible HTML versions of the core guides live in [`docs/site`](do
 
 | Guide | Start here if you want… |
 |-------|-------------------------|
-| [Home](docs/site/index.html) | The overview: first win in 3 minutes, tracks, library |
+| [Home](docs/site/index.html) | The overview: the journey, tracks, library |
 | [The Leverage Loop](docs/site/leverage-loop.html) | The core engine: Capture → Structure → Judgment → Re-run → Repeat |
 | [10-Week Curriculum](docs/site/curriculum.html) | Four modules that build a system that compounds |
 | [Stop Conditions](docs/site/stop-conditions.html) | Define "done" before you start — observable, falsifiable, real risk |
 
 > The site ships with skip links, `aria-current` navigation, keyboard-scrollable tables, and no horizontal overflow from 320 px up. It deploys via GitHub Pages once enabled (see below).
-
----
-
-## 🎯 Your First Win — Right Now (3 Minutes)
-
-**Copy this prompt. Paste it into any free AI tool. Get a usable result in seconds.**
-
-> **Copy → Paste → Edit → Save. That's the whole loop.**
-
-```
-I'm a [your role]. Here are my messy notes for this week's [status update / follow-up / meeting prep].
-Turn them into a tight version:
-• First line = the status + the ask
-• Then 3 bullets: what moved | what's blocked | what's next
-• Plain language. No jargon. Under 200 words.
-STOP WHEN: the ask is explicit and I'd be fine with my manager forwarding it.
-```
-
-**Your 3-step first win:**
-1. **Pick** one recurring task you do weekly (status update, follow-up, meeting prep)
-2. **Paste** the prompt above into [ChatGPT](https://chat.openai.com) • [Claude](https://claude.ai) • [Gemini](https://gemini.google.com) • [Copilot](https://copilot.microsoft.com)
-3. **Edit** the result like a boss, not a rubber stamp. That edit *is* the leverage.
-
-**→ Save that prompt. You just built your first recurring prompt.**  
-**→ Want the full system? Keep reading.**
 
 ---
 
@@ -103,7 +78,7 @@ STOP WHEN: the ask is explicit and I'd be fine with my manager forwarding it.
   <sub>Diagram: <a href="docs/site/curriculum.html">Read the 10-Week Curriculum guide</a></sub>
 </p>
 
-**⏱ Time to first win: 3 min** | **🎯 Time to working system: 4–6 weeks** | **🏆 Time to role mastery: 8–10 weeks**
+**🎯 Time to working system: 4–6 weeks** | **🏆 Time to role mastery: 8–10 weeks**
 
 ---
 
