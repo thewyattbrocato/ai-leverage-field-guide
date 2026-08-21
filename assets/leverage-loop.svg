@@ -1,65 +1,64 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300">
-  <rect width="900" height="300" fill="#0d1117"/>
-  <text x="450" y="30" font-size="20" font-weight="bold" fill="white" text-anchor="middle">The Leverage Loop</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="253" viewBox="0 0 760 253">
+  <rect width="760" height="253" fill="#0d1117"/>
+  <text x="380" y="28" font-size="18" font-weight="bold" fill="white" text-anchor="middle">The Leverage Loop</text>
   
   <!-- Node 1: CAPTURE -->
-  <rect x="30" y="80" width="150" height="90" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
-  <text x="105" y="105" font-size="13" font-weight="bold" fill="#58a6ff" text-anchor="middle">1. CAPTURE</text>
-  <text x="105" y="125" font-size="11" fill="#c9d1d9" text-anchor="middle">Dump messy notes,</text>
-  <text x="105" y="138" font-size="11" fill="#c9d1d9" text-anchor="middle">bullets, transcripts</text>
-  <text x="105" y="155" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">Raw material</text>
+  <rect x="15" y="60" width="120" height="72" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <text x="75" y="85" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">1. CAPTURE</text>
+  <text x="75" y="102" font-size="9" fill="#c9d1d9" text-anchor="middle">Dump messy notes,</text>
+  <text x="75" y="113" font-size="9" fill="#c9d1d9" text-anchor="middle">bullets, transcripts</text>
+  <text x="75" y="127" font-size="9" font-weight="bold" fill="#58a6ff" text-anchor="middle">Raw material</text>
   
-  <!-- Arrow 1 -->
-  <path d="M 180 145 L 230 145" stroke="#58a6ff" stroke-width="2" fill="none"/>
-  <polygon points="225,140 235,145 225,150" fill="#58a6ff"/>
+  <path d="M 135 120 L 175 120" stroke="#58a6ff" stroke-width="2" fill="none"/>
+  <polygon points="170,115 180,120 170,125" fill="#58a6ff"/>
   
   <!-- Node 2: STRUCTURE -->
-  <rect x="230" y="80" width="150" height="90" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
-  <text x="305" y="105" font-size="13" font-weight="bold" fill="#58a6ff" text-anchor="middle">2. STRUCTURE</text>
-  <text x="305" y="125" font-size="11" fill="#c9d1d9" text-anchor="middle">Run prompt to</text>
-  <text x="305" y="138" font-size="11" fill="#c9d1d9" text-anchor="middle">organize, draft</text>
-  <text x="305" y="155" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">First draft</text>
+  <rect x="188" y="60" width="120" height="72" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <text x="178" y="85" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">2. STRUCTURE</text>
+  <text x="178" y="102" font-size="9" fill="#c9d1d9" text-anchor="middle">Run prompt to</text>
+  <text x="178" y="113" font-size="9" fill="#c9d1d9" text-anchor="middle">organize, draft</text>
+  <text x="178" y="127" font-size="9" font-weight="bold" fill="#58a6ff" text-anchor="middle">First draft</text>
   
-  <path d="M 380 145 L 425 145" stroke="#58a6ff" stroke-width="2" fill="none"/>
-  <polygon points="425,140 435,145 425,150" fill="#58a6ff"/>
+  <path d="M 323 120 L 358 120" stroke="#58a6ff" stroke-width="2" fill="none"/>
+  <polygon points="353,115 363,120 353,125" fill="#58a6ff"/>
   
-  <!-- Node 3: JUDGMENT (center) -->
-  <rect x="415" y="65" width="170" height="130" rx="8" fill="#161b22" stroke="#a371f7" stroke-width="3"/>
-  <text x="500" y="90" font-size="13" font-weight="bold" fill="#a371f7" text-anchor="middle">3. JUDGMENT</text>
-  <text x="500" y="115" font-size="11" fill="#c9d1d9" text-anchor="middle">YOU mark what is</text>
-  <text x="500" y="130" font-size="11" fill="#c9d1d9" text-anchor="middle">wrong, missing,</text>
-  <text x="500" y="145" font-size="11" fill="#c9d1d9" text-anchor="middle">off-voice</text>
-  <text x="500" y="165" font-size="11" font-weight="bold" fill="#a371f7" text-anchor="middle">Feedback list</text>
-  <text x="500" y="185" font-size="10" font-weight="bold" fill="#58a6ff" text-anchor="middle">The key step</text>
+  <!-- Node 3: JUDGMENT (center, highlighted) -->
+  <rect x="340" y="45" width="145" height="110" rx="8" fill="#161b22" stroke="#a371f7" stroke-width="3"/>
+  <text x="397" y="72" font-size="11" font-weight="bold" fill="#a371f7" text-anchor="middle">3. JUDGMENT</text>
+  <text x="397" y="88" font-size="10" fill="#c9d1d9" text-anchor="middle">YOU mark what is</text>
+  <text x="397" y="100" font-size="10" fill="#c9d1d9" text-anchor="middle">wrong, missing,</text>
+  <text x="397" y="110" font-size="10" fill="#c9d1d9" text-anchor="middle">off-voice</text>
+  <text x="397" y="127" font-size="10" font-weight="bold" fill="#a371f7" text-anchor="middle">Feedback list</text>
+  <text x="397" y="140" font-size="9" font-weight="bold" fill="#58a6ff" text-anchor="middle">The key step</text>
   
-  <path d="M 585 145 L 640 145" stroke="#58a6ff" stroke-width="2" fill="none"/>
-  <polygon points="635,140 645,145 635,150" fill="#58a6ff"/>
+  <path d="M 505 120 L 535 120" stroke="#58a6ff" stroke-width="2" fill="none"/>
+  <polygon points="530,115 540,120 530,125" fill="#58a6ff"/>
   
   <!-- Node 4: RE-RUN -->
-  <rect x="630" y="80" width="150" height="90" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
-  <text x="705" y="105" font-size="13" font-weight="bold" fill="#58a6ff" text-anchor="middle">4. RE-RUN</text>
-  <text x="705" y="125" font-size="11" fill="#c9d1d9" text-anchor="middle">Feed judgment</text>
-  <text x="705" y="138" font-size="11" fill="#c9d1d9" text-anchor="middle">back as next</text>
-  <text x="705" y="155" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">Refined draft</text>
+  <rect x="520" y="60" width="120" height="72" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <text x="438" y="85" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">4. RE-RUN</text>
+  <text x="438" y="102" font-size="9" fill="#c9d1d9" text-anchor="middle">Feed judgment</text>
+  <text x="438" y="113" font-size="9" fill="#c9d1d9" text-anchor="middle">back as next</text>
+  <text x="438" y="127" font-size="9" font-weight="bold" fill="#58a6ff" text-anchor="middle">Refined draft</text>
   
-  <path d="M 780 145 L 825 145" stroke="#58a6ff" stroke-width="2" fill="none"/>
-  <polygon points="825,140 835,145 825,150" fill="#58a6ff"/>
+  <path d="M 653 120 L 688 120" stroke="#58a6ff" stroke-width="2" fill="none"/>
+  <polygon points="683,115 593,120 583,125" fill="#58a6ff"/>
   
   <!-- Node 5: REPEAT -->
-  <rect x="825" y="80" width="130" height="90" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
-  <text x="890" y="105" font-size="13" font-weight="bold" fill="#58a6ff" text-anchor="middle">5. REPEAT</text>
-  <text x="890" y="125" font-size="11" fill="#c9d1d9" text-anchor="middle">Until stop</text>
-  <text x="890" y="138" font-size="11" fill="#c9d1d9" text-anchor="middle">condition passes</text>
-  <text x="890" y="155" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">Ship it</text>
+  <rect x="690" y="60" width="110" height="72" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <text x="710" y="85" font-size="11" font-weight="bold" fill="#58a6ff" text-anchor="middle">5. REPEAT</text>
+  <text x="710" y="102" font-size="9" fill="#c9d1d9" text-anchor="middle">Until stop</text>
+  <text x="710" y="113" font-size="9" fill="#c9d1d9" text-anchor="middle">condition passes</text>
+  <text x="710" y="127" font-size="9" font-weight="bold" fill="#58a6ff" text-anchor="middle">Ship it</text>
   
-  <!-- Return arrow -->
-  <path d="M 955 145 C 975 145 975 110 880 110 C 450 110 80 110 30 160" stroke="#a371f7" stroke-width="2" fill="none" stroke-dasharray="8,4"/>
+  <!-- Return arrow (purple dashed) -->
+  <path d="M 805 120 C 795 120 795 90 720 90 C 380 90 40 90 15 120" stroke="#a371f7" stroke-width="2" fill="none" stroke-dasharray="8,4"/>
   
-  <text x="450" y="30" font-size="11" fill="#a371f7" text-anchor="middle" font-weight="bold">Next task -> New loop begins</text>
+  <text x="380" y="25" font-size="10" fill="#a371f7" text-anchor="middle" font-weight="bold">Next task → New loop begins</text>
   
   <!-- Stop Condition badge -->
-  <rect x="580" y="40" width="260" height="30" rx="8" fill="#161b22" stroke="#a371f7" stroke-width="2"/>
-  <text x="710" y="58" font-size="10" font-weight="bold" fill="#a371f7" text-anchor="middle">Stop: Ask explicit + every number traced</text>
+  <rect x="480" y="30" width="240" height="25" rx="8" fill="#161b22" stroke="#a371f7" stroke-width="2"/>
+  <text x="650" y="49" font-size="9" font-weight="bold" fill="#a371f7" text-anchor="middle">Stop: Ask explicit + every number traced</text>
   
-  <text x="450" y="285" font-size="10" fill="#8b949e" text-anchor="middle">Typical: 2-4 loops per task. Stop condition = your finish line. Judgment is the product.</text>
+  <text x="380" y="240" font-size="9" fill="#8b949e" text-anchor="middle">Typical: 2-4 loops per task. Stop condition = your finish line. Judgment is the product.</text>
 </svg>
