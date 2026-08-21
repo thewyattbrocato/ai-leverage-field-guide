@@ -32,7 +32,20 @@
 
 ---
 
-## 🌐 Read the Web Guides
+## 🌐 Use the Interactive Field Guide
+
+The guides are live as an interactive site — no install, no account, nothing leaves your browser:
+
+| Start here | What you get |
+|------------|--------------|
+| [**Interactive home**](https://thewyattbrocato.github.io/ai-leverage-field-guide/) | Overview, role-based path picker, and where to begin |
+| [**Leverage Loop**](https://thewyattbrocato.github.io/ai-leverage-field-guide/leverage-loop.html) | The core engine: Capture → Structure → Judgment → Re-run → Repeat, with a copy-ready correction prompt |
+| [**10-Week Curriculum**](https://thewyattbrocato.github.io/ai-leverage-field-guide/curriculum.html) | Four modules plus local progress tracking (export/import included) |
+| [**Stop Condition Builder**](https://thewyattbrocato.github.io/ai-leverage-field-guide/stop-conditions.html#stop-condition-builder) | Generate observable, falsifiable, real-risk stop conditions as Markdown |
+
+> Everything interactive runs locally in your browser. Selections and progress remain in the current browser and are not transmitted.
+
+## 📖 Read the Web Guides (source)
 
 Responsive, accessible HTML versions of the core guides live in [`docs/site`](docs/site/):
 
