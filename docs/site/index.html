@@ -74,34 +74,76 @@
 
     <section class="section">
       <h2 class="section-title">Choose Your Path — Start Here</h2>
+
+      <div class="path-picker" data-path-picker>
+        <p class="path-picker-hint">Pick your role and get a starting recommendation. Saved only in this browser.</p>
+        <div class="path-picker-options" role="group" aria-label="Choose your role">
+          <button type="button" class="path-option" data-path-option="manager" aria-pressed="false">
+            <span class="path-option-icon" aria-hidden="true">🎯</span> Manager
+            <span class="path-option-state" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="path-option" data-path-option="writer" aria-pressed="false">
+            <span class="path-option-icon" aria-hidden="true">✍️</span> Writer
+            <span class="path-option-state" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="path-option" data-path-option="operator" aria-pressed="false">
+            <span class="path-option-icon" aria-hidden="true">⚙️</span> Operator
+            <span class="path-option-state" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="path-option" data-path-option="knowledge" aria-pressed="false">
+            <span class="path-option-icon" aria-hidden="true">🔍</span> Knowledge Worker
+            <span class="path-option-state" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="path-option" data-path-option="generalist" aria-pressed="false">
+            <span class="path-option-icon" aria-hidden="true">🧭</span> Not sure yet
+            <span class="path-option-state" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <div class="path-recommendation callout callout--info" data-path-recommendation hidden>
+          <p class="callout-title">Recommended first guide: <a href="leverage-loop.html" data-rec-guide-link>The Leverage Loop</a></p>
+          <p class="callout-body"><strong>Suggested outcome:</strong> <span data-rec-outcome></span></p>
+          <p class="callout-body"><strong>Next step:</strong> <span data-rec-next-step></span></p>
+          <p class="path-picker-saved-note" data-rec-saved-note hidden><small>Saved in this browser only — nothing is transmitted.</small></p>
+        </div>
+
+        <p class="path-picker-reset-row">
+          <button type="button" class="button button--secondary path-reset-button" data-path-reset hidden>Change path</button>
+        </p>
+
+        <noscript>
+          <p class="noscript-note">Role recommendations need JavaScript. The track cards below cover the same choices without it.</p>
+        </noscript>
+      </div>
+
       <div class="guide-grid">
         <article class="card track-card track-card--manager">
           <div class="track-icon">🎯</div>
           <h3 class="track-title">Manager</h3>
           <p class="track-focus">Decide, prioritize, resource, report up</p>
           <p class="track-deliverable">Decision loop on real decisions</p>
-          <p class="track-guide">First Guide: <a href="leverage-loop.html">Leverage Loop</a> → <a href="../guides/maker-checker.md">Maker-Checker</a></p>
+          <p class="track-guide">First Guide: <a href="leverage-loop.html">Leverage Loop</a> → <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/blob/main/docs/guides/maker-checker.md">Maker-Checker</a></p>
         </article>
         <article class="card track-card track-card--writer">
           <div class="track-icon">✍️</div>
           <h3 class="track-title">Writer</h3>
           <p class="track-focus">Draft, edit, publish, repurpose</p>
           <p class="track-deliverable">Draft→Edit→Publish pipeline</p>
-          <p class="track-guide">First Guide: <a href="leverage-loop.html">Leverage Loop</a> → <a href="../guides/loop-prompting.md">Loop Prompting</a></p>
+          <p class="track-guide">First Guide: <a href="leverage-loop.html">Leverage Loop</a> → <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/blob/main/docs/guides/loop-prompting.md">Loop Prompting</a></p>
         </article>
         <article class="card track-card track-card--operator">
           <div class="track-icon">⚙️</div>
           <h3 class="track-title">Operator</h3>
           <p class="track-focus">Status, follow-ups, handoffs, tickets</p>
           <p class="track-deliverable">Status→Follow-up→Handoff rhythm</p>
-          <p class="track-guide">First Guide: <a href="stop-conditions.html">Stop Conditions</a> → <a href="../guides/recurring-prompts.md">Recurring Prompts</a></p>
+          <p class="track-guide">First Guide: <a href="stop-conditions.html">Stop Conditions</a> → <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/blob/main/docs/guides/recurring-prompts.md">Recurring Prompts</a></p>
         </article>
         <article class="card track-card track-card--knowledge">
           <div class="track-icon">🔍</div>
           <h3 class="track-title">Knowledge Worker</h3>
           <p class="track-focus">Research, synthesis, briefs, strategy</p>
           <p class="track-deliverable">Research→Synthesis→Brief pipeline</p>
-          <p class="track-guide">First Guide: <a href="leverage-loop.html">Leverage Loop</a> → <a href="../guides/learning-paths.md">Learning Paths</a></p>
+          <p class="track-guide">First Guide: <a href="leverage-loop.html">Leverage Loop</a> → <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/blob/main/docs/guides/learning-paths.md">Learning Paths</a></p>
         </article>
         <article class="card">
           <div class="track-icon">🎯</div>
@@ -165,7 +207,7 @@
           </tbody>
         </table>
       </div>
-      <p><strong>Full catalog:</strong> <a href="../reading.md">Reading Catalog</a> — 188 books with categories, why-it-matters, legitimate sources (buy/borrow/free). No pirate links. Ever.</p>
+      <p><strong>Full catalog:</strong> <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/blob/main/docs/reading.md">Reading Catalog</a> — 188 books with categories, why-it-matters, legitimate sources (buy/borrow/free). No pirate links. Ever.</p>
     </section>
 
     <section class="section">
@@ -212,9 +254,11 @@
     <div class="footer-links">
       <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/blob/main/LICENSE" target="_blank" rel="noopener">License: CC-BY-4.0</a>
       <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide" target="_blank" rel="noopener">Repository</a>
-      <a href="../../CONTRIBUTING.md">Contributing</a>
+      <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/issues/new" target="_blank" rel="noopener">Suggest an improvement</a>
+      <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/blob/main/CONTRIBUTING.md">Contributing</a>
     </div>
     <p>Built from a private library of 200+ books on learning science, product, copywriting, leadership, and AI. Every idea attributed. No books uploaded. No pirate links. No AI disclosures.</p>
   </footer>
+  <script src="script.js"></script>
 </body>
 </html>

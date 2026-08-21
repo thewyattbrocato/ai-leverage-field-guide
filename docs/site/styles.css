@@ -634,3 +634,428 @@ tr:hover td {
     margin-top: -1.25rem;
   }
 }
+
+/* ------------------------------------------------------------------ *
+ * Interactive features: buttons, path picker, forms, builder,
+ * progress tracker, copy controls, noscript notes.
+ * Extends the existing identity: same custom properties, contrast,
+ * focus styles, print and reduced-motion handling.
+ * ------------------------------------------------------------------ */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Buttons ----------------------------------------------------------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  min-height: 2.75rem;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.button:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.button[disabled],
+.button[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button--primary {
+  background: rgba(88, 166, 255, 0.18);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.button--primary:hover {
+  background: rgba(88, 166, 255, 0.28);
+}
+
+.button--secondary {
+  background: transparent;
+}
+
+.button--danger {
+  background: transparent;
+  border-color: var(--accent-warning);
+  color: var(--accent-warning);
+}
+
+.button--danger:hover {
+  background: rgba(247, 129, 102, 0.12);
+  border-color: var(--accent-warning);
+  color: var(--accent-warning);
+}
+
+.button.is-copied {
+  border-color: var(--accent-success);
+  color: var(--accent-success);
+}
+
+.button.is-error {
+  border-color: var(--accent-warning);
+  color: var(--accent-warning);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-md) 0;
+}
+
+/* Choose Your Path picker ------------------------------------------- */
+
+.path-picker {
+  margin-bottom: var(--spacing-lg);
+}
+
+.path-picker-hint {
+  margin: 0 0 var(--spacing-sm);
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+}
+
+.path-picker-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.path-option {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  min-height: 2.75rem;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.path-option:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+}
+
+.path-option:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.path-option[aria-pressed="true"] {
+  background: rgba(126, 231, 135, 0.12);
+  border-color: var(--accent-success);
+  box-shadow: inset 0 0 0 1px var(--accent-success);
+  color: var(--text-primary);
+}
+
+.path-option-state {
+  font-weight: 700;
+  color: var(--accent-success);
+}
+
+.path-picker-reset-row {
+  margin: 0;
+}
+
+.path-recommendation .callout-body strong {
+  color: var(--text-primary);
+}
+
+.path-picker-saved-note {
+  margin-top: var(--spacing-sm);
+}
+
+/* Forms -------------------------------------------------------------- */
+
+.sc-form {
+  max-width: 100%;
+}
+
+.form-field {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-field > label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.form-field input[type="text"],
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  max-width: 100%;
+  min-height: 2.75rem;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.form-field textarea {
+  min-height: 4.5rem;
+  resize: vertical;
+}
+
+.form-field input:focus-visible,
+.form-field select:focus-visible,
+.form-field textarea:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 1px;
+  border-color: var(--accent-primary);
+}
+
+.form-field input[aria-invalid="true"],
+.form-field select[aria-invalid="true"],
+.form-field textarea[aria-invalid="true"] {
+  border-color: var(--accent-warning);
+  box-shadow: inset 0 0 0 1px var(--accent-warning);
+}
+
+.required-marker {
+  color: var(--accent-warning);
+}
+
+.field-hint {
+  margin: var(--spacing-xs) 0 0;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.field-error {
+  margin: var(--spacing-xs) 0 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-warning);
+}
+
+.field-error::before {
+  content: "⚠ ";
+}
+
+.form-status {
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.9375rem;
+  color: var(--accent-success);
+  background: rgba(126, 231, 135, 0.08);
+  border-left: 3px solid var(--accent-success);
+  border-radius: var(--radius-sm);
+}
+
+.form-status--error {
+  color: var(--accent-warning);
+  background: rgba(247, 129, 102, 0.08);
+  border-left-color: var(--accent-warning);
+}
+
+/* Stop Condition Builder output -------------------------------------- */
+
+.sc-output-region {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.sc-output {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--spacing-md);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  resize: vertical;
+}
+
+.sc-output:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.copy-fallback {
+  position: fixed;
+  top: -1000px;
+  left: -1000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* Progress tracker ---------------------------------------------------- */
+
+.progress-storage-note {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.progress-summary {
+  font-weight: 700;
+  margin-bottom: var(--spacing-xs);
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 32rem;
+  height: 1rem;
+  accent-color: var(--accent-success);
+  margin-bottom: var(--spacing-md);
+}
+
+.progress-tracker {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: 0 0 var(--spacing-md);
+}
+
+.progress-tracker legend {
+  font-weight: 600;
+  padding: 0 var(--spacing-sm);
+}
+
+.progress-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.progress-items li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.progress-items li:last-child {
+  margin-bottom: 0;
+}
+
+.progress-items input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.1875rem;
+  flex-shrink: 0;
+  accent-color: var(--accent-success);
+  cursor: pointer;
+}
+
+.progress-items input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.progress-items label {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.import-field {
+  margin-top: var(--spacing-md);
+}
+
+.import-field input[type="file"] {
+  display: block;
+  max-width: 100%;
+  margin-top: var(--spacing-xs);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.import-field input[type="file"]::file-selector-button {
+  min-height: 2.5rem;
+  margin-right: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+/* Noscript notes ------------------------------------------------------ */
+
+.noscript-note {
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  background: rgba(88, 166, 255, 0.08);
+  border-left: 3px solid var(--accent-primary);
+  border-radius: var(--radius-sm);
+}
+
+/* Print: interactive-only chrome stays on screen ----------------------- */
+
+@media print {
+  .path-picker-options,
+  .path-reset-button,
+  .path-recommendation,
+  .button-row,
+  .import-field,
+  .form-status,
+  #sc-status,
+  .progress-bar {
+    display: none !important;
+  }
+}
+
+/* The hidden attribute must always win over component display values. */
+[hidden] {
+  display: none !important;
+}
