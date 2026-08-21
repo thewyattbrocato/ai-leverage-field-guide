@@ -96,6 +96,99 @@
       </div>
     </section>
 
+    <section class="section" id="stop-condition-builder" aria-labelledby="builder-title">
+      <h2 class="section-title" id="builder-title">Stop Condition Builder</h2>
+      <p>Fill this out <strong>before</strong> you run the prompt. It takes two minutes and saves the loop from drifting.</p>
+
+      <form id="stop-condition-form" novalidate class="sc-form">
+        <div class="form-field">
+          <label for="sc-work-type">Work type <span class="required-marker" aria-hidden="true">*</span><span class="sr-only">(required)</span></label>
+          <select id="sc-work-type" name="work-type" required aria-describedby="sc-work-type-error sc-work-type-hint">
+            <option value="">Select a work type…</option>
+          </select>
+          <p class="field-hint" id="sc-work-type-hint">Pick what kind of output you are producing.</p>
+          <p class="field-error" id="sc-work-type-error" hidden></p>
+        </div>
+
+        <div class="form-field">
+          <label for="sc-outcome">Intended outcome <span class="required-marker" aria-hidden="true">*</span><span class="sr-only">(required)</span></label>
+          <input type="text" id="sc-outcome" name="outcome" required aria-describedby="sc-outcome-error sc-outcome-hint"
+                 placeholder="e.g., A weekly status update my manager can forward without edits">
+          <p class="field-hint" id="sc-outcome-hint">What should exist when this work is done?</p>
+          <p class="field-error" id="sc-outcome-error" hidden></p>
+        </div>
+
+        <div class="form-field">
+          <label for="sc-evidence">Evidence required <span class="required-marker" aria-hidden="true">*</span><span class="sr-only">(required)</span></label>
+          <textarea id="sc-evidence" name="evidence" rows="3" required aria-describedby="sc-evidence-error sc-evidence-hint"
+                    placeholder="One observable check per line, e.g., Every number traces to a ticket"></textarea>
+          <p class="field-hint" id="sc-evidence-hint">What could someone else verify without reading your mind? One item per line.</p>
+          <p class="field-error" id="sc-evidence-error" hidden></p>
+        </div>
+
+        <div class="form-field">
+          <label for="sc-failure-condition">Clear failure condition <span class="required-marker" aria-hidden="true">*</span><span class="sr-only">(required)</span></label>
+          <textarea id="sc-failure-condition" name="failure-condition" rows="2" required aria-describedby="sc-failure-condition-error sc-failure-condition-hint"
+                    placeholder="e.g., Any number cannot be traced to a source document"></textarea>
+          <p class="field-hint" id="sc-failure-condition-hint">What clearly FAILS this? If nothing can fail it, it's not a stop condition.</p>
+          <p class="field-error" id="sc-failure-condition-error" hidden></p>
+        </div>
+
+        <div class="form-field">
+          <label for="sc-real-risk">Real risk <span class="required-marker" aria-hidden="true">*</span><span class="sr-only">(required)</span></label>
+          <textarea id="sc-real-risk" name="real-risk" rows="2" required aria-describedby="sc-real-risk-error sc-real-risk-hint"
+                    placeholder="e.g., An untraced number triggers a compliance review"></textarea>
+          <p class="field-hint" id="sc-real-risk-hint">What actually goes wrong if you ship bad work here? Not a proxy metric.</p>
+          <p class="field-error" id="sc-real-risk-error" hidden></p>
+        </div>
+
+        <div class="button-row no-print">
+          <button type="submit" class="button button--primary">Generate stop condition</button>
+          <button type="button" class="button button--secondary" data-action="clear-builder">Clear</button>
+        </div>
+      </form>
+
+      <p class="form-status" id="sc-status" role="status" hidden></p>
+
+      <div class="sc-output-region" id="sc-output-region" hidden>
+        <h3>Your stop condition (Markdown)</h3>
+        <label for="sc-output" class="sr-only">Generated stop condition in Markdown</label>
+        <textarea id="sc-output" class="sc-output" readonly rows="18" wrap="soft"></textarea>
+        <div class="button-row no-print">
+          <button type="button" class="button button--primary" id="sc-copy">Copy Markdown</button>
+          <button type="button" class="button" id="sc-download">Download Markdown</button>
+        </div>
+      </div>
+
+      <noscript>
+        <p class="noscript-note">The builder needs JavaScript. Everything it produces, you can do by hand: write your intended outcome, observable evidence, a clear fail condition, and the real risk — then check your work against the Final Checklist below.</p>
+      </noscript>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Starter Template</h2>
+      <p>A blank stop condition to adapt by hand or paste into your notes:</p>
+      <pre class="code-block" data-copyable id="stop-condition-template" role="region" aria-label="Blank stop condition template, scrollable" tabindex="0"><code># Stop condition — [work type]
+
+## Intended outcome
+[What should exist when this work is done]
+
+## Evidence required (observable)
+- [Check someone else could verify]
+- [Check someone else could verify]
+
+## Clear failure condition (falsifiable)
+This FAILS if:
+- [Condition that clearly fails the work]
+
+## Real risk
+What actually goes wrong if this ships bad:
+- [Consequence, not a proxy metric]</code></pre>
+      <div class="button-row no-print">
+        <button type="button" class="button copy-button no-print" data-copy-target="#stop-condition-template" data-copy-success="Blank template copied to clipboard.">Copy blank template</button>
+      </div>
+    </section>
+
     <section class="section">
       <h2 class="section-title">Good Examples</h2>
       <p>These pass all three criteria:</p>
@@ -253,9 +346,11 @@
     <div class="footer-links">
       <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/blob/main/LICENSE" target="_blank" rel="noopener">License: CC-BY-4.0</a>
       <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide" target="_blank" rel="noopener">Repository</a>
-      <a href="../../CONTRIBUTING.md">Contributing</a>
+      <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/issues/new" target="_blank" rel="noopener">Suggest an improvement</a>
+      <a href="https://github.com/thewyattbrocato/ai-leverage-field-guide/blob/main/CONTRIBUTING.md">Contributing</a>
     </div>
     <p>AI Leverage Field Guide — More leverage, not more AI.</p>
   </footer>
+  <script src="script.js"></script>
 </body>
 </html>
