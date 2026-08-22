@@ -358,6 +358,24 @@ async function testStopConditionBuilder(browser) {
     setextOutput.includes("\\=== not a setext heading"),
     "Leading '===' in outcome is escaped so it is not a setext heading"
   );
+
+  // m14: a leading code-fence marker ("```" or "~~~") in free text is escaped
+  // so it cannot open a code block and swallow the rest of the generated
+  // document as literal code when pasted into another Markdown renderer.
+  await page.fill("#sc-outcome", "```js\nconst x = 1;");
+  await page.click('#stop-condition-form button[type="submit"]');
+  const fenceOutput = await page.inputValue("#sc-output");
+  assert(
+    fenceOutput.includes("\\```js") && !/^```js/m.test(fenceOutput),
+    "Leading '```' in outcome is escaped so it is not a code fence"
+  );
+  await page.fill("#sc-outcome", "~~~ not a tilde fence");
+  await page.click('#stop-condition-form button[type="submit"]');
+  const tildeOutput = await page.inputValue("#sc-output");
+  assert(
+    tildeOutput.includes("\\~~~ not a tilde fence"),
+    "Leading '~~~' in outcome is escaped so it is not a tilde fence"
+  );
   await page.fill("#sc-outcome", "A status update my manager can forward unedited");
   await page.click('#stop-condition-form button[type="submit"]');
 

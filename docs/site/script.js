@@ -488,13 +488,15 @@
     }
 
     /* User free-text may start a line with Markdown block metacharacters
-        ("#" heading, ">" blockquote, "-" / "*" / "_" horizontal rule,
-        "=" setext heading) that a downstream renderer would re-interpret and
-        corrupt the document (this bites the unprefixed fields, e.g. the
-        intended-outcome, most directly). Escape the leading character so the
-        generated Markdown is safe to paste anywhere as literal text. */
+         ("#" heading, ">" blockquote, "-" / "*" / "_" horizontal rule,
+         "=" setext heading) that a downstream renderer would re-interpret and
+         corrupt the document (this bites the unprefixed fields, e.g. the
+         intended-outcome, most directly). A leading "`" or "~" would likewise
+         open a code fence and swallow every following line as literal code, so
+         it is escaped on the same footing. Escape the leading character so the
+         generated Markdown is safe to paste anywhere as literal text. */
     function escapeMarkdownLineStart(text) {
-      return String(text).replace(/^([#>*_=+\-])/, "\\$1");
+      return String(text).replace(/^([#>*_=+\-`~])/, "\\$1");
     }
 
     function buildMarkdown(values) {
