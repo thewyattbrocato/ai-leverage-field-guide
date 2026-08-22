@@ -110,25 +110,18 @@ async function testPathSelection(browser) {
     "Derived display does not create progress storage"
   );
 
-  // F2: a manual uncheck of the derived role-track box must snap back to
-  // checked, keep the summary at 1 of 8, and never persist a role-track id.
-  await page.locator("#milestone-role-track-selected").click();
+  // F2: the derived role-track checkbox is non-interactive — a user cannot
+  // toggle it, so the storage boundary is enforced in the UI itself: the
+  // checkbox can never be left in a conflicting state or persisted as a
+  // user milestone. Its checked state is owned solely by the path key.
+  const roleTrack = page.locator("#milestone-role-track-selected");
   assert(
-    await page.locator("#milestone-role-track-selected").isChecked(),
-    "Manual uncheck of derived role-track snaps back to checked"
-  );
-  const summaryAfterUncheck = (await page.locator("[data-progress-summary]").textContent()).trim();
-  assert(
-    summaryAfterUncheck === "1 of 8 complete (13%)",
-    `Summary stays 1 of 8 after uncheck attempt (got: "${summaryAfterUncheck}")`
-  );
-  const storageAfterUncheck = await page.evaluate(
-    () => window.localStorage.getItem("ai-leverage-field-guide:progress:v1")
+    await roleTrack.isDisabled(),
+    "Derived role-track checkbox is non-interactive (cannot be toggled by the user)"
   );
   assert(
-    storageAfterUncheck === null ||
-      !JSON.parse(storageAfterUncheck).milestones["role-track-selected"],
-    "No role-track entry persisted after uncheck attempt"
+    !(await roleTrack.isEditable()),
+    "Derived role-track checkbox cannot be edited by the user"
   );
   await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
 
