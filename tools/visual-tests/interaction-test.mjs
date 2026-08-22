@@ -418,6 +418,36 @@ async function testProgressTracking(browser) {
   assert(v99Message.includes("unsupported format version"), `Unsupported version rejected: "${v99Message}"`);
   assert(await page.locator("#milestone-leverage-map").isChecked(), "State unchanged after unsupported version import");
 
+  // 9b. Non-numeric string versions are still rejected (strict elsewhere)
+  const tmpBadVersion = "/tmp/alfg-bad-version.json";
+  fs.writeFileSync(
+    tmpBadVersion,
+    JSON.stringify({ schemaVersion: "two", milestones: [{ id: "leverage-map", complete: true }] })
+  );
+  await page.setInputFiles("#progress-import", tmpBadVersion);
+  await page.waitForTimeout(300);
+  const badVersionMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    badVersionMessage.includes("unsupported format version"),
+    `Non-numeric string version rejected: "${badVersionMessage}"`
+  );
+
+  // 9c. Numeric-equivalent string version ("1") is accepted (C1)
+  const tmpStrVersion = "/tmp/alfg-string-version.json";
+  fs.writeFileSync(
+    tmpStrVersion,
+    JSON.stringify({
+      schemaVersion: "1",
+      milestones: [{ id: "loop-three-runs", label: "Leverage Loop run three times", complete: true }],
+    })
+  );
+  await page.setInputFiles("#progress-import", tmpStrVersion);
+  await page.waitForTimeout(300);
+  assert(
+    await page.locator("#milestone-loop-three-runs").isChecked(),
+    "Import with schemaVersion \"1\" (string) applies milestones"
+  );
+
   // Unknown milestone id rejected too
   const tmpUnknown = "/tmp/alfg-unknown.json";
   fs.writeFileSync(

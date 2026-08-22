@@ -671,10 +671,19 @@
             return;
           }
 
-          if (imported.schemaVersion !== SCHEMA_VERSION) {
+          /* Accept numeric-equivalent strings ("1") for data-portability
+             while keeping every other validation strict. */
+          var importVersion = imported.schemaVersion;
+          var versionSupported =
+            importVersion === SCHEMA_VERSION ||
+            (typeof importVersion === "string" &&
+              importVersion.trim() !== "" &&
+              Number(importVersion) === SCHEMA_VERSION);
+
+          if (!versionSupported) {
             progressMessage(
               "Import failed: unsupported format version (" +
-                (imported.schemaVersion === undefined ? "missing" : imported.schemaVersion) +
+                (importVersion === undefined ? "missing" : importVersion) +
                 "). Expected version " + SCHEMA_VERSION + ". No changes were made.",
               true
             );
