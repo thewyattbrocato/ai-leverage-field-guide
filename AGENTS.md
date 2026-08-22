@@ -35,3 +35,9 @@ TEST_BASE_URL=http://127.0.0.1:4173 \
 - Import accepts `schemaVersion` as number 1 or string "1" only; every other validation stays strict.
 - The reading catalog lives at `docs/reading.md` (moved from root `READING.md`); `docs/library.md` is the curated shortlist and the two cross-link. Link text saying "READING.md" is correct — it matches the target's H1.
 - AI-assistance attribution footers were removed from all markdown docs; do not reintroduce them.
+- Schema-version checking has ONE source of truth: `isSupportedSchemaVersion()` in script.js, used by both storage reads (`readNamespacedJson`) and import. Never inline a version comparison elsewhere.
+- Each page must expose exactly one live region: builder → `#sc-status`, curriculum → `#progress-message`, all others → the single shared `#alfg-live-status` fallback. `announce()` routes through `getPrimaryLiveRegion()` and reveals hidden regions; do not add new `aria-live` attributes or second regions to any page.
+- The derived-milestone exclusion (`isDerivedMilestone()`) is the single source of truth for the storage boundary — collect, export, import (compact + array), and restore all filter through it. Exports omit derived milestones entirely; an import containing ONLY derived milestones is a deliberate no-op that writes no progress key.
+- The "role-track-selected" checkbox ships `disabled` in HTML (its state is owned by the path key); do not make it interactive.
+- Builder free-text is escaped at line start via `escapeMarkdownLineStart()` (leading `# > * _ = + - \` ~`) so generated Markdown cannot be reinterpreted as structure when pasted into another renderer.
+- Copy buttons capture their real label once at init; feedback timers always restore from that captured value so double-clicks within the 2s window cannot strand the button on "Copied ✓". Clipboard flows restore focus to the triggering control (the execCommand fallback can drop focus to `<body>`).
