@@ -520,10 +520,26 @@ async function testCopyFallback(browser) {
   assert(buttonLabel.includes("Copied"), "Copy button confirms visually");
   await normalContext.close();
 
-  // Fallback flow: remove navigator.clipboard entirely
+  // Fallback flow: remove navigator.clipboard entirely and record what
+  // document.execCommand("copy") actually copies, so success is verified
+  // by content rather than by feedback text alone.
   const fallbackContext = await browser.newContext();
   await fallbackContext.addInitScript(() => {
     Object.defineProperty(navigator, "clipboard", { get: () => undefined });
+    const nativeExecCommand = Document.prototype.execCommand;
+    window.__execCopiedText = null;
+    Document.prototype.execCommand = function (command) {
+      if (command === "copy") {
+        const active = document.activeElement;
+        if (active && (active.tagName === "TEXTAREA" || active.tagName === "INPUT")) {
+          window.__execCopiedText = String(active.value).slice(
+            active.selectionStart || 0,
+            active.selectionEnd || active.value.length
+          );
+        }
+      }
+      return nativeExecCommand.apply(this, arguments);
+    };
   });
   const fallbackPage = await fallbackContext.newPage();
   await fallbackPage.goto(`${BASE_URL}/curriculum.html`, { waitUntil: "networkidle" });
@@ -536,8 +552,17 @@ async function testCopyFallback(browser) {
     return region ? region.textContent : "(missing)";
   });
   assert(
-    feedbackText.includes("copied") || feedbackText.includes("Copy failed"),
-    `Understandable feedback after fallback attempt: "${feedbackText}"`
+    feedbackText.includes("copied") && !feedbackText.includes("Copy failed"),
+    `Fallback copy reports success: "${feedbackText}"`
+  );
+  const execCopied = await fallbackPage.evaluate(() => window.__execCopiedText);
+  assert(
+    typeof execCopied === "string" && execCopied.includes("Track Retrospective"),
+    "execCommand fallback placed real template content on the clipboard"
+  );
+  assert(
+    execCopied.includes("What changes in my workflow next week?"),
+    "Fallback copy content is complete, not truncated"
   );
   await fallbackContext.close();
 }
