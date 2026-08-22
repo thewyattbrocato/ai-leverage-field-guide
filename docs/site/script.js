@@ -88,8 +88,14 @@
     return getLiveRegion();
   }
 
-  function announce(message) {
+  function announce(message, isError) {
     var region = getPrimaryLiveRegion();
+    var hasPageStatusStyle = region.id === "sc-status" || region.id === "progress-message";
+    if (hasPageStatusStyle) {
+      region.classList.toggle("form-status", region.id === "sc-status" || !isError);
+      region.classList.toggle("form-status--error", region.id === "sc-status" && Boolean(isError));
+      region.classList.toggle("field-error", region.id === "progress-message" && Boolean(isError));
+    }
     /* Reveal the region if it was hidden: on the curriculum (#progress-message)
        and builder (#sc-status) pages the single live region ships hidden and is
        only shown by setStatus(), so copy-button announcements that route here
@@ -266,9 +272,12 @@
           savedAt: new Date().toISOString(),
         });
         if (options && options.announceSelection) {
-          announce(saved
-            ? data.label + " path saved in this browser."
-            : "Path set to " + data.label + ", but this browser blocked saving.");
+          announce(
+            saved
+              ? data.label + " path saved in this browser."
+              : "Path set to " + data.label + ", but this browser blocked saving.",
+            !saved
+          );
         }
       }
     }
@@ -286,7 +295,7 @@
       if (resetButton) resetButton.hidden = true;
       if (savedNote) savedNote.hidden = true;
       if (!options || !options.silent) {
-        announce("Path selection cleared.");
+        announce("Path selection cleared.", false);
       }
       /* Return focus into the picker (not the now-hidden reset button) so
          keyboard users stay oriented. */
@@ -974,7 +983,7 @@
         var successMessage = button.getAttribute("data-copy-success") || "Copied to clipboard.";
 
         copyTextToClipboard(sourceText).then(function (ok) {
-          announce(ok ? successMessage : "Copy failed — select the text and copy it manually.");
+          announce(ok ? successMessage : "Copy failed — select the text and copy it manually.", !ok);
           button.classList.add(ok ? "is-copied" : "is-error");
           button.textContent = ok ? "Copied ✓" : "Copy failed";
           /* The execCommand fallback appends and removes an off-screen textarea,

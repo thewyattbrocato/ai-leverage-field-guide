@@ -1161,6 +1161,11 @@ async function testSingleLiveRegion(browser) {
 
   // stop-conditions.html: template copy must route through #sc-status, never spawn #alfg-live-status
   await page.goto(`${BASE_URL}/stop-conditions.html`, { waitUntil: "networkidle" });
+  await page.click("#sc-copy");
+  assert(
+    await page.locator("#sc-status").evaluate((el) => el.classList.contains("form-status--error")),
+    "stop-conditions.html empty output copy marks #sc-status as an error"
+  );
   await page.click('[data-copy-target="#stop-condition-template"]');
   await page.waitForTimeout(120);
   assert(
@@ -1181,6 +1186,10 @@ async function testSingleLiveRegion(browser) {
   assert(
     !(await page.locator("#sc-status").isHidden()),
     "stop-conditions.html copy reveals #sc-status (in the a11y tree) so screen readers announce it"
+  );
+  assert(
+    !(await page.locator("#sc-status").evaluate((el) => el.classList.contains("form-status--error"))),
+    "stop-conditions.html template copy clears stale error styling from #sc-status"
   );
 
   await context.close();
