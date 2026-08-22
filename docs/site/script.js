@@ -68,8 +68,19 @@
     return region;
   }
 
+  /* The whole page must use a single live channel. Pages that already own a
+     status region (the builder's #sc-status, the curriculum's
+     #progress-message) reuse it; only pages without one fall back to the
+     shared #alfg-live-status element, which is therefore created at most once
+     per page. This prevents a second live region from spawning double speech. */
+  function getPrimaryLiveRegion() {
+    var existing = document.querySelector("#sc-status, #progress-message");
+    if (existing) return existing;
+    return getLiveRegion();
+  }
+
   function announce(message) {
-    var region = getLiveRegion();
+    var region = getPrimaryLiveRegion();
     region.textContent = "";
     window.setTimeout(function () {
       region.textContent = message;

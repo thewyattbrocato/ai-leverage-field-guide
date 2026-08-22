@@ -698,8 +698,10 @@ async function testCopyFallback(browser) {
   await fallbackPage.waitForTimeout(200);
   // With clipboard unavailable, execCommand fallback should succeed silently;
   // at minimum the page must not throw and feedback must be understandable.
+  // The curriculum page routes copy announcements through its single live
+  // region (#progress-message) — never a second #alfg-live-status region.
   const feedbackText = await fallbackPage.evaluate(() => {
-    const region = document.getElementById("alfg-live-status");
+    const region = document.getElementById("progress-message");
     return region ? region.textContent : "(missing)";
   });
   assert(
@@ -798,6 +800,90 @@ async function testJavaScriptDisabled(browser) {
 }
 
 /* ==================================================================== *
+ * E2. Single live region per page
+ * Each page must expose exactly one live region. The builder owns
+ * #sc-status, the curriculum owns #progress-message, and the remaining
+ * pages fall back to a single shared #alfg-live-status element. A second
+ * region would make screen readers speak the same message twice.
+ * ==================================================================== */
+
+async function countLiveRegions(page) {
+  return page.evaluate(
+    () => document.querySelectorAll('[role="status"], [aria-live]').length
+  );
+}
+
+async function testSingleLiveRegion(browser) {
+  console.log("\n=== E2. Single live region per page ===");
+  const context = await browser.newContext();
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  const page = await context.newPage();
+
+  // index.html: selecting a path announces via #alfg-live-status (single region)
+  await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
+  await page.locator('[data-path-option="manager"]').click();
+  await page.waitForTimeout(120);
+  assert(
+    (await countLiveRegions(page)) === 1,
+    "index.html exposes exactly one live region after path select"
+  );
+  assert(
+    await page.locator("#alfg-live-status").count() === 1 &&
+      (await page.locator("#sc-status").count()) === 0 &&
+      (await page.locator("#progress-message").count()) === 0,
+    "index.html uses the shared #alfg-live-status region only"
+  );
+  await page.locator("[data-path-reset]").click();
+
+  // leverage-loop.html: template copy announces via #alfg-live-status (single region)
+  await page.goto(`${BASE_URL}/leverage-loop.html`, { waitUntil: "networkidle" });
+  await page.click('[data-copy-target="#correction-prompt-template"]');
+  await page.waitForTimeout(120);
+  assert(
+    (await countLiveRegions(page)) === 1,
+    "leverage-loop.html exposes exactly one live region after copy"
+  );
+
+  // curriculum.html: copy must route through #progress-message, never spawn #alfg-live-status
+  await page.goto(`${BASE_URL}/curriculum.html`, { waitUntil: "networkidle" });
+  await page.click('[data-copy-target="#retrospective-template"]');
+  await page.waitForTimeout(120);
+  assert(
+    (await countLiveRegions(page)) === 1,
+    "curriculum.html keeps exactly one live region after copy"
+  );
+  assert(
+    (await page.locator("#alfg-live-status").count()) === 0,
+    "curriculum.html does not spawn a second #alfg-live-status region"
+  );
+  const curriculumLive = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    curriculumLive.toLowerCase().includes("copied"),
+    `curriculum.html announces copy via #progress-message (got: "${curriculumLive}")`
+  );
+
+  // stop-conditions.html: template copy must route through #sc-status, never spawn #alfg-live-status
+  await page.goto(`${BASE_URL}/stop-conditions.html`, { waitUntil: "networkidle" });
+  await page.click('[data-copy-target="#stop-condition-template"]');
+  await page.waitForTimeout(120);
+  assert(
+    (await countLiveRegions(page)) === 1,
+    "stop-conditions.html keeps exactly one live region after copy"
+  );
+  assert(
+    (await page.locator("#alfg-live-status").count()) === 0,
+    "stop-conditions.html does not spawn a second #alfg-live-status region"
+  );
+  const builderLive = (await page.locator("#sc-status").textContent()).trim();
+  assert(
+    builderLive.toLowerCase().includes("copied"),
+    `stop-conditions.html announces copy via #sc-status (got: "${builderLive}")`
+  );
+
+  await context.close();
+}
+
+/* ==================================================================== *
  * F. Storage privacy
  * ==================================================================== */
 
@@ -868,6 +954,7 @@ try {
   await testProgressTracking(browser);
   await testCopyFallback(browser);
   await testJavaScriptDisabled(browser);
+  await testSingleLiveRegion(browser);
   await testStoragePrivacy(browser);
 } finally {
   await browser.close();
