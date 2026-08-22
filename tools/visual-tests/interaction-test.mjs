@@ -68,6 +68,11 @@ async function testPathSelection(browser) {
   const nextStepText = await page.locator("[data-rec-next-step]").textContent();
   assert(nextStepText.length > 10, "Next step text present");
 
+  // P2: the recommendation echoes the chosen role so users can confirm the
+  // selection at a glance (and screen-reader users reading the panel hear it).
+  const roleEcho = (await page.locator("[data-rec-role]").textContent()).trim();
+  assert(roleEcho === "Manager", `Recommendation echoes chosen role (got: "${roleEcho}")`);
+
   // M1: selecting a path writes only the path key; progress storage stays
   // untouched until the user actually checks a curriculum milestone.
   const keysAfterSelect = await page.evaluate(() => Object.keys(window.localStorage));
@@ -191,6 +196,8 @@ async function testPathSelection(browser) {
   await page.locator('[data-path-option="operator"]').click();
   const operatorHref = await page.locator("[data-rec-guide-link]").getAttribute("href");
   assert(operatorHref === "stop-conditions.html", "Operator path recommends Stop Conditions");
+  const operatorRoleEcho = (await page.locator("[data-rec-role]").textContent()).trim();
+  assert(operatorRoleEcho === "Operator", `Recommendation echoes switched role (got: "${operatorRoleEcho}")`);
 
   // P1: the radiogroup exposes ARIA relationships so assistive tech knows the
   // selection controls the recommendation panel and is described by the hint.

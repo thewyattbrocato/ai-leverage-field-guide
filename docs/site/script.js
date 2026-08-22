@@ -203,6 +203,7 @@
     var recommendation = root.querySelector("[data-path-recommendation]");
     var resetButton = root.querySelector("[data-path-reset]");
     var guideLink = root.querySelector("[data-rec-guide-link]");
+    var roleTarget = root.querySelector("[data-rec-role]");
     var outcomeTarget = root.querySelector("[data-rec-outcome]");
     var nextStepTarget = root.querySelector("[data-rec-next-step]");
     var savedNote = root.querySelector("[data-rec-saved-note]");
@@ -232,9 +233,10 @@
       });
       setRovingTabindex(selectedIndex);
 
-      if (recommendation && guideLink && outcomeTarget && nextStepTarget) {
+      if (recommendation && guideLink && roleTarget && outcomeTarget && nextStepTarget) {
         guideLink.href = data.guide.href;
         guideLink.textContent = data.guide.title;
+        roleTarget.textContent = data.label;
         outcomeTarget.textContent = data.outcome;
         nextStepTarget.textContent = data.nextStep;
         recommendation.hidden = false;
