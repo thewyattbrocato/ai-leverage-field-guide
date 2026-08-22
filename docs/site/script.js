@@ -220,7 +220,6 @@
           selectedPath: pathId,
           savedAt: new Date().toISOString(),
         });
-        if (saved) markMilestoneComplete("role-track-selected", { silent: true });
         if (options && options.announceSelection) {
           announce(saved
             ? data.label + " path saved in this browser."
@@ -277,7 +276,9 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * Shared milestone marking (progress storage), used by path picker.
+   * Shared milestone marking (progress storage).
+   * The path picker never writes progress; the curriculum page derives
+   * "role track selected" from the path key at display time instead.
    * ------------------------------------------------------------------ */
 
   var MILESTONES = [
@@ -304,36 +305,26 @@
     return data;
   }
 
-  function markMilestoneComplete(id, options) {
-    if (!milestoneExists(id)) return false;
-    var existing = readProgressData();
-    var milestones = {};
-    if (existing && existing.milestones) {
-      Object.keys(existing.milestones).forEach(function (key) {
-        if (milestoneExists(key) && existing.milestones[key] === true) {
-          milestones[key] = true;
-        }
-      });
-    }
-    milestones[id] = true;
-    var saved = writeNamespacedJson(PROGRESS_KEY, {
-      schemaVersion: SCHEMA_VERSION,
-      milestones: milestones,
-    });
-    if (saved) {
-      syncProgressCheckboxes(milestones);
-    }
-    return saved;
+  /* "Role track selected" is derived, never stored by the picker: it is
+     true whenever the path key holds a known selection. */
+  function pathSelectionActive() {
+    var storedPath = readNamespacedJson(PATH_KEY);
+    return Boolean(
+      storedPath &&
+        Object.prototype.hasOwnProperty.call(PATHS, storedPath.selectedPath)
+    );
   }
 
-  /* No-op unless the curriculum page is the one calling (checkboxes exist). */
-  function syncProgressCheckboxes(milestones) {
-    var checkboxes = document.querySelectorAll("[data-progress-tracker] [data-milestone-id]");
-    if (!checkboxes.length) return;
+  function applyDerivedRoleTrack(checkboxes) {
+    if (!pathSelectionActive()) return false;
+    var applied = false;
     Array.prototype.forEach.call(checkboxes, function (checkbox) {
-      checkbox.checked = milestones[checkbox.getAttribute("data-milestone-id")] === true;
+      if (checkbox.getAttribute("data-milestone-id") === "role-track-selected") {
+        checkbox.checked = true;
+        applied = true;
+      }
     });
-    updateProgressSummary();
+    return applied;
   }
 
   /* ------------------------------------------------------------------ *
@@ -732,6 +723,7 @@
             checkbox.checked = isDone;
             if (isDone) applied[id] = true;
           });
+          applyDerivedRoleTrack(checkboxes);
 
           writeNamespacedJson(PROGRESS_KEY, {
             schemaVersion: SCHEMA_VERSION,
@@ -765,12 +757,14 @@
         checkboxes.forEach(function (checkbox) {
           checkbox.checked = false;
         });
+        applyDerivedRoleTrack(checkboxes);
         updateProgressSummary();
         progressMessage("Progress cleared from this browser.", false);
       });
     }
 
-    /* Restore previously saved progress on load. */
+    /* Restore previously saved progress on load. The derived role-track
+       milestone is overlaid from the path key, not read from storage. */
     var stored = readProgressData();
     if (stored) {
       checkboxes.forEach(function (checkbox) {
@@ -778,6 +772,7 @@
         checkbox.checked = stored.milestones[id] === true;
       });
     }
+    applyDerivedRoleTrack(checkboxes);
     updateProgressSummary();
   }
 

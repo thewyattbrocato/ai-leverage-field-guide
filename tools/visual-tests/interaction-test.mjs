@@ -68,6 +68,18 @@ async function testPathSelection(browser) {
   const nextStepText = await page.locator("[data-rec-next-step]").textContent();
   assert(nextStepText.length > 10, "Next step text present");
 
+  // M1: selecting a path writes only the path key; progress storage stays
+  // untouched until the user actually checks a curriculum milestone.
+  const keysAfterSelect = await page.evaluate(() => Object.keys(window.localStorage));
+  assert(
+    keysAfterSelect.includes("ai-leverage-field-guide:path:v1"),
+    "Path selection saves the path key"
+  );
+  assert(
+    !keysAfterSelect.includes("ai-leverage-field-guide:progress:v1"),
+    "Path selection does not write progress storage"
+  );
+
   await page.screenshot({ path: path.join(SHOT_DIR, "interaction-path-selected.png"), fullPage: false });
   console.log("screenshot: artifacts/screenshots/interaction-path-selected.png");
 
@@ -79,6 +91,25 @@ async function testPathSelection(browser) {
     await page.locator("[data-path-recommendation]").isVisible(),
     "Recommendation restored after reload"
   );
+
+  // M1: curriculum derives "Role track selected" from the path key at
+  // display time without creating progress storage.
+  await page.goto(`${BASE_URL}/curriculum.html`, { waitUntil: "networkidle" });
+  assert(
+    await page.locator("#milestone-role-track-selected").isChecked(),
+    "Curriculum shows role-track milestone derived from path selection"
+  );
+  const summaryWithPath = (await page.locator("[data-progress-summary]").textContent()).trim();
+  assert(
+    summaryWithPath === "1 of 8 complete (13%)",
+    `Derived role-track milestone counts once (got: "${summaryWithPath}")`
+  );
+  const keysOnCurriculum = await page.evaluate(() => Object.keys(window.localStorage));
+  assert(
+    !keysOnCurriculum.includes("ai-leverage-field-guide:progress:v1"),
+    "Derived display does not create progress storage"
+  );
+  await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
 
   // 5-6. Reset clears storage and visible state
   await page.locator("[data-path-reset]").click();
@@ -101,6 +132,19 @@ async function testPathSelection(browser) {
     () => document.activeElement && document.activeElement.getAttribute("data-path-option")
   );
   assert(focusedAfterReset === "manager", "Reset returns keyboard focus to first path option");
+
+  // M1: after clearing the path, the derived curriculum milestone clears too.
+  await page.goto(`${BASE_URL}/curriculum.html`, { waitUntil: "networkidle" });
+  assert(
+    !(await page.locator("#milestone-role-track-selected").isChecked()),
+    "Clearing the path clears the derived role-track display"
+  );
+  const summaryAfterClear = (await page.locator("[data-progress-summary]").textContent()).trim();
+  assert(
+    summaryAfterClear === "0 of 8 complete (0%)",
+    `Summary back to zero after path cleared (got: "${summaryAfterClear}")`
+  );
+  await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
 
   // 7. Keyboard-only selection: focus + Space activates the control
   const writerButton = page.locator('[data-path-option="writer"]');
@@ -508,14 +552,39 @@ async function testStoragePrivacy(browser) {
   await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
   await page.locator('[data-path-option="manager"]').click();
 
+  // M1: path selection writes exactly the path key, nothing else.
+  let keys = await page.evaluate(() => Object.keys(window.localStorage));
+  assert(
+    JSON.stringify(keys) === JSON.stringify(["ai-leverage-field-guide:path:v1"]),
+    "Path selection writes exactly one key: path:v1"
+  );
+
+  // Visiting the curriculum derives the role-track display but stores nothing.
   await page.goto(`${BASE_URL}/curriculum.html`, { waitUntil: "networkidle" });
+  assert(
+    await page.locator("#milestone-role-track-selected").isChecked(),
+    "Role-track milestone displayed via derivation"
+  );
+  keys = await page.evaluate(() => Object.keys(window.localStorage));
+  assert(
+    !keys.includes("ai-leverage-field-guide:progress:v1"),
+    "Derived role-track display writes no progress key"
+  );
+
   await page.locator('label[for="milestone-stop-conditions-three"]').click();
+  const progressData = await page.evaluate(
+    () => JSON.parse(window.localStorage.getItem("ai-leverage-field-guide:progress:v1"))
+  );
+  assert(
+    progressData && progressData.milestones["stop-conditions-three"] === true,
+    "Explicit milestone click creates progress storage with that milestone"
+  );
 
   await page.goto(`${BASE_URL}/stop-conditions.html`, { waitUntil: "networkidle" });
   await fillBuilder(page);
   await page.click('#stop-condition-form button[type="submit"]');
 
-  const keys = await page.evaluate(() => Object.keys(window.localStorage));
+  keys = await page.evaluate(() => Object.keys(window.localStorage));
   const unexpectedKeys = keys.filter((key) => !ALLOWED_STORAGE_KEYS.includes(key));
   assert(unexpectedKeys.length === 0, `Only documented keys written (found extra: ${unexpectedKeys.join(", ") || "none"})`);
   assert(
