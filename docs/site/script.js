@@ -764,6 +764,9 @@
           var applied = {};
           checkboxes.forEach(function (checkbox) {
             var id = checkbox.getAttribute("data-milestone-id");
+            /* Derived milestones are never imported or stored: the display
+               is owned solely by the path key (applyDerivedRoleTrack below). */
+            if (id === "role-track-selected") return;
             var isDone = normalized[id] === true;
             checkbox.checked = isDone;
             if (isDone) applied[id] = true;

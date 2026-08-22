@@ -523,6 +523,66 @@ async function testProgressTracking(browser) {
     "Import with schemaVersion \"1\" (string) applies milestones"
   );
 
+  // 9d. A derived milestone inside an import never lands in progress
+  // storage and is never displayed without a path selection (compact form)
+  const tmpDerivedCompact = "/tmp/alfg-derived-compact.json";
+  fs.writeFileSync(
+    tmpDerivedCompact,
+    JSON.stringify({
+      schemaVersion: 1,
+      milestones: { "leverage-map": true, "role-track-selected": true },
+    })
+  );
+  await page.setInputFiles("#progress-import", tmpDerivedCompact);
+  await page.waitForTimeout(300);
+  assert(
+    await page.locator("#milestone-leverage-map").isChecked(),
+    "Compact import applies normal milestones alongside a derived id"
+  );
+  assert(
+    !(await page.locator("#milestone-role-track-selected").isChecked()),
+    "Derived role-track id not displayed from compact import without a path"
+  );
+  let derivedProgress = await page.evaluate(() =>
+    JSON.parse(window.localStorage.getItem("ai-leverage-field-guide:progress:v1"))
+  );
+  assert(
+    derivedProgress.milestones["leverage-map"] === true &&
+      derivedProgress.milestones["role-track-selected"] === undefined,
+    "Compact import persists no role-track entry"
+  );
+
+  // 9e. Same invariant for the array export format
+  const tmpDerivedArray = "/tmp/alfg-derived-array.json";
+  fs.writeFileSync(
+    tmpDerivedArray,
+    JSON.stringify({
+      schemaVersion: 1,
+      milestones: [
+        { id: "loop-three-runs", label: "Leverage Loop run three times", complete: true },
+        { id: "role-track-selected", label: "Role track selected", complete: true },
+      ],
+    })
+  );
+  await page.setInputFiles("#progress-import", tmpDerivedArray);
+  await page.waitForTimeout(300);
+  assert(
+    await page.locator("#milestone-loop-three-runs").isChecked(),
+    "Array import applies normal milestones alongside a derived id"
+  );
+  assert(
+    !(await page.locator("#milestone-role-track-selected").isChecked()),
+    "Derived role-track id not displayed from array import without a path"
+  );
+  derivedProgress = await page.evaluate(() =>
+    JSON.parse(window.localStorage.getItem("ai-leverage-field-guide:progress:v1"))
+  );
+  assert(
+    derivedProgress.milestones["loop-three-runs"] === true &&
+      derivedProgress.milestones["role-track-selected"] === undefined,
+    "Array import persists no role-track entry"
+  );
+
   // Unknown milestone id rejected too
   const tmpUnknown = "/tmp/alfg-unknown.json";
   fs.writeFileSync(
