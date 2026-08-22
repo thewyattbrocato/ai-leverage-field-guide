@@ -393,6 +393,32 @@ async function testStopConditionBuilder(browser) {
     "Clear does not double-announce via the shared live region"
   );
 
+  // m11: Clear returns keyboard focus to the first field (work type) so
+  // keyboard and screen-reader users re-enter the form at its start, not
+  // stranded on a now-hidden control.
+  const focusedAfterClear = await page.evaluate(
+    () => document.activeElement && document.activeElement.id
+  );
+  assert(
+    focusedAfterClear === "sc-work-type",
+    `Clear restores focus to the work-type field (got: ${focusedAfterClear})`
+  );
+
+  // m12: after JS initializes the builder, the Generate/Clear buttons are
+  // enabled (they ship disabled so no-JS users cannot submit or reload) and
+  // the work-type select is populated from the shared WORK_TYPES list.
+  const generateEnabled = await page
+    .locator('#stop-condition-form button[type="submit"]')
+    .isEnabled();
+  assert(generateEnabled, "Generate button is enabled after JS init");
+  const clearEnabled = await page.locator('[data-action="clear-builder"]').isEnabled();
+  assert(clearEnabled, "Clear button is enabled after JS init");
+  const workTypeOptions = await page.locator("#sc-work-type option").count();
+  assert(workTypeOptions >= 6, `Work-type select populated (got ${workTypeOptions} options)`);
+  await page.selectOption("#sc-work-type", "Email or follow-up");
+  const selectedWorkType = await page.inputValue("#sc-work-type");
+  assert(selectedWorkType === "Email or follow-up", "Work-type select accepts a real option");
+
   // 13. No unexpected network requests from the builder
   const unexpected = net.unexpected();
   assert(unexpected.length === 0, `No non-static network requests (found ${unexpected.length})`);
