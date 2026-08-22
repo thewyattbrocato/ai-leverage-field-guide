@@ -54,7 +54,9 @@ The site stores two keys in your browser's `localStorage`:
 }
 ```
 
-**Import:** Choose a JSON file with `schemaVersion: 1` and known milestone ids. Malformed files, unknown versions, or unrecognized milestones are rejected with a readable error and no state change.
+Exports include only user-controlled milestones. The derived `role-track-selected` milestone is recomputed from the path key and never travels in progress files.
+
+**Import:** Choose a JSON file with `schemaVersion: 1` (or the string `"1"`) and known milestone ids. Malformed files, unknown versions, unrecognized milestones, or non-boolean milestone values are rejected with a readable error and no state change. Files containing only derived milestones are treated as a no-op and write no progress key.
 
 ## Tests
 
@@ -67,7 +69,7 @@ python3 -m http.server 4173 --directory docs/site &    # static server
 TEST_BASE_URL=http://127.0.0.1:4173 \
   node tools/visual-tests/visual-test.mjs              # overflow/axe/console/screenshots
 TEST_BASE_URL=http://127.0.0.1:4173 \
-  node tools/visual-tests/interaction-test.mjs         # interactions incl. JS-disabled
+  node tools/visual-tests/interaction-test.mjs         # interactions incl. JS-disabled + clipboard
 ```
 
 Dependencies live in `tools/visual-tests` (`npm install`, then `npx playwright install chromium`).

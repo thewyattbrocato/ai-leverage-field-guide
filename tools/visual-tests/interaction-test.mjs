@@ -68,6 +68,11 @@ async function testPathSelection(browser) {
   const nextStepText = await page.locator("[data-rec-next-step]").textContent();
   assert(nextStepText.length > 10, "Next step text present");
 
+  // P2: the recommendation echoes the chosen role so users can confirm the
+  // selection at a glance (and screen-reader users reading the panel hear it).
+  const roleEcho = (await page.locator("[data-rec-role]").textContent()).trim();
+  assert(roleEcho === "Manager", `Recommendation echoes chosen role (got: "${roleEcho}")`);
+
   // M1: selecting a path writes only the path key; progress storage stays
   // untouched until the user actually checks a curriculum milestone.
   const keysAfterSelect = await page.evaluate(() => Object.keys(window.localStorage));
@@ -110,25 +115,18 @@ async function testPathSelection(browser) {
     "Derived display does not create progress storage"
   );
 
-  // F2: a manual uncheck of the derived role-track box must snap back to
-  // checked, keep the summary at 1 of 8, and never persist a role-track id.
-  await page.locator("#milestone-role-track-selected").click();
+  // F2: the derived role-track checkbox is non-interactive — a user cannot
+  // toggle it, so the storage boundary is enforced in the UI itself: the
+  // checkbox can never be left in a conflicting state or persisted as a
+  // user milestone. Its checked state is owned solely by the path key.
+  const roleTrack = page.locator("#milestone-role-track-selected");
   assert(
-    await page.locator("#milestone-role-track-selected").isChecked(),
-    "Manual uncheck of derived role-track snaps back to checked"
-  );
-  const summaryAfterUncheck = (await page.locator("[data-progress-summary]").textContent()).trim();
-  assert(
-    summaryAfterUncheck === "1 of 8 complete (13%)",
-    `Summary stays 1 of 8 after uncheck attempt (got: "${summaryAfterUncheck}")`
-  );
-  const storageAfterUncheck = await page.evaluate(
-    () => window.localStorage.getItem("ai-leverage-field-guide:progress:v1")
+    await roleTrack.isDisabled(),
+    "Derived role-track checkbox is non-interactive (cannot be toggled by the user)"
   );
   assert(
-    storageAfterUncheck === null ||
-      !JSON.parse(storageAfterUncheck).milestones["role-track-selected"],
-    "No role-track entry persisted after uncheck attempt"
+    !(await roleTrack.isEditable()),
+    "Derived role-track checkbox cannot be edited by the user"
   );
   await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
 
@@ -198,6 +196,24 @@ async function testPathSelection(browser) {
   await page.locator('[data-path-option="operator"]').click();
   const operatorHref = await page.locator("[data-rec-guide-link]").getAttribute("href");
   assert(operatorHref === "stop-conditions.html", "Operator path recommends Stop Conditions");
+  const operatorRoleEcho = (await page.locator("[data-rec-role]").textContent()).trim();
+  assert(operatorRoleEcho === "Operator", `Recommendation echoes switched role (got: "${operatorRoleEcho}")`);
+
+  // P1: the radiogroup exposes ARIA relationships so assistive tech knows the
+  // selection controls the recommendation panel and is described by the hint.
+  const radiogroup = page.locator('[role="radiogroup"]');
+  assert(
+    (await radiogroup.getAttribute("aria-controls")) === "path-recommendation",
+    "Radiogroup declares it controls the recommendation panel"
+  );
+  assert(
+    (await radiogroup.getAttribute("aria-describedby")) === "path-picker-hint",
+    "Radiogroup is described by the picker hint"
+  );
+  assert(
+    (await page.locator("#path-recommendation").count()) === 1,
+    "Recommendation panel carries the controlled id"
+  );
 
   await context.close();
 }
@@ -276,6 +292,21 @@ async function testStopConditionBuilder(browser) {
     "aria-invalid set on invalid field"
   );
 
+  // m15: a field's invalid state is cleared the moment the user edits it, so
+  // the "invalid" signal reflects the current input rather than a stale prior
+  // submit (otherwise a screen-reader user who fixed a value would still hear
+  // "invalid" until the next generate).
+  await page.fill("#sc-outcome", "A real outcome");
+  assert(
+    (await page.locator("#sc-outcome").getAttribute("aria-invalid")) !== "true",
+    "Editing a field clears its stale aria-invalid"
+  );
+  assert(
+    !(await page.locator("#sc-outcome-error").isVisible()),
+    "Editing a field hides its stale error message"
+  );
+  await page.fill("#sc-outcome", "");
+
   // 11. Malicious-looking input stays text, never executes HTML injection
   await fillBuilder(page, { malicious: true });
   await page.click('#stop-condition-form button[type="submit"]');
@@ -297,6 +328,72 @@ async function testStopConditionBuilder(browser) {
   assert(/falsifiable/i.test(output), "Output addresses falsifiable criterion");
   assert(/real risk/i.test(output), "Output addresses real risk criterion");
 
+  // m10: generation moves keyboard focus onto the generated output so
+  // keyboard/screen-reader users land on the result, not the Generate button.
+  const focusedAfterGenerate = await page.evaluate(
+    () => document.activeElement && document.activeElement.id
+  );
+  assert(
+    focusedAfterGenerate === "sc-output",
+    `Generation focuses the output textarea (got: ${focusedAfterGenerate})`
+  );
+
+  // m8: a leading Markdown metacharacter in free text is escaped so the
+  // generated document cannot be reinterpreted as structure (a "#" must not
+  // become a heading, a ">" must not become a blockquote).
+  await page.fill("#sc-outcome", "#1 priority is clarity over length");
+  await page.click('#stop-condition-form button[type="submit"]');
+  const escapedOutput = await page.inputValue("#sc-output");
+  assert(
+    escapedOutput.includes("\\#1 priority is clarity over length"),
+    "Leading '#' in outcome is escaped so it is not a Markdown heading"
+  );
+  assert(
+    !/^#1 priority is clarity over length$/m.test(escapedOutput),
+    "Escaped outcome is not emitted as a raw Markdown heading"
+  );
+  await page.fill("#sc-outcome", "A status update my manager can forward unedited");
+  await page.click('#stop-condition-form button[type="submit"]');
+
+  // m13: leading horizontal-rule / setext markers in free text are escaped so
+  // they cannot be reinterpreted as structure (a "---" must not become an
+  // <hr>, a "===" must not turn the prior line into a setext heading) when the
+  // generated Markdown is pasted into another renderer.
+  await page.fill("#sc-outcome", "--- this looks like a rule");
+  await page.click('#stop-condition-form button[type="submit"]');
+  const hrOutput = await page.inputValue("#sc-output");
+  assert(
+    hrOutput.includes("\\--- this looks like a rule"),
+    "Leading '---' in outcome is escaped so it is not a horizontal rule"
+  );
+  await page.fill("#sc-outcome", "=== not a setext heading");
+  await page.click('#stop-condition-form button[type="submit"]');
+  const setextOutput = await page.inputValue("#sc-output");
+  assert(
+    setextOutput.includes("\\=== not a setext heading"),
+    "Leading '===' in outcome is escaped so it is not a setext heading"
+  );
+
+  // m14: a leading code-fence marker ("```" or "~~~") in free text is escaped
+  // so it cannot open a code block and swallow the rest of the generated
+  // document as literal code when pasted into another Markdown renderer.
+  await page.fill("#sc-outcome", "```js\nconst x = 1;");
+  await page.click('#stop-condition-form button[type="submit"]');
+  const fenceOutput = await page.inputValue("#sc-output");
+  assert(
+    fenceOutput.includes("\\```js") && !/^```js/m.test(fenceOutput),
+    "Leading '```' in outcome is escaped so it is not a code fence"
+  );
+  await page.fill("#sc-outcome", "~~~ not a tilde fence");
+  await page.click('#stop-condition-form button[type="submit"]');
+  const tildeOutput = await page.inputValue("#sc-output");
+  assert(
+    tildeOutput.includes("\\~~~ not a tilde fence"),
+    "Leading '~~~' in outcome is escaped so it is not a tilde fence"
+  );
+  await page.fill("#sc-outcome", "A status update my manager can forward unedited");
+  await page.click('#stop-condition-form button[type="submit"]');
+
   // m1: generation announces through exactly one live region (#sc-status),
   // so the shared transient region must stay silent.
   const sharedLiveText = await page.evaluate(() => {
@@ -316,6 +413,12 @@ async function testStopConditionBuilder(browser) {
   await page.waitForTimeout(200);
   const clip = await page.evaluate(() => navigator.clipboard.readText());
   assert(clip.startsWith("# Stop condition — Status update"), "Copy Markdown puts generated markdown on clipboard");
+  // Copy must leave keyboard focus on the copy button (the execCommand fallback
+  // can otherwise drop it to <body>).
+  const focusAfterCopy = await page.evaluate(
+    () => document.activeElement && document.activeElement.id
+  );
+  assert(focusAfterCopy === "sc-copy", `Copy keeps focus on the copy button (got: ${focusAfterCopy})`);
 
   // 9. Download Markdown
   const [download] = await Promise.all([
@@ -355,6 +458,49 @@ async function testStopConditionBuilder(browser) {
       .evaluate((el) => !el.classList.contains("is-generated")),
     "Clear removes the submit button's generated styling"
   );
+
+  // m9: Clear announces through exactly one live region (#sc-status), so the
+  // shared transient region must stay silent and the builder's own channel
+  // must carry the message.
+  const scStatusText = await page.locator("#sc-status").textContent();
+  assert(
+    scStatusText.trim() === "Builder cleared.",
+    `Clear announces via #sc-status single channel (got: "${scStatusText.trim()}")`
+  );
+  const sharedLiveAfterClear = await page.evaluate(() => {
+    const region = document.getElementById("alfg-live-status");
+    return region ? region.textContent : "";
+  });
+  assert(
+    sharedLiveAfterClear.trim() === "",
+    "Clear does not double-announce via the shared live region"
+  );
+
+  // m11: Clear returns keyboard focus to the first field (work type) so
+  // keyboard and screen-reader users re-enter the form at its start, not
+  // stranded on a now-hidden control.
+  const focusedAfterClear = await page.evaluate(
+    () => document.activeElement && document.activeElement.id
+  );
+  assert(
+    focusedAfterClear === "sc-work-type",
+    `Clear restores focus to the work-type field (got: ${focusedAfterClear})`
+  );
+
+  // m12: after JS initializes the builder, the Generate/Clear buttons are
+  // enabled (they ship disabled so no-JS users cannot submit or reload) and
+  // the work-type select is populated from the shared WORK_TYPES list.
+  const generateEnabled = await page
+    .locator('#stop-condition-form button[type="submit"]')
+    .isEnabled();
+  assert(generateEnabled, "Generate button is enabled after JS init");
+  const clearEnabled = await page.locator('[data-action="clear-builder"]').isEnabled();
+  assert(clearEnabled, "Clear button is enabled after JS init");
+  const workTypeOptions = await page.locator("#sc-work-type option").count();
+  assert(workTypeOptions >= 6, `Work-type select populated (got ${workTypeOptions} options)`);
+  await page.selectOption("#sc-work-type", "Email or follow-up");
+  const selectedWorkType = await page.inputValue("#sc-work-type");
+  assert(selectedWorkType === "Email or follow-up", "Work-type select accepts a real option");
 
   // 13. No unexpected network requests from the builder
   const unexpected = net.unexpected();
@@ -407,6 +553,17 @@ async function testProgressTracking(browser) {
   assert(exported.schemaVersion === 1, "Export includes schemaVersion 1");
   const leverageMapEntry = exported.milestones.find((m) => m.id === "leverage-map");
   assert(leverageMapEntry && leverageMapEntry.complete === true, "Export marks leverage-map complete");
+
+  // 4b. Derived role-track milestone must never travel in the export payload.
+  const derivedInExport = exported.milestones.some((m) => m.id === "role-track-selected");
+  assert(!derivedInExport, "Export excludes the derived role-track-selected milestone");
+
+  // 4c. The persisted progress key must never contain the derived milestone.
+  const storedProgress = await page.evaluate(() =>
+    JSON.parse(window.localStorage.getItem("ai-leverage-field-guide:progress:v1") || "{}")
+  );
+  const derivedInStorage = storedProgress.milestones && "role-track-selected" in storedProgress.milestones;
+  assert(!derivedInStorage, "Stored progress key excludes role-track-selected (storage boundary)");
 
   // 10 (part 1). Reset requires confirmation — dismissing leaves state intact
   let dialogHandled = { shown: false, accepted: false };
@@ -493,6 +650,27 @@ async function testProgressTracking(browser) {
     "State unchanged after failed compact import"
   );
 
+  // 7d. A compact file with a non-boolean milestone value is rejected rather
+  // than silently dropping the value and reporting a false success.
+  const tmpCompactNonBool = "/tmp/alfg-compact-nonbool.json";
+  fs.writeFileSync(
+    tmpCompactNonBool,
+    JSON.stringify({ schemaVersion: 1, milestones: { "leverage-map": 1 } })
+  );
+  await page.setInputFiles("#progress-import", tmpCompactNonBool);
+  await page.waitForTimeout(300);
+  const nonBoolMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    nonBoolMessage.toLowerCase().includes("import failed") &&
+      nonBoolMessage.toLowerCase().includes("true or false"),
+    `Non-boolean compact value rejected: "${nonBoolMessage}"`
+  );
+  assert(
+    await page.locator("#milestone-leverage-map").isChecked() &&
+      await page.locator("#milestone-loop-three-runs").isChecked(),
+    "State unchanged after non-boolean compact import"
+  );
+
   // 8. Malformed JSON rejected, state unchanged
   const tmpMalformed = "/tmp/alfg-malformed.json";
   fs.writeFileSync(tmpMalformed, "{ this is not json ");
@@ -528,6 +706,21 @@ async function testProgressTracking(browser) {
     `Non-numeric string version rejected: "${badVersionMessage}"`
   );
 
+  for (const schemaVersion of ["01", "1.0", "1e0", " 1 "]) {
+    const tmpLooseVersion = `/tmp/alfg-loose-version-${schemaVersion.replace(/\W/g, "-")}.json`;
+    fs.writeFileSync(
+      tmpLooseVersion,
+      JSON.stringify({ schemaVersion, milestones: [{ id: "leverage-map", complete: true }] })
+    );
+    await page.setInputFiles("#progress-import", tmpLooseVersion);
+    await page.waitForTimeout(300);
+    const looseVersionMessage = (await page.locator("#progress-message").textContent()).trim();
+    assert(
+      looseVersionMessage.includes("unsupported format version"),
+      `Loose string schemaVersion ${JSON.stringify(schemaVersion)} rejected: "${looseVersionMessage}"`
+    );
+  }
+
   // 9c. Numeric-equivalent string version ("1") is accepted (C1)
   const tmpStrVersion = "/tmp/alfg-string-version.json";
   fs.writeFileSync(
@@ -542,6 +735,59 @@ async function testProgressTracking(browser) {
   assert(
     await page.locator("#milestone-loop-three-runs").isChecked(),
     "Import with schemaVersion \"1\" (string) applies milestones"
+  );
+
+  // 9f. An array (export) import with a non-boolean `complete` value is
+  // rejected (matching the compact format's strictness) rather than silently
+  // coercing it to false and reporting a false success.
+  const tmpArrayNonBool = "/tmp/alfg-array-nonbool.json";
+  fs.writeFileSync(
+    tmpArrayNonBool,
+    JSON.stringify({
+      schemaVersion: 1,
+      milestones: [
+        { id: "loop-three-runs", label: "Leverage Loop run three times", complete: "yes" },
+      ],
+    })
+  );
+  const summaryBeforeArrayNonBool = (await page.locator("[data-progress-summary]").textContent()).trim();
+  await page.setInputFiles("#progress-import", tmpArrayNonBool);
+  await page.waitForTimeout(300);
+  const arrayNonBoolMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    arrayNonBoolMessage.toLowerCase().includes("import failed") &&
+      arrayNonBoolMessage.toLowerCase().includes("true or false"),
+    `Array import with non-boolean complete rejected: "${arrayNonBoolMessage}"`
+  );
+  const summaryAfterArrayNonBool = (await page.locator("[data-progress-summary]").textContent()).trim();
+  assert(
+    summaryAfterArrayNonBool === summaryBeforeArrayNonBool,
+    `Rejected array import leaves progress unchanged (got: "${summaryAfterArrayNonBool}")`
+  );
+
+  const tmpArrayMissingComplete = "/tmp/alfg-array-missing-complete.json";
+  fs.writeFileSync(
+    tmpArrayMissingComplete,
+    JSON.stringify({
+      schemaVersion: 1,
+      milestones: [
+        { id: "leverage-map", label: "Leverage map completed" },
+      ],
+    })
+  );
+  const summaryBeforeArrayMissing = (await page.locator("[data-progress-summary]").textContent()).trim();
+  await page.setInputFiles("#progress-import", tmpArrayMissingComplete);
+  await page.waitForTimeout(300);
+  const arrayMissingMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    arrayMissingMessage.toLowerCase().includes("import failed") &&
+      arrayMissingMessage.toLowerCase().includes("true or false"),
+    `Array import with missing complete rejected: "${arrayMissingMessage}"`
+  );
+  const summaryAfterArrayMissing = (await page.locator("[data-progress-summary]").textContent()).trim();
+  assert(
+    summaryAfterArrayMissing === summaryBeforeArrayMissing,
+    `Rejected missing-complete import leaves progress unchanged (got: "${summaryAfterArrayMissing}")`
   );
 
   // 9d. A derived milestone inside an import never lands in progress
@@ -604,6 +850,56 @@ async function testProgressTracking(browser) {
     "Array import persists no role-track entry"
   );
 
+  // 9g. A compact file whose ONLY entry is a derived milestone must not
+  // create a progress key or report a false success — the derived flag is
+  // owned by the path key and never imported or persisted.
+  await page.evaluate(() => window.localStorage.removeItem("ai-leverage-field-guide:progress:v1"));
+  const tmpOnlyDerived = "/tmp/alfg-only-derived.json";
+  fs.writeFileSync(
+    tmpOnlyDerived,
+    JSON.stringify({ schemaVersion: 1, milestones: { "role-track-selected": true } })
+  );
+  await page.setInputFiles("#progress-import", tmpOnlyDerived);
+  await page.waitForTimeout(300);
+  const onlyDerivedMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    onlyDerivedMessage.toLowerCase().includes("only derived") ||
+      onlyDerivedMessage.toLowerCase().includes("nothing was imported"),
+    `Only-derived import reports no import: "${onlyDerivedMessage}"`
+  );
+  const keysAfterOnlyDerived = await page.evaluate(() => Object.keys(window.localStorage));
+  assert(
+    !keysAfterOnlyDerived.includes("ai-leverage-field-guide:progress:v1"),
+    "Only-derived import writes no progress key (no false storage)"
+  );
+
+  // 9h. Same invariant for the array (export) format — only a derived entry
+  // means nothing applicable was imported, so no storage is written.
+  await page.evaluate(() => window.localStorage.removeItem("ai-leverage-field-guide:progress:v1"));
+  const tmpOnlyDerivedArray = "/tmp/alfg-only-derived-array.json";
+  fs.writeFileSync(
+    tmpOnlyDerivedArray,
+    JSON.stringify({
+      schemaVersion: 1,
+      milestones: [
+        { id: "role-track-selected", label: "Role track selected", complete: true },
+      ],
+    })
+  );
+  await page.setInputFiles("#progress-import", tmpOnlyDerivedArray);
+  await page.waitForTimeout(300);
+  const onlyDerivedArrayMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    onlyDerivedArrayMessage.toLowerCase().includes("only derived") ||
+      onlyDerivedArrayMessage.toLowerCase().includes("nothing was imported"),
+    `Only-derived array import reports no import: "${onlyDerivedArrayMessage}"`
+  );
+  const keysAfterOnlyDerivedArray = await page.evaluate(() => Object.keys(window.localStorage));
+  assert(
+    !keysAfterOnlyDerivedArray.includes("ai-leverage-field-guide:progress:v1"),
+    "Only-derived array import writes no progress key"
+  );
+
   // Unknown milestone id rejected too
   const tmpUnknown = "/tmp/alfg-unknown.json";
   fs.writeFileSync(
@@ -630,11 +926,29 @@ async function testCopyFallback(browser) {
   await normalContext.grantPermissions(["clipboard-read", "clipboard-write"]);
   const normalPage = await normalContext.newPage();
   await normalPage.goto(`${BASE_URL}/leverage-loop.html`, { waitUntil: "networkidle" });
+  const copyButtonLocator = normalPage.locator('[data-copy-target="#correction-prompt-template"]');
+  // Capture the real, pre-interaction label before any click mutates it.
+  const realLabel = (await copyButtonLocator.textContent()).trim();
   await normalPage.click('[data-copy-target="#correction-prompt-template"]');
   const clip = await normalPage.evaluate(() => navigator.clipboard.readText());
   assert(clip.includes("Fix these things:"), "Correction prompt copied via clipboard API");
-  const buttonLabel = await normalPage.locator('[data-copy-target="#correction-prompt-template"]').textContent();
+  await copyButtonLocator.click();
+  await normalPage.waitForTimeout(120);
+  const buttonLabel = await copyButtonLocator.textContent();
   assert(buttonLabel.includes("Copied"), "Copy button confirms visually");
+
+  // D2: clicking the copy button twice within the feedback window must not
+  // leave it stuck on the transient "Copied ✓" label — the real label must be
+  // restored. (Previously the restore label was re-read from the button after
+  // it already showed "Copied ✓", so a second click stranded it there.)
+  await copyButtonLocator.click();
+  await normalPage.waitForTimeout(2300);
+  const restoredLabel = (await copyButtonLocator.textContent()).trim();
+  assert(
+    restoredLabel === realLabel,
+    `Double-click restores the copy button's real label (got: "${restoredLabel}", expected: "${realLabel}")`
+  );
+
   await normalContext.close();
 
   // Fallback flow: remove navigator.clipboard entirely and record what
@@ -664,8 +978,10 @@ async function testCopyFallback(browser) {
   await fallbackPage.waitForTimeout(200);
   // With clipboard unavailable, execCommand fallback should succeed silently;
   // at minimum the page must not throw and feedback must be understandable.
+  // The curriculum page routes copy announcements through its single live
+  // region (#progress-message) — never a second #alfg-live-status region.
   const feedbackText = await fallbackPage.evaluate(() => {
-    const region = document.getElementById("alfg-live-status");
+    const region = document.getElementById("progress-message");
     return region ? region.textContent : "(missing)";
   });
   assert(
@@ -680,6 +996,16 @@ async function testCopyFallback(browser) {
   assert(
     execCopied.includes("What changes in my workflow next week?"),
     "Fallback copy content is complete, not truncated"
+  );
+  // The execCommand fallback appends/removes an off-screen textarea, which can
+  // drop focus to <body>; focus must be restored to the triggering button so
+  // keyboard and screen-reader users are not stranded.
+  const focusAfterFallbackCopy = await fallbackPage.evaluate(
+    () => document.activeElement && document.activeElement.getAttribute("data-copy-target")
+  );
+  assert(
+    focusAfterFallbackCopy === "#retrospective-template",
+    `Fallback copy restores focus to the copy button (got: ${focusAfterFallbackCopy})`
   );
   await fallbackContext.close();
 }
@@ -764,6 +1090,112 @@ async function testJavaScriptDisabled(browser) {
 }
 
 /* ==================================================================== *
+ * E2. Single live region per page
+ * Each page must expose exactly one live region. The builder owns
+ * #sc-status, the curriculum owns #progress-message, and the remaining
+ * pages fall back to a single shared #alfg-live-status element. A second
+ * region would make screen readers speak the same message twice.
+ * ==================================================================== */
+
+async function countLiveRegions(page) {
+  return page.evaluate(
+    () => document.querySelectorAll('[role="status"], [aria-live]').length
+  );
+}
+
+async function testSingleLiveRegion(browser) {
+  console.log("\n=== E2. Single live region per page ===");
+  const context = await browser.newContext();
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  const page = await context.newPage();
+
+  // index.html: selecting a path announces via #alfg-live-status (single region)
+  await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
+  await page.locator('[data-path-option="manager"]').click();
+  await page.waitForTimeout(120);
+  assert(
+    (await countLiveRegions(page)) === 1,
+    "index.html exposes exactly one live region after path select"
+  );
+  assert(
+    await page.locator("#alfg-live-status").count() === 1 &&
+      (await page.locator("#sc-status").count()) === 0 &&
+      (await page.locator("#progress-message").count()) === 0,
+    "index.html uses the shared #alfg-live-status region only"
+  );
+  await page.locator("[data-path-reset]").click();
+
+  // leverage-loop.html: template copy announces via #alfg-live-status (single region)
+  await page.goto(`${BASE_URL}/leverage-loop.html`, { waitUntil: "networkidle" });
+  await page.click('[data-copy-target="#correction-prompt-template"]');
+  await page.waitForTimeout(120);
+  assert(
+    (await countLiveRegions(page)) === 1,
+    "leverage-loop.html exposes exactly one live region after copy"
+  );
+
+  // curriculum.html: copy must route through #progress-message, never spawn #alfg-live-status
+  await page.goto(`${BASE_URL}/curriculum.html`, { waitUntil: "networkidle" });
+  await page.click('[data-copy-target="#retrospective-template"]');
+  await page.waitForTimeout(120);
+  assert(
+    (await countLiveRegions(page)) === 1,
+    "curriculum.html keeps exactly one live region after copy"
+  );
+  assert(
+    (await page.locator("#alfg-live-status").count()) === 0,
+    "curriculum.html does not spawn a second #alfg-live-status region"
+  );
+  const curriculumLive = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    curriculumLive.toLowerCase().includes("copied"),
+    `curriculum.html announces copy via #progress-message (got: "${curriculumLive}")`
+  );
+  // The shared live region ships hidden on the curriculum; if the copy
+  // announcement leaves it hidden it is removed from the a11y tree and screen
+  // readers never hear it. It must be revealed when announced.
+  assert(
+    !(await page.locator("#progress-message").isHidden()),
+    "curriculum.html copy reveals #progress-message (in the a11y tree) so screen readers announce it"
+  );
+
+  // stop-conditions.html: template copy must route through #sc-status, never spawn #alfg-live-status
+  await page.goto(`${BASE_URL}/stop-conditions.html`, { waitUntil: "networkidle" });
+  await page.click("#sc-copy");
+  assert(
+    await page.locator("#sc-status").evaluate((el) => el.classList.contains("form-status--error")),
+    "stop-conditions.html empty output copy marks #sc-status as an error"
+  );
+  await page.click('[data-copy-target="#stop-condition-template"]');
+  await page.waitForTimeout(120);
+  assert(
+    (await countLiveRegions(page)) === 1,
+    "stop-conditions.html keeps exactly one live region after copy"
+  );
+  assert(
+    (await page.locator("#alfg-live-status").count()) === 0,
+    "stop-conditions.html does not spawn a second #alfg-live-status region"
+  );
+  const builderLive = (await page.locator("#sc-status").textContent()).trim();
+  assert(
+    builderLive.toLowerCase().includes("copied"),
+    `stop-conditions.html announces copy via #sc-status (got: "${builderLive}")`
+  );
+  // #sc-status ships hidden until the builder generates; a template-copy
+  // announcement must reveal it or it is not announced to screen readers.
+  assert(
+    !(await page.locator("#sc-status").isHidden()),
+    "stop-conditions.html copy reveals #sc-status (in the a11y tree) so screen readers announce it"
+  );
+  assert(
+    !(await page.locator("#sc-status").evaluate((el) => el.classList.contains("form-status--error"))),
+    "stop-conditions.html template copy clears stale error styling from #sc-status"
+  );
+
+  await context.close();
+}
+
+/* ==================================================================== *
  * F. Storage privacy
  * ==================================================================== */
 
@@ -823,6 +1255,106 @@ async function testStoragePrivacy(browser) {
 }
 
 /* ==================================================================== *
+ * G. Schema-version tolerance for stored data
+ * A stored path or progress key whose schemaVersion is the exact string "1"
+ * must restore exactly like the number 1 (the same single rule imports use).
+ * Other strings must be ignored so stale/corrupt data never silently loads.
+ * ==================================================================== */
+
+async function testStringSchemaVersionStorage(browser) {
+  console.log("\n=== G. Stored schema-version tolerance ===");
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+  // 1. Path key written with schemaVersion "1" (string) still restores.
+  await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:path:v1",
+      JSON.stringify({ schemaVersion: "1", selectedPath: "operator", savedAt: new Date().toISOString() })
+    );
+  });
+  await page.reload({ waitUntil: "networkidle" });
+  assert(
+    (await page.locator('[data-path-option="operator"]').getAttribute("aria-checked")) === "true",
+    "Path stored with schemaVersion \"1\" (string) restores on reload"
+  );
+  assert(
+    await page.locator("[data-path-recommendation]").isVisible(),
+    "Recommendation shows for string-version path storage"
+  );
+
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:path:v1",
+      JSON.stringify({ schemaVersion: "01", selectedPath: "writer", savedAt: new Date().toISOString() })
+    );
+  });
+  await page.reload({ waitUntil: "networkidle" });
+  assert(
+    (await page.locator('[data-path-option="writer"]').getAttribute("aria-checked")) === "false",
+    "Path stored with schemaVersion \"01\" is ignored"
+  );
+
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:path:v1",
+      JSON.stringify({ schemaVersion: "1", selectedPath: "operator", savedAt: new Date().toISOString() })
+    );
+  });
+  await page.reload({ waitUntil: "networkidle" });
+
+  // 2. The derived role-track milestone still derives from that selection.
+  await page.goto(`${BASE_URL}/curriculum.html`, { waitUntil: "networkidle" });
+  assert(
+    await page.locator("#milestone-role-track-selected").isChecked(),
+    "Role-track milestone derived from string-version path storage"
+  );
+
+  // 3. Progress key written with schemaVersion "1" (string) still restores.
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:progress:v1",
+      JSON.stringify({ schemaVersion: "1", milestones: { "leverage-map": true } })
+    );
+  });
+  await page.reload({ waitUntil: "networkidle" });
+  assert(
+    await page.locator("#milestone-leverage-map").isChecked(),
+    "Progress stored with schemaVersion \"1\" (string) restores on reload"
+  );
+
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:progress:v1",
+      JSON.stringify({ schemaVersion: "1.0", milestones: { "loop-three-runs": true } })
+    );
+  });
+  await page.reload({ waitUntil: "networkidle" });
+  assert(
+    !(await page.locator("#milestone-loop-three-runs").isChecked()),
+    "Progress stored with schemaVersion \"1.0\" is ignored"
+  );
+
+  // 4. A different version ("2") is ignored — selection does not restore.
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:path:v1",
+      JSON.stringify({ schemaVersion: "2", selectedPath: "writer", savedAt: new Date().toISOString() })
+    );
+    window.localStorage.removeItem("ai-leverage-field-guide:progress:v1");
+  });
+  await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
+  await page.reload({ waitUntil: "networkidle" });
+  assert(
+    (await page.locator('[data-path-option="writer"]').getAttribute("aria-checked")) === "false",
+    "Path stored with schemaVersion \"2\" is ignored (not restored)"
+  );
+
+  await context.close();
+}
+
+/* ==================================================================== *
  * Run
  * ==================================================================== */
 
@@ -834,7 +1366,9 @@ try {
   await testProgressTracking(browser);
   await testCopyFallback(browser);
   await testJavaScriptDisabled(browser);
+  await testSingleLiveRegion(browser);
   await testStoragePrivacy(browser);
+  await testStringSchemaVersionStorage(browser);
 } finally {
   await browser.close();
 }

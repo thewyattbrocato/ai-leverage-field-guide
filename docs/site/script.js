@@ -22,6 +22,15 @@
    * Small helpers
    * ------------------------------------------------------------------ */
 
+  /* A stored or imported payload is valid only for our single supported
+      schema version. Accept the exact string ("1") as well as the number 1 so
+      local storage and file imports follow exactly one rule — this is the
+      schema-version check's single source of truth. Anything else (missing,
+      "01", "1.0", "2", "two") is rejected. */
+  function isSupportedSchemaVersion(version) {
+    return version === SCHEMA_VERSION || version === String(SCHEMA_VERSION);
+  }
+
   function readNamespacedJson(key) {
     try {
       var raw = window.localStorage.getItem(key);
@@ -30,7 +39,7 @@
       if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
         return null;
       }
-      if (parsed.schemaVersion !== SCHEMA_VERSION) return null;
+      if (!isSupportedSchemaVersion(parsed.schemaVersion)) return null;
       return parsed;
     } catch (err) {
       return null;
@@ -68,8 +77,31 @@
     return region;
   }
 
-  function announce(message) {
-    var region = getLiveRegion();
+  /* The whole page must use a single live channel. Pages that already own a
+     status region (the builder's #sc-status, the curriculum's
+     #progress-message) reuse it; only pages without one fall back to the
+     shared #alfg-live-status element, which is therefore created at most once
+     per page. This prevents a second live region from spawning double speech. */
+  function getPrimaryLiveRegion() {
+    var existing = document.querySelector("#sc-status, #progress-message");
+    if (existing) return existing;
+    return getLiveRegion();
+  }
+
+  function announce(message, isError) {
+    var region = getPrimaryLiveRegion();
+    var hasPageStatusStyle = region.id === "sc-status" || region.id === "progress-message";
+    if (hasPageStatusStyle) {
+      region.classList.toggle("form-status", region.id === "sc-status" || !isError);
+      region.classList.toggle("form-status--error", region.id === "sc-status" && Boolean(isError));
+      region.classList.toggle("field-error", region.id === "progress-message" && Boolean(isError));
+    }
+    /* Reveal the region if it was hidden: on the curriculum (#progress-message)
+       and builder (#sc-status) pages the single live region ships hidden and is
+       only shown by setStatus(), so copy-button announcements that route here
+       via announce() must surface it or it stays out of the accessibility tree
+       and screen readers never hear the confirmation. */
+    region.hidden = false;
     region.textContent = "";
     window.setTimeout(function () {
       region.textContent = message;
@@ -192,6 +224,7 @@
     var recommendation = root.querySelector("[data-path-recommendation]");
     var resetButton = root.querySelector("[data-path-reset]");
     var guideLink = root.querySelector("[data-rec-guide-link]");
+    var roleTarget = root.querySelector("[data-rec-role]");
     var outcomeTarget = root.querySelector("[data-rec-outcome]");
     var nextStepTarget = root.querySelector("[data-rec-next-step]");
     var savedNote = root.querySelector("[data-rec-saved-note]");
@@ -221,9 +254,10 @@
       });
       setRovingTabindex(selectedIndex);
 
-      if (recommendation && guideLink && outcomeTarget && nextStepTarget) {
+      if (recommendation && guideLink && roleTarget && outcomeTarget && nextStepTarget) {
         guideLink.href = data.guide.href;
         guideLink.textContent = data.guide.title;
+        roleTarget.textContent = data.label;
         outcomeTarget.textContent = data.outcome;
         nextStepTarget.textContent = data.nextStep;
         recommendation.hidden = false;
@@ -238,9 +272,12 @@
           savedAt: new Date().toISOString(),
         });
         if (options && options.announceSelection) {
-          announce(saved
-            ? data.label + " path saved in this browser."
-            : "Path set to " + data.label + ", but this browser blocked saving.");
+          announce(
+            saved
+              ? data.label + " path saved in this browser."
+              : "Path set to " + data.label + ", but this browser blocked saving.",
+            !saved
+          );
         }
       }
     }
@@ -258,7 +295,7 @@
       if (resetButton) resetButton.hidden = true;
       if (savedNote) savedNote.hidden = true;
       if (!options || !options.silent) {
-        announce("Path selection cleared.");
+        announce("Path selection cleared.", false);
       }
       /* Return focus into the picker (not the now-hidden reset button) so
          keyboard users stay oriented. */
@@ -320,6 +357,15 @@
     { id: "retrospective-completed", label: "Retrospective completed" },
   ];
 
+  /* Derived milestones are computed from the path key, never authored or
+     stored by the user. Keep them in one list so every read/write/export path
+     agrees on what to exclude — this is the storage boundary's single source
+     of truth and prevents a derived flag leaking into saved progress. */
+  var DERIVED_MILESTONE_IDS = ["role-track-selected"];
+  function isDerivedMilestone(id) {
+    return DERIVED_MILESTONE_IDS.indexOf(id) !== -1;
+  }
+
   function milestoneExists(id) {
     return MILESTONES.some(function (milestone) {
       return milestone.id === id;
@@ -347,7 +393,7 @@
     if (!pathSelectionActive()) return false;
     var applied = false;
     Array.prototype.forEach.call(checkboxes, function (checkbox) {
-      if (checkbox.getAttribute("data-milestone-id") === "role-track-selected") {
+      if (isDerivedMilestone(checkbox.getAttribute("data-milestone-id"))) {
         checkbox.checked = true;
         applied = true;
       }
@@ -418,17 +464,31 @@
       }
     }
 
-    function clearErrors() {
-      requiredFields.forEach(function (field) {
-        if (!field) return;
-        field.removeAttribute("aria-invalid");
-        var errorEl = findErrorElement(field);
-        if (errorEl) {
-          errorEl.textContent = "";
-          errorEl.hidden = true;
-        }
-      });
+    function clearErrorForField(field) {
+      if (!field) return;
+      field.removeAttribute("aria-invalid");
+      var errorEl = findErrorElement(field);
+      if (errorEl) {
+        errorEl.textContent = "";
+        errorEl.hidden = true;
+      }
     }
+
+    function clearErrors() {
+      requiredFields.forEach(clearErrorForField);
+    }
+
+    /* Clear a field's invalid state the moment the user edits it so a
+       screen-reader user who corrects the value no longer hears "invalid"
+       until the next submit — the error reflects the current input, not a
+       stale prior attempt. */
+    requiredFields.forEach(function (field) {
+      if (!field) return;
+      var eventName = field.tagName === "SELECT" ? "change" : "input";
+      field.addEventListener(eventName, function () {
+        if (field.value.trim()) clearErrorForField(field);
+      });
+    });
 
     /* Prefer an explicit data-label; otherwise derive a friendly name from
        the field's <label for>. This keeps validation messages readable when
@@ -465,6 +525,18 @@
       return firstInvalid;
     }
 
+    /* User free-text may start a line with Markdown block metacharacters
+         ("#" heading, ">" blockquote, "-" / "*" / "_" horizontal rule,
+         "=" setext heading) that a downstream renderer would re-interpret and
+         corrupt the document (this bites the unprefixed fields, e.g. the
+         intended-outcome, most directly). A leading "`" or "~" would likewise
+         open a code fence and swallow every following line as literal code, so
+         it is escaped on the same footing. Escape the leading character so the
+         generated Markdown is safe to paste anywhere as literal text. */
+    function escapeMarkdownLineStart(text) {
+      return String(text).replace(/^([#>*_=+\-`~])/, "\\$1");
+    }
+
     function buildMarkdown(values) {
       var lines = [
         "# Stop condition — " + values.workType,
@@ -472,28 +544,31 @@
         "_Written before starting the work. Check against it like a checklist, not a vibe._",
         "",
         "## Intended outcome",
-        values.outcome,
-        "",
-        "## Evidence required (observable)",
-        "Someone other than me can verify each item:",
       ];
+      values.outcome.split(/\r?\n/).forEach(function (line) {
+        var trimmed = line.trim();
+        if (trimmed) lines.push(escapeMarkdownLineStart(trimmed));
+      });
+      lines.push("");
+      lines.push("## Evidence required (observable)");
+      lines.push("Someone other than me can verify each item:");
       values.evidence.split(/\r?\n/).forEach(function (line) {
         var trimmed = line.trim();
-        if (trimmed) lines.push("- [ ] " + trimmed);
+        if (trimmed) lines.push("- [ ] " + escapeMarkdownLineStart(trimmed));
       });
       lines.push("");
       lines.push("## Clear failure condition (falsifiable)");
       lines.push("This stop condition FAILS if any of the following is true:");
       values.failure.split(/\r?\n/).forEach(function (line) {
         var trimmed = line.trim();
-        if (trimmed) lines.push("- " + trimmed);
+        if (trimmed) lines.push("- " + escapeMarkdownLineStart(trimmed));
       });
       lines.push("");
       lines.push("## Real risk");
       lines.push("What actually goes wrong if this passes but the work is bad:");
       values.risk.split(/\r?\n/).forEach(function (line) {
         var trimmed = line.trim();
-        if (trimmed) lines.push("- " + trimmed);
+        if (trimmed) lines.push("- " + escapeMarkdownLineStart(trimmed));
       });
       lines.push("");
       lines.push("---");
@@ -526,8 +601,12 @@
       outputArea.value = buildMarkdown(values);
       outputRegion.hidden = false;
       /* #sc-status is role="status" and already carries this message;
-         announcing separately would make screen readers speak twice. */
+          announcing separately would make screen readers speak twice. */
       setStatus("Stop condition generated. Copy it into your task notes before starting the work.", false);
+      /* Drop focus onto the generated result so keyboard and screen-reader
+          users land on the output (not stranded on the Generate button) and
+          can Tab straight to Copy / Download. */
+      if (outputArea) outputArea.focus();
 
       var generateButton = form.querySelector('button[type="submit"]');
       if (generateButton) generateButton.classList.add("is-generated");
@@ -552,6 +631,10 @@
           } else {
             setStatus("Copy failed — select the text in the box and copy it manually.", true);
           }
+          /* The execCommand fallback appends and removes an off-screen textarea,
+             which can drop page focus to <body>; restoring it keeps keyboard and
+             screen-reader users on the control they activated. */
+          if (copyButton) copyButton.focus();
         });
       });
     }
@@ -576,8 +659,9 @@
         clearErrors();
         if (outputArea) outputArea.value = "";
         if (outputRegion) outputRegion.hidden = true;
-        setStatus("", false);
-        announce("Builder cleared.");
+        /* Use the builder's single live channel (#sc-status). announce()
+           would write to a second region and make screen readers speak twice. */
+        setStatus("Builder cleared.", false);
         var generateButton = form.querySelector('button[type="submit"]');
         if (generateButton) generateButton.classList.remove("is-generated");
         if (fields.workType) fields.workType.focus();
@@ -641,7 +725,7 @@
       var milestones = {};
       checkboxes.forEach(function (checkbox) {
         var id = checkbox.getAttribute("data-milestone-id");
-        if (id === "role-track-selected") return;
+        if (isDerivedMilestone(id)) return;
         if (checkbox.checked) milestones[id] = true;
       });
       return milestones;
@@ -667,7 +751,12 @@
           schemaVersion: SCHEMA_VERSION,
           app: STORAGE_PREFIX,
           exportedAt: new Date().toISOString(),
-          milestones: MILESTONES.map(function (milestone) {
+          milestones: MILESTONES.filter(function (milestone) {
+            /* Derived milestones are owned by the path key and must not
+               travel in the export payload (they would always serialize as
+               complete:false and mislead an importer). */
+            return !isDerivedMilestone(milestone.id);
+          }).map(function (milestone) {
             return {
               id: milestone.id,
               label: milestone.label,
@@ -708,19 +797,10 @@
             return;
           }
 
-          /* Accept numeric-equivalent strings ("1") for data-portability
-             while keeping every other validation strict. */
-          var importVersion = imported.schemaVersion;
-          var versionSupported =
-            importVersion === SCHEMA_VERSION ||
-            (typeof importVersion === "string" &&
-              importVersion.trim() !== "" &&
-              Number(importVersion) === SCHEMA_VERSION);
-
-          if (!versionSupported) {
+          if (!isSupportedSchemaVersion(imported.schemaVersion)) {
             progressMessage(
               "Import failed: unsupported format version (" +
-                (importVersion === undefined ? "missing" : importVersion) +
+                (imported.schemaVersion === undefined ? "missing" : imported.schemaVersion) +
                 "). Expected version " + SCHEMA_VERSION + ". No changes were made.",
               true
             );
@@ -732,7 +812,27 @@
           var normalized = null;
 
           if (Array.isArray(rawMilestones)) {
-            /* Export format: [{ id, label, complete }] */
+            /* Export format: [{ id, label, complete }]
+               Reject entries without an explicit boolean `complete` value so
+               array imports fail loudly and consistently with the compact
+               format instead of reporting a false success. */
+            if (
+              rawMilestones.some(function (entry) {
+                return (
+                  !entry ||
+                  typeof entry !== "object" ||
+                  Array.isArray(entry) ||
+                  typeof entry.complete !== "boolean"
+                );
+              })
+            ) {
+              progressMessage(
+                "Import failed: each milestone's complete value must be true or false. No changes were made.",
+                true
+              );
+              importInput.value = "";
+              return;
+            }
             normalized = {};
             rawMilestones.forEach(function (entry) {
               if (!entry || typeof entry !== "object") return;
@@ -741,6 +841,24 @@
           } else if (rawMilestones && typeof rawMilestones === "object") {
             /* Compact format: { id: true } */
             normalized = rawMilestones;
+          }
+
+          /* Compact format is hand-authored, so a non-boolean value (e.g.
+             { "leverage-map": 1 }) must be rejected rather than silently
+             dropped — a silent no-op would make a bad import look successful. */
+          if (
+            normalized &&
+            !Array.isArray(rawMilestones) &&
+            Object.keys(normalized).some(function (id) {
+              return typeof normalized[id] !== "boolean";
+            })
+          ) {
+            progressMessage(
+              "Import failed: each milestone value must be true or false (found a non-boolean value). No changes were made.",
+              true
+            );
+            importInput.value = "";
+            return;
           }
 
           if (!normalized || Object.keys(normalized).length === 0) {
@@ -762,12 +880,28 @@
             return;
           }
 
+          /* A file whose only entries are derived milestones (owned solely by
+             the path key) carries nothing importable. Treating it as a normal
+             import would write an empty progress key and report a false
+             success, so it is a deliberate no-op instead. */
+          var realIds = Object.keys(normalized).filter(function (id) {
+            return !isDerivedMilestone(id);
+          });
+          if (realIds.length === 0) {
+            progressMessage(
+              "Import contained only derived milestones (set automatically by your path). Nothing was imported.",
+              false
+            );
+            importInput.value = "";
+            return;
+          }
+
           var applied = {};
           checkboxes.forEach(function (checkbox) {
             var id = checkbox.getAttribute("data-milestone-id");
             /* Derived milestones are never imported or stored: the display
                is owned solely by the path key (applyDerivedRoleTrack below). */
-            if (id === "role-track-selected") return;
+            if (isDerivedMilestone(id)) return;
             var isDone = normalized[id] === true;
             checkbox.checked = isDone;
             if (isDone) applied[id] = true;
@@ -818,7 +952,7 @@
     if (stored) {
       checkboxes.forEach(function (checkbox) {
         var id = checkbox.getAttribute("data-milestone-id");
-        if (id === "role-track-selected") return;
+        if (isDerivedMilestone(id)) return;
         checkbox.checked = stored.milestones[id] === true;
       });
     }
@@ -835,6 +969,11 @@
     if (!buttons.length) return;
 
     Array.prototype.forEach.call(buttons, function (button) {
+      /* Capture the real label once. Reading it back from button.textContent
+         later would capture the transient "Copied ✓" state if the user clicks
+         again within the 2-second window, leaving the control stuck on that
+         label instead of its original text. */
+      var originalLabel = button.textContent;
       button.addEventListener("click", function () {
         var targetSelector = button.getAttribute("data-copy-target");
         var target = targetSelector ? document.querySelector(targetSelector) : null;
@@ -844,12 +983,15 @@
         var successMessage = button.getAttribute("data-copy-success") || "Copied to clipboard.";
 
         copyTextToClipboard(sourceText).then(function (ok) {
-          announce(ok ? successMessage : "Copy failed — select the text and copy it manually.");
+          announce(ok ? successMessage : "Copy failed — select the text and copy it manually.", !ok);
           button.classList.add(ok ? "is-copied" : "is-error");
-          var originalTitle = button.textContent;
           button.textContent = ok ? "Copied ✓" : "Copy failed";
+          /* The execCommand fallback appends and removes an off-screen textarea,
+             which can drop page focus to <body>; restore it so keyboard and
+             screen-reader users stay on the control they activated. */
+          button.focus();
           window.setTimeout(function () {
-            button.textContent = originalTitle;
+            button.textContent = originalLabel;
             button.classList.remove("is-copied");
             button.classList.remove("is-error");
           }, 2000);

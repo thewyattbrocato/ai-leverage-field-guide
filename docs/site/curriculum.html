@@ -192,7 +192,7 @@
       <h2 class="section-title" id="progress-title">Track Your Progress</h2>
       <p class="progress-storage-note">Checkboxes save automatically in this browser only — nothing is transmitted, nothing syncs across devices.</p>
 
-      <p class="progress-summary" data-progress-summary aria-live="polite">0 of 8 complete (0%)</p>
+      <p class="progress-summary" data-progress-summary>0 of 8 complete (0%)</p>
       <progress class="progress-bar" data-progress-bar max="8" value="0" aria-hidden="true"></progress>
 
       <fieldset class="progress-tracker" data-progress-tracker>
@@ -219,8 +219,8 @@
             <label for="milestone-maker-checker-review">Maker-Checker review completed</label>
           </li>
           <li>
-            <input type="checkbox" id="milestone-role-track-selected" data-milestone-id="role-track-selected">
-            <label for="milestone-role-track-selected">Role track selected</label>
+            <input type="checkbox" id="milestone-role-track-selected" data-milestone-id="role-track-selected" disabled aria-describedby="role-track-derived-note">
+            <label for="milestone-role-track-selected">Role track selected <small id="role-track-derived-note" class="milestone-derived-note">(set automatically when you pick a path)</small></label>
           </li>
           <li>
             <input type="checkbox" id="milestone-track-project-completed" data-milestone-id="track-project-completed">

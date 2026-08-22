@@ -43,20 +43,7 @@ The guides are live as an interactive site — no install, no account, nothing l
 | [**10-Week Curriculum**](https://thewyattbrocato.github.io/ai-leverage-field-guide/curriculum.html) | Four modules plus local progress tracking (export/import included) |
 | [**Stop Condition Builder**](https://thewyattbrocato.github.io/ai-leverage-field-guide/stop-conditions.html#stop-condition-builder) | Generate observable, falsifiable, real-risk stop conditions as Markdown |
 
-> Everything interactive runs locally in your browser. Selections and progress remain in the current browser and are not transmitted.
-
-## 📖 Read the Web Guides (source)
-
-Responsive, accessible HTML versions of the core guides live in [`docs/site`](docs/site/):
-
-| Guide | Start here if you want… |
-|-------|-------------------------|
-| [Home](docs/site/index.html) | The overview: the journey, tracks, library |
-| [The Leverage Loop](docs/site/leverage-loop.html) | The core engine: Capture → Structure → Judgment → Re-run → Repeat |
-| [10-Week Curriculum](docs/site/curriculum.html) | Four modules that build a system that compounds |
-| [Stop Conditions](docs/site/stop-conditions.html) | Define "done" before you start — observable, falsifiable, real risk |
-
-> The site ships with skip links, `aria-current` navigation, keyboard-scrollable tables, and no horizontal overflow from 320 px up. It deploys via GitHub Pages once enabled (see below).
+> Everything interactive runs locally in your browser. Selections and progress remain in the current browser and are not transmitted. The same guides also ship as responsive, accessible HTML in [`docs/site`](docs/site/) — with skip links, `aria-current` navigation, keyboard-scrollable tables, and no horizontal overflow from 320 px up. They deploy via GitHub Pages once enabled (see below).
 
 ---
 
