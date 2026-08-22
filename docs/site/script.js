@@ -772,6 +772,24 @@
             normalized = rawMilestones;
           }
 
+          /* Compact format is hand-authored, so a non-boolean value (e.g.
+             { "leverage-map": 1 }) must be rejected rather than silently
+             dropped — a silent no-op would make a bad import look successful. */
+          if (
+            normalized &&
+            !Array.isArray(rawMilestones) &&
+            Object.keys(normalized).some(function (id) {
+              return typeof normalized[id] !== "boolean";
+            })
+          ) {
+            progressMessage(
+              "Import failed: each milestone value must be true or false (found a non-boolean value). No changes were made.",
+              true
+            );
+            importInput.value = "";
+            return;
+          }
+
           if (!normalized || Object.keys(normalized).length === 0) {
             progressMessage("Import failed: no milestones found in the file. No changes were made.", true);
             importInput.value = "";

@@ -593,6 +593,27 @@ async function testProgressTracking(browser) {
     "State unchanged after failed compact import"
   );
 
+  // 7d. A compact file with a non-boolean milestone value is rejected rather
+  // than silently dropping the value and reporting a false success.
+  const tmpCompactNonBool = "/tmp/alfg-compact-nonbool.json";
+  fs.writeFileSync(
+    tmpCompactNonBool,
+    JSON.stringify({ schemaVersion: 1, milestones: { "leverage-map": 1 } })
+  );
+  await page.setInputFiles("#progress-import", tmpCompactNonBool);
+  await page.waitForTimeout(300);
+  const nonBoolMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    nonBoolMessage.toLowerCase().includes("import failed") &&
+      nonBoolMessage.toLowerCase().includes("true or false"),
+    `Non-boolean compact value rejected: "${nonBoolMessage}"`
+  );
+  assert(
+    await page.locator("#milestone-leverage-map").isChecked() &&
+      await page.locator("#milestone-loop-three-runs").isChecked(),
+    "State unchanged after non-boolean compact import"
+  );
+
   // 8. Malformed JSON rejected, state unchanged
   const tmpMalformed = "/tmp/alfg-malformed.json";
   fs.writeFileSync(tmpMalformed, "{ this is not json ");
