@@ -544,6 +544,8 @@
         if (outputRegion) outputRegion.hidden = true;
         setStatus("", false);
         announce("Builder cleared.");
+        var generateButton = form.querySelector('button[type="submit"]');
+        if (generateButton) generateButton.classList.remove("is-generated");
         if (fields.workType) fields.workType.focus();
       });
     }

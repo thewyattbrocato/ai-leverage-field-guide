@@ -304,11 +304,24 @@ async function testStopConditionBuilder(browser) {
   // Re-fill quickly for Clear test
   await fillBuilder(page);
   await page.click('#stop-condition-form button[type="submit"]');
+  assert(
+    await page
+      .locator('#stop-condition-form button[type="submit"]')
+      .evaluate((el) => el.classList.contains("is-generated")),
+    "Generate styles the submit button as generated"
+  );
 
   // 10. Clear resets fields and output
   await page.click('[data-action="clear-builder"]');
   assert((await page.inputValue("#sc-outcome")) === "", "Clear empties fields");
   assert(!(await page.locator("#sc-output-region").isVisible()), "Clear hides output region");
+  // m5: Clear also removes the submit button's generated styling
+  assert(
+    await page
+      .locator('#stop-condition-form button[type="submit"]')
+      .evaluate((el) => !el.classList.contains("is-generated")),
+    "Clear removes the submit button's generated styling"
+  );
 
   // 13. No unexpected network requests from the builder
   const unexpected = net.unexpected();
