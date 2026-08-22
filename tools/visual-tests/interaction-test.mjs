@@ -96,6 +96,12 @@ async function testPathSelection(browser) {
     "Reset removes path key from localStorage"
   );
 
+  // 5b. Focus returns into the picker (first path option), not a hidden element
+  const focusedAfterReset = await page.evaluate(
+    () => document.activeElement && document.activeElement.getAttribute("data-path-option")
+  );
+  assert(focusedAfterReset === "manager", "Reset returns keyboard focus to first path option");
+
   // 7. Keyboard-only selection: focus + Space activates the control
   const writerButton = page.locator('[data-path-option="writer"]');
   await writerButton.focus();
@@ -167,6 +173,23 @@ async function testStopConditionBuilder(browser) {
   assert(await workTypeError.isVisible(), "Validation message shown for empty work type");
   const errorText = (await workTypeError.textContent()).trim();
   assert(errorText.length > 5 && errorText.toLowerCase().includes("required"), "Validation message is helpful text, not color-only");
+  assert(errorText === "Work type is required.", `Validation message names the field (got: "${errorText}")`);
+
+  // 1b. Every empty field names itself in its validation message.
+  const FIELD_LABELS = {
+    "#sc-work-type-error": "Work type",
+    "#sc-outcome-error": "Intended outcome",
+    "#sc-evidence-error": "Evidence required",
+    "#sc-failure-condition-error": "Clear failure condition",
+    "#sc-real-risk-error": "Real risk",
+  };
+  for (const [errorSel, expected] of Object.entries(FIELD_LABELS)) {
+    const msg = (await page.locator(errorSel).textContent()).trim();
+    assert(
+      msg === expected + " is required.",
+      `Empty submit names "${expected}" (got: "${msg}")`
+    );
+  }
   const focusedId = await page.evaluate(() => document.activeElement && document.activeElement.id);
   assert(focusedId === "sc-work-type", `Focus moved to first invalid field (got: ${focusedId})`);
   const describedBy = await page.locator("#sc-work-type").getAttribute("aria-describedby");
