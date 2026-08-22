@@ -242,7 +242,12 @@
       if (savedNote) savedNote.hidden = true;
       if (!options || !options.silent) {
         announce("Path selection cleared.");
-        if (resetButton) resetButton.focus();
+      }
+      /* Return focus into the picker (not the now-hidden reset button) so
+         keyboard users stay oriented. Skip when toggling a path off by click,
+         where focus should remain on the button they activated. */
+      if (options && options.focusStart && buttons.length) {
+        buttons[0].focus();
       }
     }
 
@@ -260,7 +265,7 @@
 
     if (resetButton) {
       resetButton.addEventListener("click", function () {
-        clearSelection();
+        clearSelection({ focusStart: true });
       });
     }
 
