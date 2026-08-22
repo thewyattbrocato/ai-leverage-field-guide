@@ -22,6 +22,20 @@
    * Small helpers
    * ------------------------------------------------------------------ */
 
+  /* A stored or imported payload is valid only for our single supported
+      schema version. Accept a numeric-equivalent string ("1") as well as the
+      number 1 so local storage and file imports follow exactly one rule —
+      this is the schema-version check's single source of truth. Anything else
+      (missing, NaN, "2", "two") is rejected. */
+  function isSupportedSchemaVersion(version) {
+    if (version === SCHEMA_VERSION) return true;
+    return (
+      typeof version === "string" &&
+      version.trim() !== "" &&
+      Number(version) === SCHEMA_VERSION
+    );
+  }
+
   function readNamespacedJson(key) {
     try {
       var raw = window.localStorage.getItem(key);
@@ -30,7 +44,7 @@
       if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
         return null;
       }
-      if (parsed.schemaVersion !== SCHEMA_VERSION) return null;
+      if (!isSupportedSchemaVersion(parsed.schemaVersion)) return null;
       return parsed;
     } catch (err) {
       return null;
@@ -760,18 +774,11 @@
           }
 
           /* Accept numeric-equivalent strings ("1") for data-portability
-             while keeping every other validation strict. */
-          var importVersion = imported.schemaVersion;
-          var versionSupported =
-            importVersion === SCHEMA_VERSION ||
-            (typeof importVersion === "string" &&
-              importVersion.trim() !== "" &&
-              Number(importVersion) === SCHEMA_VERSION);
-
-          if (!versionSupported) {
+             using the same single rule as storage reads. */
+          if (!isSupportedSchemaVersion(imported.schemaVersion)) {
             progressMessage(
               "Import failed: unsupported format version (" +
-                (importVersion === undefined ? "missing" : importVersion) +
+                (imported.schemaVersion === undefined ? "missing" : imported.schemaVersion) +
                 "). Expected version " + SCHEMA_VERSION + ". No changes were made.",
               true
             );

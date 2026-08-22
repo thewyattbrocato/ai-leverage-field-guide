@@ -1110,6 +1110,75 @@ async function testStoragePrivacy(browser) {
 }
 
 /* ==================================================================== *
+ * G. Schema-version tolerance for stored data
+ * A stored path or progress key whose schemaVersion is the numeric-
+ * equivalent string "1" must restore exactly like the number 1 (the same
+ * single rule imports use). A different version ("2") must be ignored so
+ * stale/corrupt data never silently loads.
+ * ==================================================================== */
+
+async function testStringSchemaVersionStorage(browser) {
+  console.log("\n=== G. Stored schema-version tolerance ===");
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+  // 1. Path key written with schemaVersion "1" (string) still restores.
+  await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:path:v1",
+      JSON.stringify({ schemaVersion: "1", selectedPath: "operator", savedAt: new Date().toISOString() })
+    );
+  });
+  await page.reload({ waitUntil: "networkidle" });
+  assert(
+    (await page.locator('[data-path-option="operator"]').getAttribute("aria-checked")) === "true",
+    "Path stored with schemaVersion \"1\" (string) restores on reload"
+  );
+  assert(
+    await page.locator("[data-path-recommendation]").isVisible(),
+    "Recommendation shows for string-version path storage"
+  );
+
+  // 2. The derived role-track milestone still derives from that selection.
+  await page.goto(`${BASE_URL}/curriculum.html`, { waitUntil: "networkidle" });
+  assert(
+    await page.locator("#milestone-role-track-selected").isChecked(),
+    "Role-track milestone derived from string-version path storage"
+  );
+
+  // 3. Progress key written with schemaVersion "1" (string) still restores.
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:progress:v1",
+      JSON.stringify({ schemaVersion: "1", milestones: { "leverage-map": true } })
+    );
+  });
+  await page.reload({ waitUntil: "networkidle" });
+  assert(
+    await page.locator("#milestone-leverage-map").isChecked(),
+    "Progress stored with schemaVersion \"1\" (string) restores on reload"
+  );
+
+  // 4. A different version ("2") is ignored — selection does not restore.
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:path:v1",
+      JSON.stringify({ schemaVersion: "2", selectedPath: "writer", savedAt: new Date().toISOString() })
+    );
+    window.localStorage.removeItem("ai-leverage-field-guide:progress:v1");
+  });
+  await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
+  await page.reload({ waitUntil: "networkidle" });
+  assert(
+    (await page.locator('[data-path-option="writer"]').getAttribute("aria-checked")) === "false",
+    "Path stored with schemaVersion \"2\" is ignored (not restored)"
+  );
+
+  await context.close();
+}
+
+/* ==================================================================== *
  * Run
  * ==================================================================== */
 
@@ -1123,6 +1192,7 @@ try {
   await testJavaScriptDisabled(browser);
   await testSingleLiveRegion(browser);
   await testStoragePrivacy(browser);
+  await testStringSchemaVersionStorage(browser);
 } finally {
   await browser.close();
 }
