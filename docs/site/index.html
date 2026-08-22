@@ -76,8 +76,8 @@
       <h2 class="section-title">Choose Your Path — Start Here</h2>
 
       <div class="path-picker" data-path-picker>
-        <p class="path-picker-hint">Pick your role and get a starting recommendation. Saved only in this browser.</p>
-        <div class="path-picker-options" role="radiogroup" aria-label="Choose your role">
+        <p class="path-picker-hint" id="path-picker-hint">Pick your role and get a starting recommendation. Saved only in this browser.</p>
+        <div class="path-picker-options" role="radiogroup" aria-label="Choose your role" aria-controls="path-recommendation" aria-describedby="path-picker-hint">
           <button type="button" role="radio" class="path-option" disabled data-path-option="manager" aria-checked="false" tabindex="0">
             <span class="path-option-icon" aria-hidden="true">🎯</span> Manager
             <span class="path-option-state" aria-hidden="true"></span>
@@ -100,7 +100,7 @@
           </button>
         </div>
 
-        <div class="path-recommendation callout callout--info" data-path-recommendation hidden>
+        <div class="path-recommendation callout callout--info" id="path-recommendation" data-path-recommendation hidden>
           <p class="callout-title">Recommended first guide: <a href="leverage-loop.html" data-rec-guide-link>The Leverage Loop</a></p>
           <p class="callout-body"><strong>Suggested outcome:</strong> <span data-rec-outcome></span></p>
           <p class="callout-body"><strong>Next step:</strong> <span data-rec-next-step></span></p>

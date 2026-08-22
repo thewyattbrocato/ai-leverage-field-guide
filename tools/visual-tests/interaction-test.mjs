@@ -192,6 +192,22 @@ async function testPathSelection(browser) {
   const operatorHref = await page.locator("[data-rec-guide-link]").getAttribute("href");
   assert(operatorHref === "stop-conditions.html", "Operator path recommends Stop Conditions");
 
+  // P1: the radiogroup exposes ARIA relationships so assistive tech knows the
+  // selection controls the recommendation panel and is described by the hint.
+  const radiogroup = page.locator('[role="radiogroup"]');
+  assert(
+    (await radiogroup.getAttribute("aria-controls")) === "path-recommendation",
+    "Radiogroup declares it controls the recommendation panel"
+  );
+  assert(
+    (await radiogroup.getAttribute("aria-describedby")) === "path-picker-hint",
+    "Radiogroup is described by the picker hint"
+  );
+  assert(
+    (await page.locator("#path-recommendation").count()) === 1,
+    "Recommendation panel carries the controlled id"
+  );
+
   await context.close();
 }
 
