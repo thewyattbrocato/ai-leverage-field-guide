@@ -297,6 +297,23 @@ async function testStopConditionBuilder(browser) {
   assert(/falsifiable/i.test(output), "Output addresses falsifiable criterion");
   assert(/real risk/i.test(output), "Output addresses real risk criterion");
 
+  // m8: a leading Markdown metacharacter in free text is escaped so the
+  // generated document cannot be reinterpreted as structure (a "#" must not
+  // become a heading, a ">" must not become a blockquote).
+  await page.fill("#sc-outcome", "#1 priority is clarity over length");
+  await page.click('#stop-condition-form button[type="submit"]');
+  const escapedOutput = await page.inputValue("#sc-output");
+  assert(
+    escapedOutput.includes("\\#1 priority is clarity over length"),
+    "Leading '#' in outcome is escaped so it is not a Markdown heading"
+  );
+  assert(
+    !/^#1 priority is clarity over length$/m.test(escapedOutput),
+    "Escaped outcome is not emitted as a raw Markdown heading"
+  );
+  await page.fill("#sc-outcome", "A status update my manager can forward unedited");
+  await page.click('#stop-condition-form button[type="submit"]');
+
   // m1: generation announces through exactly one live region (#sc-status),
   // so the shared transient region must stay silent.
   const sharedLiveText = await page.evaluate(() => {

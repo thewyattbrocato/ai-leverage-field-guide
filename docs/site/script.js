@@ -465,6 +465,14 @@
       return firstInvalid;
     }
 
+    /* User free-text may start a line with Markdown block metacharacters
+       ("#" heading, ">" blockquote) that a downstream renderer would
+       re-interpret and corrupt the document. Escape those at the line start
+       so the generated Markdown is safe to paste anywhere as literal text. */
+    function escapeMarkdownLineStart(text) {
+      return String(text).replace(/^([#>])/, "\\$1");
+    }
+
     function buildMarkdown(values) {
       var lines = [
         "# Stop condition — " + values.workType,
@@ -472,28 +480,31 @@
         "_Written before starting the work. Check against it like a checklist, not a vibe._",
         "",
         "## Intended outcome",
-        values.outcome,
-        "",
-        "## Evidence required (observable)",
-        "Someone other than me can verify each item:",
       ];
+      values.outcome.split(/\r?\n/).forEach(function (line) {
+        var trimmed = line.trim();
+        if (trimmed) lines.push(escapeMarkdownLineStart(trimmed));
+      });
+      lines.push("");
+      lines.push("## Evidence required (observable)");
+      lines.push("Someone other than me can verify each item:");
       values.evidence.split(/\r?\n/).forEach(function (line) {
         var trimmed = line.trim();
-        if (trimmed) lines.push("- [ ] " + trimmed);
+        if (trimmed) lines.push("- [ ] " + escapeMarkdownLineStart(trimmed));
       });
       lines.push("");
       lines.push("## Clear failure condition (falsifiable)");
       lines.push("This stop condition FAILS if any of the following is true:");
       values.failure.split(/\r?\n/).forEach(function (line) {
         var trimmed = line.trim();
-        if (trimmed) lines.push("- " + trimmed);
+        if (trimmed) lines.push("- " + escapeMarkdownLineStart(trimmed));
       });
       lines.push("");
       lines.push("## Real risk");
       lines.push("What actually goes wrong if this passes but the work is bad:");
       values.risk.split(/\r?\n/).forEach(function (line) {
         var trimmed = line.trim();
-        if (trimmed) lines.push("- " + trimmed);
+        if (trimmed) lines.push("- " + escapeMarkdownLineStart(trimmed));
       });
       lines.push("");
       lines.push("---");
