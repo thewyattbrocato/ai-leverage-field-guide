@@ -508,6 +508,17 @@ async function testProgressTracking(browser) {
   const leverageMapEntry = exported.milestones.find((m) => m.id === "leverage-map");
   assert(leverageMapEntry && leverageMapEntry.complete === true, "Export marks leverage-map complete");
 
+  // 4b. Derived role-track milestone must never travel in the export payload.
+  const derivedInExport = exported.milestones.some((m) => m.id === "role-track-selected");
+  assert(!derivedInExport, "Export excludes the derived role-track-selected milestone");
+
+  // 4c. The persisted progress key must never contain the derived milestone.
+  const storedProgress = await page.evaluate(() =>
+    JSON.parse(window.localStorage.getItem("ai-leverage-field-guide:progress:v1") || "{}")
+  );
+  const derivedInStorage = storedProgress.milestones && "role-track-selected" in storedProgress.milestones;
+  assert(!derivedInStorage, "Stored progress key excludes role-track-selected (storage boundary)");
+
   // 10 (part 1). Reset requires confirmation — dismissing leaves state intact
   let dialogHandled = { shown: false, accepted: false };
   page.once("dialog", async (dialog) => {

@@ -331,6 +331,15 @@
     { id: "retrospective-completed", label: "Retrospective completed" },
   ];
 
+  /* Derived milestones are computed from the path key, never authored or
+     stored by the user. Keep them in one list so every read/write/export path
+     agrees on what to exclude — this is the storage boundary's single source
+     of truth and prevents a derived flag leaking into saved progress. */
+  var DERIVED_MILESTONE_IDS = ["role-track-selected"];
+  function isDerivedMilestone(id) {
+    return DERIVED_MILESTONE_IDS.indexOf(id) !== -1;
+  }
+
   function milestoneExists(id) {
     return MILESTONES.some(function (milestone) {
       return milestone.id === id;
@@ -358,7 +367,7 @@
     if (!pathSelectionActive()) return false;
     var applied = false;
     Array.prototype.forEach.call(checkboxes, function (checkbox) {
-      if (checkbox.getAttribute("data-milestone-id") === "role-track-selected") {
+      if (isDerivedMilestone(checkbox.getAttribute("data-milestone-id"))) {
         checkbox.checked = true;
         applied = true;
       }
@@ -670,7 +679,7 @@
       var milestones = {};
       checkboxes.forEach(function (checkbox) {
         var id = checkbox.getAttribute("data-milestone-id");
-        if (id === "role-track-selected") return;
+        if (isDerivedMilestone(id)) return;
         if (checkbox.checked) milestones[id] = true;
       });
       return milestones;
@@ -696,7 +705,12 @@
           schemaVersion: SCHEMA_VERSION,
           app: STORAGE_PREFIX,
           exportedAt: new Date().toISOString(),
-          milestones: MILESTONES.map(function (milestone) {
+          milestones: MILESTONES.filter(function (milestone) {
+            /* Derived milestones are owned by the path key and must not
+               travel in the export payload (they would always serialize as
+               complete:false and mislead an importer). */
+            return !isDerivedMilestone(milestone.id);
+          }).map(function (milestone) {
             return {
               id: milestone.id,
               label: milestone.label,
@@ -814,7 +828,7 @@
             var id = checkbox.getAttribute("data-milestone-id");
             /* Derived milestones are never imported or stored: the display
                is owned solely by the path key (applyDerivedRoleTrack below). */
-            if (id === "role-track-selected") return;
+            if (isDerivedMilestone(id)) return;
             var isDone = normalized[id] === true;
             checkbox.checked = isDone;
             if (isDone) applied[id] = true;
@@ -865,7 +879,7 @@
     if (stored) {
       checkboxes.forEach(function (checkbox) {
         var id = checkbox.getAttribute("data-milestone-id");
-        if (id === "role-track-selected") return;
+        if (isDerivedMilestone(id)) return;
         checkbox.checked = stored.milestones[id] === true;
       });
     }
