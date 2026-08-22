@@ -460,17 +460,31 @@
       }
     }
 
-    function clearErrors() {
-      requiredFields.forEach(function (field) {
-        if (!field) return;
-        field.removeAttribute("aria-invalid");
-        var errorEl = findErrorElement(field);
-        if (errorEl) {
-          errorEl.textContent = "";
-          errorEl.hidden = true;
-        }
-      });
+    function clearErrorForField(field) {
+      if (!field) return;
+      field.removeAttribute("aria-invalid");
+      var errorEl = findErrorElement(field);
+      if (errorEl) {
+        errorEl.textContent = "";
+        errorEl.hidden = true;
+      }
     }
+
+    function clearErrors() {
+      requiredFields.forEach(clearErrorForField);
+    }
+
+    /* Clear a field's invalid state the moment the user edits it so a
+       screen-reader user who corrects the value no longer hears "invalid"
+       until the next submit — the error reflects the current input, not a
+       stale prior attempt. */
+    requiredFields.forEach(function (field) {
+      if (!field) return;
+      var eventName = field.tagName === "SELECT" ? "change" : "input";
+      field.addEventListener(eventName, function () {
+        if (field.value.trim()) clearErrorForField(field);
+      });
+    });
 
     /* Prefer an explicit data-label; otherwise derive a friendly name from
        the field's <label for>. This keeps validation messages readable when

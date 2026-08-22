@@ -292,6 +292,21 @@ async function testStopConditionBuilder(browser) {
     "aria-invalid set on invalid field"
   );
 
+  // m15: a field's invalid state is cleared the moment the user edits it, so
+  // the "invalid" signal reflects the current input rather than a stale prior
+  // submit (otherwise a screen-reader user who fixed a value would still hear
+  // "invalid" until the next generate).
+  await page.fill("#sc-outcome", "A real outcome");
+  assert(
+    (await page.locator("#sc-outcome").getAttribute("aria-invalid")) !== "true",
+    "Editing a field clears its stale aria-invalid"
+  );
+  assert(
+    !(await page.locator("#sc-outcome-error").isVisible()),
+    "Editing a field hides its stale error message"
+  );
+  await page.fill("#sc-outcome", "");
+
   // 11. Malicious-looking input stays text, never executes HTML injection
   await fillBuilder(page, { malicious: true });
   await page.click('#stop-condition-form button[type="submit"]');
