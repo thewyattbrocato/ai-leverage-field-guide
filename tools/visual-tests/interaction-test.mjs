@@ -706,6 +706,21 @@ async function testProgressTracking(browser) {
     `Non-numeric string version rejected: "${badVersionMessage}"`
   );
 
+  for (const schemaVersion of ["01", "1.0", "1e0", " 1 "]) {
+    const tmpLooseVersion = `/tmp/alfg-loose-version-${schemaVersion.replace(/\W/g, "-")}.json`;
+    fs.writeFileSync(
+      tmpLooseVersion,
+      JSON.stringify({ schemaVersion, milestones: [{ id: "leverage-map", complete: true }] })
+    );
+    await page.setInputFiles("#progress-import", tmpLooseVersion);
+    await page.waitForTimeout(300);
+    const looseVersionMessage = (await page.locator("#progress-message").textContent()).trim();
+    assert(
+      looseVersionMessage.includes("unsupported format version"),
+      `Loose string schemaVersion ${JSON.stringify(schemaVersion)} rejected: "${looseVersionMessage}"`
+    );
+  }
+
   // 9c. Numeric-equivalent string version ("1") is accepted (C1)
   const tmpStrVersion = "/tmp/alfg-string-version.json";
   fs.writeFileSync(
@@ -748,6 +763,31 @@ async function testProgressTracking(browser) {
   assert(
     summaryAfterArrayNonBool === summaryBeforeArrayNonBool,
     `Rejected array import leaves progress unchanged (got: "${summaryAfterArrayNonBool}")`
+  );
+
+  const tmpArrayMissingComplete = "/tmp/alfg-array-missing-complete.json";
+  fs.writeFileSync(
+    tmpArrayMissingComplete,
+    JSON.stringify({
+      schemaVersion: 1,
+      milestones: [
+        { id: "leverage-map", label: "Leverage map completed" },
+      ],
+    })
+  );
+  const summaryBeforeArrayMissing = (await page.locator("[data-progress-summary]").textContent()).trim();
+  await page.setInputFiles("#progress-import", tmpArrayMissingComplete);
+  await page.waitForTimeout(300);
+  const arrayMissingMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    arrayMissingMessage.toLowerCase().includes("import failed") &&
+      arrayMissingMessage.toLowerCase().includes("true or false"),
+    `Array import with missing complete rejected: "${arrayMissingMessage}"`
+  );
+  const summaryAfterArrayMissing = (await page.locator("[data-progress-summary]").textContent()).trim();
+  assert(
+    summaryAfterArrayMissing === summaryBeforeArrayMissing,
+    `Rejected missing-complete import leaves progress unchanged (got: "${summaryAfterArrayMissing}")`
   );
 
   // 9d. A derived milestone inside an import never lands in progress
@@ -1207,10 +1247,9 @@ async function testStoragePrivacy(browser) {
 
 /* ==================================================================== *
  * G. Schema-version tolerance for stored data
- * A stored path or progress key whose schemaVersion is the numeric-
- * equivalent string "1" must restore exactly like the number 1 (the same
- * single rule imports use). A different version ("2") must be ignored so
- * stale/corrupt data never silently loads.
+ * A stored path or progress key whose schemaVersion is the exact string "1"
+ * must restore exactly like the number 1 (the same single rule imports use).
+ * Other strings must be ignored so stale/corrupt data never silently loads.
  * ==================================================================== */
 
 async function testStringSchemaVersionStorage(browser) {
@@ -1236,6 +1275,26 @@ async function testStringSchemaVersionStorage(browser) {
     "Recommendation shows for string-version path storage"
   );
 
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:path:v1",
+      JSON.stringify({ schemaVersion: "01", selectedPath: "writer", savedAt: new Date().toISOString() })
+    );
+  });
+  await page.reload({ waitUntil: "networkidle" });
+  assert(
+    (await page.locator('[data-path-option="writer"]').getAttribute("aria-checked")) === "false",
+    "Path stored with schemaVersion \"01\" is ignored"
+  );
+
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:path:v1",
+      JSON.stringify({ schemaVersion: "1", selectedPath: "operator", savedAt: new Date().toISOString() })
+    );
+  });
+  await page.reload({ waitUntil: "networkidle" });
+
   // 2. The derived role-track milestone still derives from that selection.
   await page.goto(`${BASE_URL}/curriculum.html`, { waitUntil: "networkidle" });
   assert(
@@ -1254,6 +1313,18 @@ async function testStringSchemaVersionStorage(browser) {
   assert(
     await page.locator("#milestone-leverage-map").isChecked(),
     "Progress stored with schemaVersion \"1\" (string) restores on reload"
+  );
+
+  await page.evaluate(() => {
+    window.localStorage.setItem(
+      "ai-leverage-field-guide:progress:v1",
+      JSON.stringify({ schemaVersion: "1.0", milestones: { "loop-three-runs": true } })
+    );
+  });
+  await page.reload({ waitUntil: "networkidle" });
+  assert(
+    !(await page.locator("#milestone-loop-three-runs").isChecked()),
+    "Progress stored with schemaVersion \"1.0\" is ignored"
   );
 
   // 4. A different version ("2") is ignored — selection does not restore.

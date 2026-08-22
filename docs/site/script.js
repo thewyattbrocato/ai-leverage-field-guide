@@ -23,17 +23,12 @@
    * ------------------------------------------------------------------ */
 
   /* A stored or imported payload is valid only for our single supported
-      schema version. Accept a numeric-equivalent string ("1") as well as the
-      number 1 so local storage and file imports follow exactly one rule —
-      this is the schema-version check's single source of truth. Anything else
-      (missing, NaN, "2", "two") is rejected. */
+      schema version. Accept the exact string ("1") as well as the number 1 so
+      local storage and file imports follow exactly one rule — this is the
+      schema-version check's single source of truth. Anything else (missing,
+      "01", "1.0", "2", "two") is rejected. */
   function isSupportedSchemaVersion(version) {
-    if (version === SCHEMA_VERSION) return true;
-    return (
-      typeof version === "string" &&
-      version.trim() !== "" &&
-      Number(version) === SCHEMA_VERSION
-    );
+    return version === SCHEMA_VERSION || version === String(SCHEMA_VERSION);
   }
 
   function readNamespacedJson(key) {
@@ -793,8 +788,6 @@
             return;
           }
 
-          /* Accept numeric-equivalent strings ("1") for data-portability
-             using the same single rule as storage reads. */
           if (!isSupportedSchemaVersion(imported.schemaVersion)) {
             progressMessage(
               "Import failed: unsupported format version (" +
@@ -811,15 +804,15 @@
 
           if (Array.isArray(rawMilestones)) {
             /* Export format: [{ id, label, complete }]
-               Reject any entry whose `complete` is present but not a boolean so an
-               array import fails loudly and consistently with the compact format
-               instead of silently coercing "yes"/1 to false (a false success). */
+               Reject entries without an explicit boolean `complete` value so
+               array imports fail loudly and consistently with the compact
+               format instead of reporting a false success. */
             if (
               rawMilestones.some(function (entry) {
                 return (
-                  entry &&
-                  typeof entry === "object" &&
-                  Object.prototype.hasOwnProperty.call(entry, "complete") &&
+                  !entry ||
+                  typeof entry !== "object" ||
+                  Array.isArray(entry) ||
                   typeof entry.complete !== "boolean"
                 );
               })
