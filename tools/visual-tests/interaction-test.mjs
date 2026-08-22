@@ -317,6 +317,27 @@ async function testStopConditionBuilder(browser) {
   await page.fill("#sc-outcome", "A status update my manager can forward unedited");
   await page.click('#stop-condition-form button[type="submit"]');
 
+  // m13: leading horizontal-rule / setext markers in free text are escaped so
+  // they cannot be reinterpreted as structure (a "---" must not become an
+  // <hr>, a "===" must not turn the prior line into a setext heading) when the
+  // generated Markdown is pasted into another renderer.
+  await page.fill("#sc-outcome", "--- this looks like a rule");
+  await page.click('#stop-condition-form button[type="submit"]');
+  const hrOutput = await page.inputValue("#sc-output");
+  assert(
+    hrOutput.includes("\\--- this looks like a rule"),
+    "Leading '---' in outcome is escaped so it is not a horizontal rule"
+  );
+  await page.fill("#sc-outcome", "=== not a setext heading");
+  await page.click('#stop-condition-form button[type="submit"]');
+  const setextOutput = await page.inputValue("#sc-output");
+  assert(
+    setextOutput.includes("\\=== not a setext heading"),
+    "Leading '===' in outcome is escaped so it is not a setext heading"
+  );
+  await page.fill("#sc-outcome", "A status update my manager can forward unedited");
+  await page.click('#stop-condition-form button[type="submit"]');
+
   // m1: generation announces through exactly one live region (#sc-status),
   // so the shared transient region must stay silent.
   const sharedLiveText = await page.evaluate(() => {

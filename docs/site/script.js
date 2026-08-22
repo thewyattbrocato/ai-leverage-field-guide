@@ -477,11 +477,13 @@
     }
 
     /* User free-text may start a line with Markdown block metacharacters
-       ("#" heading, ">" blockquote) that a downstream renderer would
-       re-interpret and corrupt the document. Escape those at the line start
-       so the generated Markdown is safe to paste anywhere as literal text. */
+        ("#" heading, ">" blockquote, "-" / "*" / "_" horizontal rule,
+        "=" setext heading) that a downstream renderer would re-interpret and
+        corrupt the document (this bites the unprefixed fields, e.g. the
+        intended-outcome, most directly). Escape the leading character so the
+        generated Markdown is safe to paste anywhere as literal text. */
     function escapeMarkdownLineStart(text) {
-      return String(text).replace(/^([#>])/, "\\$1");
+      return String(text).replace(/^([#>*_=+\-])/, "\\$1");
     }
 
     function buildMarkdown(values) {
