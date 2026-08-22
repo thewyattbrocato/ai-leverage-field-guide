@@ -953,6 +953,11 @@
     if (!buttons.length) return;
 
     Array.prototype.forEach.call(buttons, function (button) {
+      /* Capture the real label once. Reading it back from button.textContent
+         later would capture the transient "Copied ✓" state if the user clicks
+         again within the 2-second window, leaving the control stuck on that
+         label instead of its original text. */
+      var originalLabel = button.textContent;
       button.addEventListener("click", function () {
         var targetSelector = button.getAttribute("data-copy-target");
         var target = targetSelector ? document.querySelector(targetSelector) : null;
@@ -964,14 +969,13 @@
         copyTextToClipboard(sourceText).then(function (ok) {
           announce(ok ? successMessage : "Copy failed — select the text and copy it manually.");
           button.classList.add(ok ? "is-copied" : "is-error");
-          var originalTitle = button.textContent;
           button.textContent = ok ? "Copied ✓" : "Copy failed";
           /* The execCommand fallback appends and removes an off-screen textarea,
              which can drop page focus to <body>; restore it so keyboard and
              screen-reader users stay on the control they activated. */
           button.focus();
           window.setTimeout(function () {
-            button.textContent = originalTitle;
+            button.textContent = originalLabel;
             button.classList.remove("is-copied");
             button.classList.remove("is-error");
           }, 2000);

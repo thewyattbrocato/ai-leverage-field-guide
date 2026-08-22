@@ -871,11 +871,29 @@ async function testCopyFallback(browser) {
   await normalContext.grantPermissions(["clipboard-read", "clipboard-write"]);
   const normalPage = await normalContext.newPage();
   await normalPage.goto(`${BASE_URL}/leverage-loop.html`, { waitUntil: "networkidle" });
+  const copyButtonLocator = normalPage.locator('[data-copy-target="#correction-prompt-template"]');
+  // Capture the real, pre-interaction label before any click mutates it.
+  const realLabel = (await copyButtonLocator.textContent()).trim();
   await normalPage.click('[data-copy-target="#correction-prompt-template"]');
   const clip = await normalPage.evaluate(() => navigator.clipboard.readText());
   assert(clip.includes("Fix these things:"), "Correction prompt copied via clipboard API");
-  const buttonLabel = await normalPage.locator('[data-copy-target="#correction-prompt-template"]').textContent();
+  await copyButtonLocator.click();
+  await normalPage.waitForTimeout(120);
+  const buttonLabel = await copyButtonLocator.textContent();
   assert(buttonLabel.includes("Copied"), "Copy button confirms visually");
+
+  // D2: clicking the copy button twice within the feedback window must not
+  // leave it stuck on the transient "Copied ✓" label — the real label must be
+  // restored. (Previously the restore label was re-read from the button after
+  // it already showed "Copied ✓", so a second click stranded it there.)
+  await copyButtonLocator.click();
+  await normalPage.waitForTimeout(2300);
+  const restoredLabel = (await copyButtonLocator.textContent()).trim();
+  assert(
+    restoredLabel === realLabel,
+    `Double-click restores the copy button's real label (got: "${restoredLabel}", expected: "${realLabel}")`
+  );
+
   await normalContext.close();
 
   // Fallback flow: remove navigator.clipboard entirely and record what
