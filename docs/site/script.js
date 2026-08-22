@@ -491,8 +491,9 @@
 
       outputArea.value = buildMarkdown(values);
       outputRegion.hidden = false;
+      /* #sc-status is role="status" and already carries this message;
+         announcing separately would make screen readers speak twice. */
       setStatus("Stop condition generated. Copy it into your task notes before starting the work.", false);
-      announce("Stop condition generated.");
 
       var generateButton = form.querySelector('button[type="submit"]');
       if (generateButton) generateButton.classList.add("is-generated");
@@ -514,10 +515,8 @@
         copyTextToClipboard(outputArea.value).then(function (ok) {
           if (ok) {
             setStatus("Markdown copied to your clipboard.", false);
-            announce("Stop condition markdown copied.");
           } else {
             setStatus("Copy failed — select the text in the box and copy it manually.", true);
-            announce("Copy failed. Select the text manually.");
           }
         });
       });
@@ -533,7 +532,6 @@
           "stop-condition-" + safeFileName(fields.workType.value, "task") + "-" + todayStamp() + ".md";
         triggerDownload(fileName, outputArea.value, "text/markdown");
         setStatus("Downloaded as " + fileName, false);
-        announce("Stop condition downloaded as " + fileName);
       });
     }
 

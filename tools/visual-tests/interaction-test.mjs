@@ -264,6 +264,17 @@ async function testStopConditionBuilder(browser) {
   assert(/falsifiable/i.test(output), "Output addresses falsifiable criterion");
   assert(/real risk/i.test(output), "Output addresses real risk criterion");
 
+  // m1: generation announces through exactly one live region (#sc-status),
+  // so the shared transient region must stay silent.
+  const sharedLiveText = await page.evaluate(() => {
+    const region = document.getElementById("alfg-live-status");
+    return region ? region.textContent : "";
+  });
+  assert(
+    sharedLiveText.trim() === "",
+    "Generate does not double-announce via the shared live region"
+  );
+
   await page.screenshot({ path: path.join(SHOT_DIR, "interaction-builder-populated.png"), fullPage: true });
   console.log("screenshot: artifacts/screenshots/interaction-builder-populated.png");
 
