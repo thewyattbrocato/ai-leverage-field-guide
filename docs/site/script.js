@@ -640,7 +640,9 @@
     function collectState() {
       var milestones = {};
       checkboxes.forEach(function (checkbox) {
-        if (checkbox.checked) milestones[checkbox.getAttribute("data-milestone-id")] = true;
+        var id = checkbox.getAttribute("data-milestone-id");
+        if (id === "role-track-selected") return;
+        if (checkbox.checked) milestones[id] = true;
       });
       return milestones;
     }
@@ -812,6 +814,7 @@
     if (stored) {
       checkboxes.forEach(function (checkbox) {
         var id = checkbox.getAttribute("data-milestone-id");
+        if (id === "role-track-selected") return;
         checkbox.checked = stored.milestones[id] === true;
       });
     }
