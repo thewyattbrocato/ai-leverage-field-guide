@@ -95,6 +95,12 @@
 
   function announce(message) {
     var region = getPrimaryLiveRegion();
+    /* Reveal the region if it was hidden: on the curriculum (#progress-message)
+       and builder (#sc-status) pages the single live region ships hidden and is
+       only shown by setStatus(), so copy-button announcements that route here
+       via announce() must surface it or it stays out of the accessibility tree
+       and screen readers never hear the confirmation. */
+    region.hidden = false;
     region.textContent = "";
     window.setTimeout(function () {
       region.textContent = message;

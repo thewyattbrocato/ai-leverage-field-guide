@@ -1028,6 +1028,13 @@ async function testSingleLiveRegion(browser) {
     curriculumLive.toLowerCase().includes("copied"),
     `curriculum.html announces copy via #progress-message (got: "${curriculumLive}")`
   );
+  // The shared live region ships hidden on the curriculum; if the copy
+  // announcement leaves it hidden it is removed from the a11y tree and screen
+  // readers never hear it. It must be revealed when announced.
+  assert(
+    !(await page.locator("#progress-message").isHidden()),
+    "curriculum.html copy reveals #progress-message (in the a11y tree) so screen readers announce it"
+  );
 
   // stop-conditions.html: template copy must route through #sc-status, never spawn #alfg-live-status
   await page.goto(`${BASE_URL}/stop-conditions.html`, { waitUntil: "networkidle" });
@@ -1045,6 +1052,12 @@ async function testSingleLiveRegion(browser) {
   assert(
     builderLive.toLowerCase().includes("copied"),
     `stop-conditions.html announces copy via #sc-status (got: "${builderLive}")`
+  );
+  // #sc-status ships hidden until the builder generates; a template-copy
+  // announcement must reveal it or it is not announced to screen readers.
+  assert(
+    !(await page.locator("#sc-status").isHidden()),
+    "stop-conditions.html copy reveals #sc-status (in the a11y tree) so screen readers announce it"
   );
 
   await context.close();
