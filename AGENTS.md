@@ -27,3 +27,9 @@ TEST_BASE_URL=http://127.0.0.1:4173 \
 - Stop Condition Builder validation derives a friendly field name via `getFieldLabel()` (explicit `data-label`, else `<label for>` text with required markers stripped) so each error names its field.
 - Path-picker reset returns focus to the first path option (`focusStart`) so keyboard users are not stranded on a hidden button.
 - The removed "Your First Win" section must stay absent from README and the site.
+- Storage boundary: the path picker writes ONLY the path key — never `progress:v1`. The curriculum's "Role track selected" milestone is derived at display time (load/import/reset) from the path key and is not a picker write; explicit checkbox actions are what create progress storage.
+- The "role-track-selected" curriculum checkbox may legitimately appear checked with an empty progress key; that is derivation, not corruption.
+- JS-only controls ship `disabled` in HTML (path-picker radios, builder Generate/Clear) and their initializers enable them. Do not remove the attribute from HTML or no-JS users get fake-active buttons and the builder form submits into a reload.
+- Builder announcements use exactly one live channel: `#sc-status` (`role="status"`). Never add `announce()` calls for messages that `setStatus()` already displays there — double speech.
+- Path options form an ARIA radiogroup (roving tabindex, arrow-key selection-follows-focus); re-activating a selected option must never deselect it — clearing belongs solely to the Clear control.
+- Import accepts `schemaVersion` as number 1 or string "1" only; every other validation stays strict.
