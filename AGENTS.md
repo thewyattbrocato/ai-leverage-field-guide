@@ -33,3 +33,5 @@ TEST_BASE_URL=http://127.0.0.1:4173 \
 - Builder announcements use exactly one live channel: `#sc-status` (`role="status"`). Never add `announce()` calls for messages that `setStatus()` already displays there — double speech.
 - Path options form an ARIA radiogroup (roving tabindex, arrow-key selection-follows-focus); re-activating a selected option must never deselect it — clearing belongs solely to the Clear control.
 - Import accepts `schemaVersion` as number 1 or string "1" only; every other validation stays strict.
+- The reading catalog lives at `docs/reading.md` (moved from root `READING.md`); `docs/library.md` is the curated shortlist and the two cross-link. Link text saying "READING.md" is correct — it matches the target's H1.
+- AI-assistance attribution footers were removed from all markdown docs; do not reintroduce them.
