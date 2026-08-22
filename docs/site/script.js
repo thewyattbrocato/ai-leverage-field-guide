@@ -654,6 +654,7 @@
           schemaVersion: SCHEMA_VERSION,
           milestones: collectState(),
         });
+        applyDerivedRoleTrack(checkboxes);
         updateProgressSummary();
       });
     });
