@@ -548,8 +548,12 @@
       outputArea.value = buildMarkdown(values);
       outputRegion.hidden = false;
       /* #sc-status is role="status" and already carries this message;
-         announcing separately would make screen readers speak twice. */
+          announcing separately would make screen readers speak twice. */
       setStatus("Stop condition generated. Copy it into your task notes before starting the work.", false);
+      /* Drop focus onto the generated result so keyboard and screen-reader
+          users land on the output (not stranded on the Generate button) and
+          can Tab straight to Copy / Download. */
+      if (outputArea) outputArea.focus();
 
       var generateButton = form.querySelector('button[type="submit"]');
       if (generateButton) generateButton.classList.add("is-generated");

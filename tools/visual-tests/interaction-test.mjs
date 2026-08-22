@@ -297,6 +297,16 @@ async function testStopConditionBuilder(browser) {
   assert(/falsifiable/i.test(output), "Output addresses falsifiable criterion");
   assert(/real risk/i.test(output), "Output addresses real risk criterion");
 
+  // m10: generation moves keyboard focus onto the generated output so
+  // keyboard/screen-reader users land on the result, not the Generate button.
+  const focusedAfterGenerate = await page.evaluate(
+    () => document.activeElement && document.activeElement.id
+  );
+  assert(
+    focusedAfterGenerate === "sc-output",
+    `Generation focuses the output textarea (got: ${focusedAfterGenerate})`
+  );
+
   // m8: a leading Markdown metacharacter in free text is escaped so the
   // generated document cannot be reinterpreted as structure (a "#" must not
   // become a heading, a ">" must not become a blockquote).
