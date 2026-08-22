@@ -1,9 +1,8 @@
 # Leverage Library
 
 The curated front door to the reading behind this field guide. The full catalog lives in
-[READING.md](reading.md) at
-the repo root. This page is the shortlist: the books worth your hour, organized by the idea
-they sharpen.
+[READING.md](reading.md), right alongside this page. This page is the shortlist: the books
+worth your hour, organized by the idea they sharpen.
 
 The thesis of everything here is the same as the repo's: **more leverage, not more AI.** These
 books are leverage multipliers for your judgment, your focus, and your clarity. None of them
@@ -232,7 +231,3 @@ Use the library in three passes, not all at once:
 
 The guides are the practice; the library is the reading that makes the practice stick. Start with
 a guide, hit a wall, then pull the book behind it.
-
----
-
-*Written with AI assistance, edited and verified by Wyatt.*
