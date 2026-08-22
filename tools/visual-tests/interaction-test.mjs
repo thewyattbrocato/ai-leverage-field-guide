@@ -795,6 +795,56 @@ async function testProgressTracking(browser) {
     "Array import persists no role-track entry"
   );
 
+  // 9g. A compact file whose ONLY entry is a derived milestone must not
+  // create a progress key or report a false success — the derived flag is
+  // owned by the path key and never imported or persisted.
+  await page.evaluate(() => window.localStorage.removeItem("ai-leverage-field-guide:progress:v1"));
+  const tmpOnlyDerived = "/tmp/alfg-only-derived.json";
+  fs.writeFileSync(
+    tmpOnlyDerived,
+    JSON.stringify({ schemaVersion: 1, milestones: { "role-track-selected": true } })
+  );
+  await page.setInputFiles("#progress-import", tmpOnlyDerived);
+  await page.waitForTimeout(300);
+  const onlyDerivedMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    onlyDerivedMessage.toLowerCase().includes("only derived") ||
+      onlyDerivedMessage.toLowerCase().includes("nothing was imported"),
+    `Only-derived import reports no import: "${onlyDerivedMessage}"`
+  );
+  const keysAfterOnlyDerived = await page.evaluate(() => Object.keys(window.localStorage));
+  assert(
+    !keysAfterOnlyDerived.includes("ai-leverage-field-guide:progress:v1"),
+    "Only-derived import writes no progress key (no false storage)"
+  );
+
+  // 9h. Same invariant for the array (export) format — only a derived entry
+  // means nothing applicable was imported, so no storage is written.
+  await page.evaluate(() => window.localStorage.removeItem("ai-leverage-field-guide:progress:v1"));
+  const tmpOnlyDerivedArray = "/tmp/alfg-only-derived-array.json";
+  fs.writeFileSync(
+    tmpOnlyDerivedArray,
+    JSON.stringify({
+      schemaVersion: 1,
+      milestones: [
+        { id: "role-track-selected", label: "Role track selected", complete: true },
+      ],
+    })
+  );
+  await page.setInputFiles("#progress-import", tmpOnlyDerivedArray);
+  await page.waitForTimeout(300);
+  const onlyDerivedArrayMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    onlyDerivedArrayMessage.toLowerCase().includes("only derived") ||
+      onlyDerivedArrayMessage.toLowerCase().includes("nothing was imported"),
+    `Only-derived array import reports no import: "${onlyDerivedArrayMessage}"`
+  );
+  const keysAfterOnlyDerivedArray = await page.evaluate(() => Object.keys(window.localStorage));
+  assert(
+    !keysAfterOnlyDerivedArray.includes("ai-leverage-field-guide:progress:v1"),
+    "Only-derived array import writes no progress key"
+  );
+
   // Unknown milestone id rejected too
   const tmpUnknown = "/tmp/alfg-unknown.json";
   fs.writeFileSync(

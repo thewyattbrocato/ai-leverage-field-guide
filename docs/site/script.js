@@ -864,6 +864,22 @@
             return;
           }
 
+          /* A file whose only entries are derived milestones (owned solely by
+             the path key) carries nothing importable. Treating it as a normal
+             import would write an empty progress key and report a false
+             success, so it is a deliberate no-op instead. */
+          var realIds = Object.keys(normalized).filter(function (id) {
+            return !isDerivedMilestone(id);
+          });
+          if (realIds.length === 0) {
+            progressMessage(
+              "Import contained only derived milestones (set automatically by your path). Nothing was imported.",
+              false
+            );
+            importInput.value = "";
+            return;
+          }
+
           var applied = {};
           checkboxes.forEach(function (checkbox) {
             var id = checkbox.getAttribute("data-milestone-id");
