@@ -599,8 +599,22 @@ tr:hover td {
     --max-content-width: 100%;
   }
 
+  /* m2: the stacked sticky header consumed ~15% of small viewports on every
+     scroll. Let it scroll away with the page and tighten its footprint. */
+  .site-header {
+    position: static;
+  }
+
   .header-inner {
     padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .site-title {
+    font-size: 1rem;
+  }
+
+  .main-nav {
+    gap: calc(var(--spacing-xs) / 2);
   }
 
   .main-content {
