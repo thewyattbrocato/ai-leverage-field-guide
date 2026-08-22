@@ -77,24 +77,24 @@
 
       <div class="path-picker" data-path-picker>
         <p class="path-picker-hint">Pick your role and get a starting recommendation. Saved only in this browser.</p>
-        <div class="path-picker-options" role="group" aria-label="Choose your role">
-          <button type="button" class="path-option" data-path-option="manager" aria-pressed="false">
+        <div class="path-picker-options" role="radiogroup" aria-label="Choose your role">
+          <button type="button" role="radio" class="path-option" data-path-option="manager" aria-checked="false" tabindex="0">
             <span class="path-option-icon" aria-hidden="true">🎯</span> Manager
             <span class="path-option-state" aria-hidden="true"></span>
           </button>
-          <button type="button" class="path-option" data-path-option="writer" aria-pressed="false">
+          <button type="button" role="radio" class="path-option" data-path-option="writer" aria-checked="false" tabindex="-1">
             <span class="path-option-icon" aria-hidden="true">✍️</span> Writer
             <span class="path-option-state" aria-hidden="true"></span>
           </button>
-          <button type="button" class="path-option" data-path-option="operator" aria-pressed="false">
+          <button type="button" role="radio" class="path-option" data-path-option="operator" aria-checked="false" tabindex="-1">
             <span class="path-option-icon" aria-hidden="true">⚙️</span> Operator
             <span class="path-option-state" aria-hidden="true"></span>
           </button>
-          <button type="button" class="path-option" data-path-option="knowledge" aria-pressed="false">
+          <button type="button" role="radio" class="path-option" data-path-option="knowledge" aria-checked="false" tabindex="-1">
             <span class="path-option-icon" aria-hidden="true">🔍</span> Knowledge Worker
             <span class="path-option-state" aria-hidden="true"></span>
           </button>
-          <button type="button" class="path-option" data-path-option="generalist" aria-pressed="false">
+          <button type="button" role="radio" class="path-option" data-path-option="generalist" aria-checked="false" tabindex="-1">
             <span class="path-option-icon" aria-hidden="true">🧭</span> Not sure yet
             <span class="path-option-state" aria-hidden="true"></span>
           </button>

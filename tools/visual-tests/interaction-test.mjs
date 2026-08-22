@@ -54,8 +54,8 @@ async function testPathSelection(browser) {
   const managerButton = page.locator('[data-path-option="manager"]');
   await managerButton.click();
   assert(
-    (await managerButton.getAttribute("aria-pressed")) === "true",
-    "Manager option exposes aria-pressed=true when selected"
+    (await managerButton.getAttribute("aria-checked")) === "true",
+    "Manager option exposes aria-checked=true when selected"
   );
 
   // 3. Recommendation content appears with guide link, outcome, next step
@@ -85,8 +85,8 @@ async function testPathSelection(browser) {
 
   // 4. Reload → restore
   await page.reload({ waitUntil: "networkidle" });
-  const restoredPressed = await page.locator('[data-path-option="manager"]').getAttribute("aria-pressed");
-  assert(restoredPressed === "true", "Manager selection restored after reload");
+  const restoredChecked = await page.locator('[data-path-option="manager"]').getAttribute("aria-checked");
+  assert(restoredChecked === "true", "Manager selection restored after reload");
   assert(
     await page.locator("[data-path-recommendation]").isVisible(),
     "Recommendation restored after reload"
@@ -114,8 +114,8 @@ async function testPathSelection(browser) {
   // 5-6. Reset clears storage and visible state
   await page.locator("[data-path-reset]").click();
   assert(
-    (await page.locator('[data-path-option="manager"]').getAttribute("aria-pressed")) === "false",
-    "Reset clears aria-pressed"
+    (await page.locator('[data-path-option="manager"]').getAttribute("aria-checked")) === "false",
+    "Reset clears aria-checked"
   );
   assert(
     !(await page.locator("[data-path-recommendation]").isVisible()),
@@ -146,19 +146,31 @@ async function testPathSelection(browser) {
   );
   await page.goto(`${BASE_URL}/index.html`, { waitUntil: "networkidle" });
 
-  // 7. Keyboard-only selection: focus + Space activates the control
+  // 7. Keyboard-only selection: the group exposes a single tab stop; arrow
+  // keys move focus and selection together (radiogroup pattern).
   const writerButton = page.locator('[data-path-option="writer"]');
-  await writerButton.focus();
-  await page.keyboard.press("Space");
+  await page.locator('[data-path-option="manager"]').focus();
+  await page.keyboard.press("ArrowRight");
   assert(
-    (await writerButton.getAttribute("aria-pressed")) === "true",
-    "Keyboard Space selects Writer path"
+    (await writerButton.getAttribute("aria-checked")) === "true",
+    "Keyboard ArrowRight selects Writer path (selection follows focus)"
   );
-  // Enter also toggles native buttons
+  // m7: re-activating a selected radio must never deselect it — clearing is
+  // owned by the explicit Clear control.
+  await writerButton.click();
+  assert(
+    (await writerButton.getAttribute("aria-checked")) === "true",
+    "Clicking the selected path again keeps it selected"
+  );
   await page.keyboard.press("Enter");
   assert(
-    (await writerButton.getAttribute("aria-pressed")) === "false",
-    "Keyboard Enter re-toggles (clears) Writer path"
+    (await writerButton.getAttribute("aria-checked")) === "true",
+    "Enter on the selected path does not deselect it"
+  );
+  await page.locator("[data-path-reset]").click();
+  assert(
+    (await writerButton.getAttribute("aria-checked")) === "false",
+    "The Clear control deselects explicitly"
   );
 
   // Switching paths updates recommendation (operator → stop conditions)

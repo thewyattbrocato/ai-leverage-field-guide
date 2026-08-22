@@ -190,19 +190,30 @@
     var nextStepTarget = root.querySelector("[data-rec-next-step]");
     var savedNote = root.querySelector("[data-rec-saved-note]");
 
+    /* Radiogroup pattern: exactly one tab stop, arrow keys move both focus
+       and selection, and the only way to clear is the explicit Clear control. */
+    function setRovingTabindex(selectedIndex) {
+      buttons.forEach(function (button, index) {
+        button.tabIndex = index === selectedIndex ? 0 : -1;
+      });
+    }
+
     function applySelection(pathId, options) {
       var data = PATHS[pathId];
       if (!data) return;
 
-      buttons.forEach(function (button) {
+      var selectedIndex = 0;
+      buttons.forEach(function (button, index) {
         var isSelected = button.getAttribute("data-path-option") === pathId;
-        button.setAttribute("aria-pressed", isSelected ? "true" : "false");
+        if (isSelected) selectedIndex = index;
+        button.setAttribute("aria-checked", isSelected ? "true" : "false");
         button.classList.toggle("is-selected", isSelected);
         var stateLabel = button.querySelector(".path-option-state");
         if (stateLabel) {
           stateLabel.textContent = isSelected ? "Selected ✓" : "";
         }
       });
+      setRovingTabindex(selectedIndex);
 
       if (recommendation && guideLink && outcomeTarget && nextStepTarget) {
         guideLink.href = data.guide.href;
@@ -231,11 +242,12 @@
     function clearSelection(options) {
       removeNamespacedKey(PATH_KEY);
       buttons.forEach(function (button) {
-        button.setAttribute("aria-pressed", "false");
+        button.setAttribute("aria-checked", "false");
         button.classList.remove("is-selected");
         var stateLabel = button.querySelector(".path-option-state");
         if (stateLabel) stateLabel.textContent = "";
       });
+      setRovingTabindex(0);
       if (recommendation) recommendation.hidden = true;
       if (resetButton) resetButton.hidden = true;
       if (savedNote) savedNote.hidden = true;
@@ -243,22 +255,32 @@
         announce("Path selection cleared.");
       }
       /* Return focus into the picker (not the now-hidden reset button) so
-         keyboard users stay oriented. Skip when toggling a path off by click,
-         where focus should remain on the button they activated. */
+         keyboard users stay oriented. */
       if (options && options.focusStart && buttons.length) {
         buttons[0].focus();
       }
     }
 
-    buttons.forEach(function (button) {
+    buttons.forEach(function (button, index) {
       button.addEventListener("click", function () {
-        var pathId = button.getAttribute("data-path-option");
-        var wasSelected = button.getAttribute("aria-pressed") === "true";
-        if (wasSelected) {
-          clearSelection();
-        } else {
-          applySelection(pathId, { announceSelection: true });
+        applySelection(button.getAttribute("data-path-option"), { announceSelection: true });
+      });
+      button.addEventListener("keydown", function (event) {
+        var nextIndex = null;
+        if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+          nextIndex = (index + 1) % buttons.length;
+        } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+          nextIndex = (index - 1 + buttons.length) % buttons.length;
+        } else if (event.key === "Home") {
+          nextIndex = 0;
+        } else if (event.key === "End") {
+          nextIndex = buttons.length - 1;
         }
+        if (nextIndex === null) return;
+        event.preventDefault();
+        var target = buttons[nextIndex];
+        target.focus();
+        applySelection(target.getAttribute("data-path-option"), { announceSelection: true });
       });
     });
 
