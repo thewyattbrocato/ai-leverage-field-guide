@@ -591,6 +591,10 @@
           } else {
             setStatus("Copy failed — select the text in the box and copy it manually.", true);
           }
+          /* The execCommand fallback appends and removes an off-screen textarea,
+             which can drop page focus to <body>; restoring it keeps keyboard and
+             screen-reader users on the control they activated. */
+          if (copyButton) copyButton.focus();
         });
       });
     }
@@ -931,6 +935,10 @@
           button.classList.add(ok ? "is-copied" : "is-error");
           var originalTitle = button.textContent;
           button.textContent = ok ? "Copied ✓" : "Copy failed";
+          /* The execCommand fallback appends and removes an off-screen textarea,
+             which can drop page focus to <body>; restore it so keyboard and
+             screen-reader users stay on the control they activated. */
+          button.focus();
           window.setTimeout(function () {
             button.textContent = originalTitle;
             button.classList.remove("is-copied");

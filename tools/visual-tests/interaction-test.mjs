@@ -380,6 +380,12 @@ async function testStopConditionBuilder(browser) {
   await page.waitForTimeout(200);
   const clip = await page.evaluate(() => navigator.clipboard.readText());
   assert(clip.startsWith("# Stop condition — Status update"), "Copy Markdown puts generated markdown on clipboard");
+  // Copy must leave keyboard focus on the copy button (the execCommand fallback
+  // can otherwise drop it to <body>).
+  const focusAfterCopy = await page.evaluate(
+    () => document.activeElement && document.activeElement.id
+  );
+  assert(focusAfterCopy === "sc-copy", `Copy keeps focus on the copy button (got: ${focusAfterCopy})`);
 
   // 9. Download Markdown
   const [download] = await Promise.all([
@@ -849,6 +855,16 @@ async function testCopyFallback(browser) {
   assert(
     execCopied.includes("What changes in my workflow next week?"),
     "Fallback copy content is complete, not truncated"
+  );
+  // The execCommand fallback appends/removes an off-screen textarea, which can
+  // drop focus to <body>; focus must be restored to the triggering button so
+  // keyboard and screen-reader users are not stranded.
+  const focusAfterFallbackCopy = await fallbackPage.evaluate(
+    () => document.activeElement && document.activeElement.getAttribute("data-copy-target")
+  );
+  assert(
+    focusAfterFallbackCopy === "#retrospective-template",
+    `Fallback copy restores focus to the copy button (got: ${focusAfterFallbackCopy})`
   );
   await fallbackContext.close();
 }
