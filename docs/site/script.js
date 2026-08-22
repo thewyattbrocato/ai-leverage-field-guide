@@ -405,6 +405,27 @@
       });
     }
 
+    /* Prefer an explicit data-label; otherwise derive a friendly name from
+       the field's <label for>. This keeps validation messages readable when
+       the author has not supplied an explicit override. */
+    function getFieldLabel(field) {
+      var explicit = field.getAttribute("data-label");
+      if (explicit) return explicit;
+      if (!field.id) return "This field";
+      var label = document.querySelector('label[for="' + field.id + '"]');
+      if (!label) return "This field";
+      var clone = label.cloneNode(true);
+      var removeables = clone.querySelectorAll(".required-marker, .sr-only");
+      Array.prototype.forEach.call(removeables, function (removeable) {
+        if (removeable.parentNode) removeable.parentNode.removeChild(removeable);
+      });
+      var text = (clone.textContent || "")
+        .replace(/\*/g, "")
+        .replace(/\(required\)/gi, "")
+        .trim();
+      return text || "This field";
+    }
+
     function validate() {
       clearErrors();
       var firstInvalid = null;
@@ -412,8 +433,7 @@
         if (!field) return;
         var value = field.value.trim();
         if (!value) {
-          var label = field.getAttribute("data-label") || "This field";
-          showError(field, label + " is required.");
+          showError(field, getFieldLabel(field) + " is required.");
           if (!firstInvalid) firstInvalid = field;
         }
       });
