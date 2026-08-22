@@ -646,6 +646,10 @@ async function testJavaScriptDisabled(browser) {
   const trackCards = await page.locator(".track-card").count();
   assert(trackCards >= 4, `Static track cards remain (${trackCards})`);
 
+  // m3: without JS the picker buttons are visibly inert, not fake-active
+  const managerDisabled = await page.locator('[data-path-option="manager"]').isDisabled();
+  assert(managerDisabled, "Path options render disabled without JavaScript");
+
   await page.screenshot({ path: path.join(SHOT_DIR, "interaction-js-disabled-home.png"), fullPage: false });
 
   // Manual stop-condition instructions visible without JS
@@ -655,6 +659,15 @@ async function testJavaScriptDisabled(browser) {
     noJsBody.includes("builder needs JavaScript"),
     "Stop-condition noscript note explains manual alternative"
   );
+  // m4: without JS the builder form can neither submit nor reload
+  const submitDisabled = await page
+    .locator('#stop-condition-form button[type="submit"]')
+    .isDisabled();
+  assert(submitDisabled, "Builder submit is disabled without JavaScript");
+  const clearDisabled = await page
+    .locator('#stop-condition-form [data-action="clear-builder"]')
+    .isDisabled();
+  assert(clearDisabled, "Builder clear is disabled without JavaScript");
   await page.screenshot({ path: path.join(SHOT_DIR, "interaction-js-disabled-stop-conditions.png"), fullPage: false });
   console.log("screenshots: artifacts/screenshots/interaction-js-disabled-*.png");
 

@@ -778,6 +778,16 @@ tr:hover td {
   color: var(--text-primary);
 }
 
+.path-option[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.path-option[disabled]:hover {
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
 .path-option:focus-visible {
   outline: 2px solid var(--accent-primary);
   outline-offset: 2px;

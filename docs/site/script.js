@@ -183,6 +183,12 @@
     var buttons = Array.prototype.slice.call(root.querySelectorAll("[data-path-option]"));
     if (!buttons.length) return;
 
+    /* The buttons ship disabled so no-JS visitors see honest, inert controls;
+       JavaScript arriving means they can be enabled. */
+    buttons.forEach(function (button) {
+      button.disabled = false;
+    });
+
     var recommendation = root.querySelector("[data-path-recommendation]");
     var resetButton = root.querySelector("[data-path-reset]");
     var guideLink = root.querySelector("[data-rec-guide-link]");
@@ -366,6 +372,12 @@
   function initStopConditionBuilder() {
     var form = document.getElementById("stop-condition-form");
     if (!form) return;
+
+    /* The form's buttons ship disabled so no-JS visitors can neither submit
+       (page reload with query params) nor click a dead Clear. */
+    Array.prototype.forEach.call(form.querySelectorAll("button"), function (button) {
+      button.disabled = false;
+    });
 
     var fields = {
       workType: form.querySelector("#sc-work-type"),
