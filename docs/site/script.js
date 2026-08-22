@@ -775,7 +775,27 @@
           var normalized = null;
 
           if (Array.isArray(rawMilestones)) {
-            /* Export format: [{ id, label, complete }] */
+            /* Export format: [{ id, label, complete }]
+               Reject any entry whose `complete` is present but not a boolean so an
+               array import fails loudly and consistently with the compact format
+               instead of silently coercing "yes"/1 to false (a false success). */
+            if (
+              rawMilestones.some(function (entry) {
+                return (
+                  entry &&
+                  typeof entry === "object" &&
+                  Object.prototype.hasOwnProperty.call(entry, "complete") &&
+                  typeof entry.complete !== "boolean"
+                );
+              })
+            ) {
+              progressMessage(
+                "Import failed: each milestone's complete value must be true or false. No changes were made.",
+                true
+              );
+              importInput.value = "";
+              return;
+            }
             normalized = {};
             rawMilestones.forEach(function (entry) {
               if (!entry || typeof entry !== "object") return;

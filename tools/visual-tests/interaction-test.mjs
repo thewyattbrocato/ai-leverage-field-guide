@@ -676,6 +676,34 @@ async function testProgressTracking(browser) {
     "Import with schemaVersion \"1\" (string) applies milestones"
   );
 
+  // 9f. An array (export) import with a non-boolean `complete` value is
+  // rejected (matching the compact format's strictness) rather than silently
+  // coercing it to false and reporting a false success.
+  const tmpArrayNonBool = "/tmp/alfg-array-nonbool.json";
+  fs.writeFileSync(
+    tmpArrayNonBool,
+    JSON.stringify({
+      schemaVersion: 1,
+      milestones: [
+        { id: "loop-three-runs", label: "Leverage Loop run three times", complete: "yes" },
+      ],
+    })
+  );
+  const summaryBeforeArrayNonBool = (await page.locator("[data-progress-summary]").textContent()).trim();
+  await page.setInputFiles("#progress-import", tmpArrayNonBool);
+  await page.waitForTimeout(300);
+  const arrayNonBoolMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    arrayNonBoolMessage.toLowerCase().includes("import failed") &&
+      arrayNonBoolMessage.toLowerCase().includes("true or false"),
+    `Array import with non-boolean complete rejected: "${arrayNonBoolMessage}"`
+  );
+  const summaryAfterArrayNonBool = (await page.locator("[data-progress-summary]").textContent()).trim();
+  assert(
+    summaryAfterArrayNonBool === summaryBeforeArrayNonBool,
+    `Rejected array import leaves progress unchanged (got: "${summaryAfterArrayNonBool}")`
+  );
+
   // 9d. A derived milestone inside an import never lands in progress
   // storage and is never displayed without a path selection (compact form)
   const tmpDerivedCompact = "/tmp/alfg-derived-compact.json";
