@@ -397,6 +397,45 @@ async function testProgressTracking(browser) {
   summary = (await page.locator("[data-progress-summary]").textContent()).trim();
   assert(summary === "2 of 8 complete (25%)", "Summary reflects imported state");
 
+  // 7b. Compact format ({ id: true }) imports cleanly too
+  const tmpCompact = "/tmp/alfg-compact-import.json";
+  fs.writeFileSync(
+    tmpCompact,
+    JSON.stringify({
+      schemaVersion: 1,
+      milestones: { "leverage-map": true, "loop-three-runs": true },
+    })
+  );
+  await page.setInputFiles("#progress-import", tmpCompact);
+  await page.waitForTimeout(300);
+  assert(await page.locator("#milestone-leverage-map").isChecked(), "Compact import checks leverage-map");
+  assert(await page.locator("#milestone-loop-three-runs").isChecked(), "Compact import checks loop-three-runs");
+  assert(
+    !(await page.locator("#milestone-maker-checker-review").isChecked()),
+    "Compact import replaces prior state"
+  );
+  summary = (await page.locator("[data-progress-summary]").textContent()).trim();
+  assert(summary === "2 of 8 complete (25%)", `Summary reflects compact import (got: "${summary}")`);
+
+  // 7c. Unknown ids inside a compact file are still rejected
+  const tmpCompactUnknown = "/tmp/alfg-compact-unknown.json";
+  fs.writeFileSync(
+    tmpCompactUnknown,
+    JSON.stringify({ schemaVersion: 1, milestones: { "made-up-milestone": true } })
+  );
+  await page.setInputFiles("#progress-import", tmpCompactUnknown);
+  await page.waitForTimeout(300);
+  const compactUnknownMessage = (await page.locator("#progress-message").textContent()).trim();
+  assert(
+    compactUnknownMessage.includes("unrecognized milestone"),
+    `Compact unknown milestone rejected: "${compactUnknownMessage}"`
+  );
+  assert(
+    await page.locator("#milestone-leverage-map").isChecked() &&
+      await page.locator("#milestone-loop-three-runs").isChecked(),
+    "State unchanged after failed compact import"
+  );
+
   // 8. Malformed JSON rejected, state unchanged
   const tmpMalformed = "/tmp/alfg-malformed.json";
   fs.writeFileSync(tmpMalformed, "{ this is not json ");
