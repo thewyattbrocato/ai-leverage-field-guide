@@ -587,8 +587,9 @@
         clearErrors();
         if (outputArea) outputArea.value = "";
         if (outputRegion) outputRegion.hidden = true;
-        setStatus("", false);
-        announce("Builder cleared.");
+        /* Use the builder's single live channel (#sc-status). announce()
+           would write to a second region and make screen readers speak twice. */
+        setStatus("Builder cleared.", false);
         var generateButton = form.querySelector('button[type="submit"]');
         if (generateButton) generateButton.classList.remove("is-generated");
         if (fields.workType) fields.workType.focus();

@@ -373,6 +373,23 @@ async function testStopConditionBuilder(browser) {
     "Clear removes the submit button's generated styling"
   );
 
+  // m9: Clear announces through exactly one live region (#sc-status), so the
+  // shared transient region must stay silent and the builder's own channel
+  // must carry the message.
+  const scStatusText = await page.locator("#sc-status").textContent();
+  assert(
+    scStatusText.trim() === "Builder cleared.",
+    `Clear announces via #sc-status single channel (got: "${scStatusText.trim()}")`
+  );
+  const sharedLiveAfterClear = await page.evaluate(() => {
+    const region = document.getElementById("alfg-live-status");
+    return region ? region.textContent : "";
+  });
+  assert(
+    sharedLiveAfterClear.trim() === "",
+    "Clear does not double-announce via the shared live region"
+  );
+
   // 13. No unexpected network requests from the builder
   const unexpected = net.unexpected();
   assert(unexpected.length === 0, `No non-static network requests (found ${unexpected.length})`);
